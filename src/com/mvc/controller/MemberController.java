@@ -9,9 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.google.gson.Gson;
 import com.mvc.service.MemberService;
+
 @WebServlet({"/login","/logout","/join","/overlay"})
 public class MemberController extends HttpServlet {
 	
@@ -41,9 +41,15 @@ public class MemberController extends HttpServlet {
 				String page = "member01_login.jsp";
 				String msg = "로그인에 실패 하였습니다.";
 				String id=req.getParameter("id");
+				String admin = "admin";
 				if(success) {
-					page = "index.jsp";
-					msg = "환영합니다.";
+					if(id.equals(admin)) {
+						page="admin00_Main.jsp";
+						msg="관리자 페이지입니다.";
+					}else {
+						page = "index.jsp";
+						msg = "환영합니다.";
+					}
 					req.getSession().setAttribute("id", id);
 				}
 				req.setAttribute("msg", msg);
