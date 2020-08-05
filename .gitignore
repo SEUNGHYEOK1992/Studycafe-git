@@ -3,3 +3,4 @@
 WebContent/META-INF/MANIFEST.MF
 .settings/
 WebContent/WEB-INF/lib/
+build/
