@@ -114,28 +114,30 @@
             </ul>
             </div>
             <div id="log">
-                <a href="#">로그인/회원가입</a>
+                <a href="member01_login.jsp">로그인/회원가입</a>
             </div>  
          </div>
-        <div id="log">
-            <a href="#">로그인/회원가입</a>
-        </div>  
 
-        <form method="post" id="authForm" action="mainpage~">
+        <form method="post" id="authForm" action="login">
             <div>            
-                <input type="id" id="loginId" name="loginId" placeholder="ID" >          
-                <input type="password" id="loginPw" name="password" placeholder="Password" >
+                <input type="text" id="loginId" name="id" placeholder="ID" >          
+                <input type="password" id="loginPw" name="pw" placeholder="Password" >
             </div>            
             <div id="login">
-                <button type="button" onclick="location.href='00_index.html'" >로그인</button>
+                <input type="submit" value="로그인">
             </div>        
             <div id="join">
-                <button type="button" onclick="location.href='02_join.html'" >회원가입</button>
+                <input type="button" onclick="location.href='member02_join.jsp'" value="회원가입">
             </div>              
             <div id="keep">
                 <input type="checkbox" id="keepLogin" name="keepLogin">
-                <label for="keepLogin"><span>로그인 상태 유지</span></label>
             </div> 
         </form>
     </body>
+    <script>
+		var msg = "${msg}";
+		if(msg != ""){
+			alert(msg)	
+		}
+    </script>
 </html>
