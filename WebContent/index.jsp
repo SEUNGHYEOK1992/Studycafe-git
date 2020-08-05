@@ -201,18 +201,21 @@
             <li><a href="#">고객센터</a></li>
          </ul>
          </div>
-         <div id="log"><a href="#">로그인/회원가입</a></div>  
-      </div>
+         <div id="log"><%if(session.getAttribute("id") != null){%>
+         							${id } 님
+         						<%}else{ %>
+         							<a href="member01_login.jsp">로그인/회원가입</a></div> 
+         						<%} %>
+         </div>
    <!--헤더 끝--> 
 
     <div id="after_guest">
         <div>
             <img src="" alt="">
             <ul id="gusetInfo">
-                <li style="margin-bottom: 5px;">qkrtkdgus님</li>
-                <li style="margin-bottom: 5px;">프로필 보기</li>
-                <li style="margin-bottom: 5px;"><button>로그아웃</button></li><br/>
-                <li style="margin-top: 0;">jeongeum17@gmail.com</li>
+                <li style="margin-bottom: 5px;">${id }님</li>
+                <li style="margin-bottom: 5px;"><a href="member03_profile.jsp">프로필 보기</a></li>
+                <li style="margin-bottom: 5px;"><button onclick="location.href='logout'">로그아웃</button></li><br/>
             </ul>
         </div>
         <div id="msg">
@@ -262,6 +265,9 @@
    
 </body>
 <script>
-
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg)	
+	}
 </script>
 </html>
