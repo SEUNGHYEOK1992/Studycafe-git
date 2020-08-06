@@ -55,7 +55,7 @@ public class MemberDAO {
 	}
 
 	public boolean join(String id, String pw, String name, String birth, String email, String phone, String addr) {
-		String sql ="INSERT INTO memberList(id,pw,name,birth,email,phone,addr) VALUES(?,?,?,?,?,?,?)";
+		String sql ="INSERT INTO memberList(id,idx,pw,name,birth,email,phone,addr) VALUES(?,memberList_seq.NEXTVAL,?,?,?,?,?,?)";
 		boolean success = false;
 		try {
 			ps=conn.prepareStatement(sql);

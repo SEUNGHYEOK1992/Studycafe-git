@@ -201,7 +201,7 @@
             <li><a href="#">고객센터</a></li>
          </ul>
          </div>
-         <div id="log"><a href="member01_login.jsp">로그인/회원가입</a></div>  
+         <div id="log"><a href="member01_login.jsp">${id }님</a></div>  
       </div>
    <!--헤더 끝--> 
 
@@ -209,13 +209,12 @@
         <div>
             <img src="" alt="">
             <ul id="gusetInfo">
-                <li style="margin-bottom: 5px;">admin님</li>
-                <li style="margin-bottom: 5px;"><button>로그아웃</button></li><br/>
-                <li>jeongeum17@gmail.com</li>
+                <li style="margin-bottom: 5px;">${id }님</li>
+                <li style="margin-bottom: 5px;"><button onclick="location.href='logout'">로그아웃</button></li><br/>
             </ul>
         </div>
         <div id="manage">
-            <a href="#">관리</a>
+            <a href="memberList">관리</a>
         </div>
     </div>
    <!--중앙이미지 시작-->
@@ -261,6 +260,9 @@
    
 </body>
 <script>
-
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg)	
+	}
 </script>
 </html>

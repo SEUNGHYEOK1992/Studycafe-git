@@ -142,12 +142,14 @@
                <th>이름</th>
                <th>상세보기</th>
             </tr>
+            <c:forEach items="${list }" var="member">
             <tr>
-               <td></td>
-               <td></td>
-               <td></td>
+               <td>${member.idx }</td>
+               <td>${member.id }</td>
+               <td>${member.name }</td>
                <td><button>Button</button></td>
             </tr>
+            </c:forEach>
          </table>
       </div>
    </div>
