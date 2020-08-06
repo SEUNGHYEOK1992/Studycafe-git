@@ -151,7 +151,7 @@
       </div>
  <!--헤더 끝-->
 
-    <form action="write" method="post">
+    <!--  <form action="write" method="post">-->
         <div class="reviewBox" style="top: 30%; left: 50%; position: absolute; transform: translate(-50%,-50%);">
             <h2>후기게시판</h2>
             <textarea id="content" placeholder="내용을 입력해주세요." style="width: 800px; height: 100px; outline: 1px solid #666; resize: none;" ></textarea>
@@ -159,25 +159,23 @@
                 <button id="sendbtn" style="float: right; margin-top: 5px;">저장</button>
             </div>
         </div>
-    </form>
+    <!--  </form>-->
 
     <table class="aa" style="width: 800px; top: 55%; left: 50%; position: absolute; transform: translate(-50%,-50%);">
+        <!-- 
         <tr>
-            <th>
+        	<th>
                 <ul>
                     <li>아이디</li>
                     <li><button>수정</button></li>
                     <li><button>삭제</button></li>
                 </ul>
-            </th>
+            </th>    
         </tr>
         <tr>
-            <td style="resize: none;">
-                어쩌고저쩌고 sdanslefaskjf;lasdflhaskjnaskjnvaslfvak.jdsfkjasdkasdkhasbjksdkjhasfhals<br/>
-                efhbkjaeblfWADVHaugdQJHVFhikqjhvsdafvngsdfwerkjbg<br/>
-                lkashdfliaueifubhasdlaskejfkasenfkjablfbalskdcbkasnerkjnalskflaksjbldfaisio
-            </td>
+            <td style="resize: none;"></td>
         </tr>
+         -->
     </table>
  
     <!--footer시작-->
@@ -205,6 +203,16 @@
  </footer>
 </body>
 <script>
-
+	function drawList(list){
+		var content="";
+		$("td").empty();
+		list.forEach(function(item,num){
+			con = "<tr> <th> <ul> <li>"+item.id+"</li>"
+			+"<li><input type='button' value='수정'/>"+"</li>"
+			+"<li><input type='button' value='삭제'/>"+"</li></ul></th></tr>"
+			+"<tr><td  style='resize: none;'>"+item.content+"</td></tr>";
+			$("td").append(con);
+		});
+	}
 </script>
 </html>
