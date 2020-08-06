@@ -10,6 +10,9 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import com.mvc.dto.AdminDTO;
+import com.mvc.dto.BlackDTO;
+import com.mvc.dto.KickDTO;
+import com.mvc.dto.ReportDTO;
 
 public class AdminDAO {
 
@@ -38,11 +41,20 @@ public class AdminDAO {
 		}		
 	}
 
-	public ArrayList<AdminDTO> memberList() {
+	public ArrayList<AdminDTO> memberList(int page) {
+		
+		int pagePerCnt = 10; // 페이지 당 보여줄 게시물의 수
+		int end = page * pagePerCnt;
+		int start = (end-pagePerCnt)+1;
+		
 		ArrayList<AdminDTO> list = new ArrayList<AdminDTO>();
-		String sql = "select idx, id, name from memberlist order by idx";
+		String sql = "SELECT rnum, idx, id, name FROM (SELECT ROW_NUMBER() OVER(ORDER BY idx ASC) AS rnum,"
+				+ " idx, id, name FROM memberList) WHERE rnum BETWEEN ? AND ?";
+		//String sql = "Select idx, id, name FROM memberList ORDER BY idx";
 		try {
 			ps=conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				AdminDTO dto = new AdminDTO();
@@ -59,4 +71,178 @@ public class AdminDAO {
 		return list;
 	}
 
+	public AdminDTO detail(String id) {
+		String sql = "select id, name, birth, email, phone, addr, blacklist FROM memberlist WHERE id=?";
+		AdminDTO dto = null;
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, id);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				dto = new AdminDTO();
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setBirth(rs.getString("birth"));
+				dto.setEmail(rs.getString("email"));
+				dto.setPhone(rs.getString("phone"));
+				dto.setAddr(rs.getString("addr"));
+				dto.setBlacklist(rs.getString(7));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return dto;
+	}
+
+	public boolean update(String id, String name, String birth, String email, String phone, String addr, String blacklist) {
+		String sql="UPDATE memberList SET name=?, birth=?, email=?, phone=?, addr=?, blacklist=? WHERE id=?";
+		boolean success = false;
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, birth);
+			ps.setString(3, email);
+			ps.setString(4, phone);
+			ps.setString(5, addr);
+			ps.setString(6, blacklist);
+			ps.setString(7, id);
+			if(ps.executeUpdate()>0) {
+				success = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+
+	public ArrayList<ReportDTO> report(int page) {
+		int pagePerCnt = 10; // 페이지 당 보여줄 게시물의 수
+		int end = page * pagePerCnt;
+		int start = (end-pagePerCnt)+1;
+		
+		ArrayList<ReportDTO> list = new ArrayList<ReportDTO>();
+		String sql = "SELECT rnum, repo_idx, b_idx, id, repo_content, repo_reg_date "
+				+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY repo_idx DESC) AS rnum,"
+				+ " repo_idx, b_idx, id, repo_content, repo_reg_date FROM report) WHERE rnum BETWEEN ? AND ?";
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				ReportDTO dto = new ReportDTO();
+				dto.setRepo_idx(rs.getInt("repo_idx"));
+				dto.setB_idx(rs.getInt("b_idx"));
+				dto.setId(rs.getString("id"));
+				dto.setRepo_content(rs.getString("repo_content"));
+				dto.setRepo_reg_date(rs.getDate("repo_reg_date"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return list;
+	}
+
+	public ArrayList<BlackDTO> blackList(int page) {
+		int pagePerCnt = 10; // 페이지 당 보여줄 게시물의 수
+		int end = page * pagePerCnt;
+		int start = (end-pagePerCnt)+1;
+		ArrayList<BlackDTO> list = new ArrayList<BlackDTO>();
+		String sql = "select rnum, idx, id, repo_content FROM(select row_number() over(order by m.idx asc) as rnum, "
+				+ "m.idx, m.id, r.repo_content FROM memberlist m, report r WHERE m.id=r.id(+) AND m.blacklist='T') "
+				+ "WHERE rnum BETWEEN ? AND ?";
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				BlackDTO dto = new BlackDTO();
+				dto.setIdx(rs.getInt("idx"));
+				dto.setId(rs.getString("id"));
+				dto.setRepo_content(rs.getString("repo_content"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return list;
+	}
+
+	public ArrayList<KickDTO> kick(int page) {
+		int pagePerCnt = 10; // 페이지 당 보여줄 게시물의 수
+		int end = page * pagePerCnt;
+		int start = (end-pagePerCnt)+1;
+		ArrayList<KickDTO> list = new ArrayList<KickDTO>();
+		String sql = "select rnum, k_idx, id, cause FROM(SELECT ROW_NUMBER() OVER(ORDER BY k_idx ASC) AS rnum, "
+				+ "k_idx, id, cause FROM kick) WHERE rnum BETWEEN ? AND ?";
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				KickDTO dto = new KickDTO();
+				dto.setK_idx(rs.getInt("k_idx"));
+				dto.setId(rs.getString("id"));
+				dto.setCause(rs.getString("cause"));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return list;
+	}
+
+	public boolean delete(String id) {
+		//System.out.println("dao 까지 들어왔음.");
+		String sql = "delete from memberList where id=?";
+		boolean success = false;
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, id);
+			if(ps.executeUpdate()>0) {
+				success = true;
+			}
+		} catch (SQLException e) {
+		}finally {
+			resClose();
+		}
+		//System.out.println("success 값 1차 확인 : " + success);
+		return success;
+	}
+
+	public boolean kickAdd(String id, String cause) {
+		String sql="INSERT INTO kick(k_idx, id, cause) VALUES(kick_seq.nextval,?,?)";
+		boolean success = false;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, cause);
+			if(ps.executeUpdate()>0) {
+				success = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+
+	
+	
+	
+	
 }
