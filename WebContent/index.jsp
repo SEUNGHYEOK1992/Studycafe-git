@@ -197,7 +197,7 @@
             <li><a href="#">스터디룸 소개</a></li>
             <li><a href="#">예약하기</a></li>
             <li><a href="#">자유게시판</a></li>
-            <li><a href="Review01.jsp">후기게시판</a></li>
+            <li><a href="./list">후기게시판</a></li>
             <li><a href="#">고객센터</a></li>
          </ul>
          </div>

@@ -19,11 +19,12 @@ public class ReviewDAO {
 	Connection conn = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
+	String id;
 	
 	public ReviewDAO() {
-		Context ctx;
+		
 		try {
-			ctx = new InitialContext();
+			Context ctx = new InitialContext();
 			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Oracle");
 			conn = ds.getConnection();
 			
@@ -31,6 +32,59 @@ public class ReviewDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public ArrayList<ReviewDTO> list() {
+		String sql;
+		ArrayList<ReviewDTO> list = new ArrayList<ReviewDTO>();
+		try {
+			sql = "Select b_idx, id, content FROM bbs WHERE category = 2 ORDER BY b_idx DESC";
+			
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ReviewDTO dto = new ReviewDTO();
+				dto.setB_idx(rs.getInt("b_idx"));
+				System.out.println(dto.getB_idx());
+				dto.setId(rs.getString("id"));
+				System.out.println(dto.getId());
+				dto.setContent(rs.getString("content"));
+				System.out.println(dto.getContent());
+				list.add(dto);
+			}System.out.println("dto받아왔냐?");
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		
+		return list;
+		
+	}
+	
+	
+	public boolean write(String content, String id) {
+		String sql = "INSERT INTO bbs (b_idx,id,content,category) VALUES(bbs_seq.NEXTVAL,?,?,2)";
+		boolean success = false;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, content);
+			if(ps.executeUpdate()>0){
+				success = true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+
+	
+
 	
 	public void resClose() {
 		try {
@@ -42,22 +96,10 @@ public class ReviewDAO {
 		}		
 	}
 
-	public ArrayList<ReviewDTO> list() throws SQLException {
-		ArrayList<ReviewDTO> list = new ArrayList<ReviewDTO>();
-		String sql = "Select b_idx,id,content FROM revtest WHERE category=2 ORDER BY b_idx DESC; ";
-		ps = conn.prepareStatement(sql);
-		rs = ps.executeQuery();
-		
-		while(rs.next()) {
-			ReviewDTO dto = new ReviewDTO();
-			dto.setB_idx(rs.getInt("b_idx"));
-			dto.setId(rs.getString("id"));
-			dto.setContent(rs.getString("content"));
-			list.add(dto);
-		}
-		return list;
-		
-	}
+
+
+
+	
 
 
 }
