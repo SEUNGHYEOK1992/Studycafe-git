@@ -98,17 +98,17 @@
 		<div class="boardTitle"><h1>문의하기</h1><hr></div>
 		<div class="board_zone">
 			<div class="board_list_table" style="width: 35%;">
-				<form action="write" method="post" enctype="multipart/form-data">
+				<form action="askwrite" method="post">
 				<table class="table">
 					<thead>
 						<tr>
 							<th>
 								<label for="askingTypes">문의유형을 선택해주세요 : </label>
-								<select id="askingTypes">
-									<option value="refund">환불 문의</option>
-									<option value="facility">시설 문의</option>
-									<option value="reservation">예약 문의</option>
-									<option value="etc">기타 문의</option>
+								<select id="askingTypes" name="askingTypes">
+									<option value="환불 문의">환불 문의</option>
+									<option value="시설 문의">시설 문의</option>
+									<option value="예약 문의">예약 문의</option>
+									<option value="기타 문의">기타 문의</option>
 								</select>
 							</th>
 						</tr>
@@ -117,15 +117,15 @@
 						<tr>
 							<td style="text-align: center;">
 								<span>
-									<textarea name="" id="" cols="30" rows="10" style="margin: 0px; width: 500px; height: 300px; resize: none; margin-top: 20px; margin-bottom: 20px;"></textarea>
+									<textarea name="content" id="content" cols="30" rows="10" style="margin: 0px; width: 500px; height: 300px; resize: none; margin-top: 20px; margin-bottom: 20px;"></textarea>
 								</span>
 							</td>
 						</tr>
 					</tbody>
 				</table>
-				<a class="btn btn-default pull-right" onclick="location.href='#.jsp'" style="margin-right: 30px;">취소</a>
-				<a class="btn btn-default pull-right" onclick="location.href='#.jsp'" style="margin-right: 10px;">작성</a>
+				<input type = "submit" value = "작성"/>
 				</form>
+				<a class="btn btn-default pull-right" onclick="location.href='#.jsp'" style="margin-right: 30px;">취소</a>
 			</div>
 		</div>
 	</body>

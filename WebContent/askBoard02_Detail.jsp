@@ -92,29 +92,27 @@
 				<table class="table">
 					<thead>
 						<tr>
-							<th style="background-color: rgba(223, 223, 223, 0.719); font-size: 17px;">환불 문의</th>
+							<th style="background-color: rgba(223, 223, 223, 0.719); font-size: 17px;">${bbs.subject}</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td>
-								<span style="margin-right: 10px; font-weight: 800;">ID : dkgibmsk</span>
-								<span style="font-size: 13px;">작성일 : 2020-08-20</span>
+								<span style="margin-right: 10px; font-weight: 800;">${bbs.id}</span>
+								<span style="font-size: 13px;">${bbs.reg_date}</span>
 							</td>
 						</tr>
 						<tr>
 							<td style="text-align: center; padding-top: 30px;">
 								<span>
-									~~~ 결제했는데요.<br><br>
-									환불하고 싶습니다.<br><br>
-									연락 부탁드립니다.
+									${bbs.content}
 								</span>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 				<br>
-				<a class="btn btn-default pull-right" onclick="location.href='#.jsp'">목록</a>
+				<a class="btn btn-default pull-right" href="./ask">목록</a>
 				<a class="btn btn-default" onclick="location.href='#.jsp'" style="margin-right: 10px;">수정</a>
 				<a class="btn btn-default" onclick="location.href='#.jsp'" style="margin-right: 10px;">삭제</a>
 			</div>

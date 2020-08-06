@@ -100,71 +100,17 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="##" var="##">
+						<c:forEach items="${list}" var="bbs">
 							<tr>
-								<td style="text-align: center;">122</td>
-								<td style="text-align: center;">환불 문의</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td style="text-align: center;">환불 문의</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td style="text-align: center;">환불 문의</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td style="text-align: center;">환불 문의</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td style="text-align: center;">환불 문의</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td style="text-align: center;">환불 문의</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td style="text-align: center;">환불 문의</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td style="text-align: center;">환불 문의</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td style="text-align: center;">환불 문의</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td style="text-align: center;">환불 문의</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
+								<td style="text-align: center;">${bbs.b_idx}</td>
+								<td style="text-align: center;"><a href = "askdetail?b_idx=${bbs.b_idx}">${bbs.subject}</a></td>
+								<td style="text-align: center;">${bbs.id}</td>
+								<td style="text-align: center;">${bbs.reg_date}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
-				<a class="btn btn-default pull-right" onclick="location.href='reportBoard04_WriteForm.jsp'">문의하기</a>
+				<a class="btn btn-default pull-right" href="askBoard04_WriteForm.jsp">문의하기</a>
 				<br><br>
 				<div class="text-center">
 					<ul class="pagination">
@@ -195,7 +141,10 @@
 			</div>
 		</div>
 	</body>
-	<script>
-		
-	</script>
+<script>
+	var msg = "${msg}";
+	if(msg !=""){
+		alert(msg);
+	}		
+</script>
 </html>
