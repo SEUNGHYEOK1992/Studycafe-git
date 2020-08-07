@@ -128,10 +128,10 @@
       <img src=""/>
       <span>관리자 프로필 폼</span>
       <ul>
-         <li><a href="#">회원관리</a></li>
-         <li><a href="#">신고내역</a></li>
-         <li><a href="#">블랙리스트</a></li>
-         <li><a href="#">제명목록</a></li>
+         <li><a href="memberList">회원관리</a></li>
+         <li><a href="report">신고내역</a></li>
+         <li><a href="blackList">블랙리스트</a></li>
+         <li><a href="kick">제명목록</a></li>
       </ul>
       <div id="memberManage">
          <table>
@@ -140,12 +140,19 @@
                 <th>아이디</th>
                 <th>사유</th>
              </tr>
+             <c:forEach items="${k_list }" var="kick">
              <tr>
-                <td></td>
-                <td><a href="#">아이디로 이동</a></td>
-                <td></td>
+                <td>${kick.k_idx }</td>
+                <td>${kick.id }</td>
+                <td>${kick.cause }</td>
              </tr>
+             </c:forEach>
          </table>
+          <div class="pageArea">
+			<a href="./kick?page=${currPage -1 }"><span id="spanPage">이전 페이지</span></a>
+			<span><b>${currPage }</b></span>
+			<a href="./kick?page=${currPage+1 }"><span>다음 페이지</span></a>
+		</div>          
       </div>
    </div>
    <!--중앙이미지 끝-->
@@ -160,6 +167,12 @@
    
 </body>
 <script>
-
+	var currPage = ${currPage};
+	console.log(currPage);
+	
+	if(currPage<1){
+		alert("이전 페이지가 없습니다.");
+		location.href="kick";
+	}
 </script>
 </html>

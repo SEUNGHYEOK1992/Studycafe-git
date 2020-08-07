@@ -120,7 +120,7 @@
          <li><a href="#">고객센터</a></li>
       </ul>
       </div>
-      <div id="log"><a href="#">관리자</a></div>  
+      <div id="log"><a href="admin00_Main.jsp">관리자</a></div>  
    </div>
    <!--헤더 끝--> 
 
@@ -129,10 +129,10 @@
       <img src=""/>
       <span>관리자 프로필 폼</span>
       <ul>
-         <li><a href="#">회원관리</a></li>
-         <li><a href="#">신고내역</a></li>
-         <li><a href="#">블랙리스트</a></li>
-         <li><a href="#">제명목록</a></li>
+         <li><a href="memberList">회원관리</a></li>
+         <li><a href="report">신고내역</a></li>
+         <li><a href="blackList">블랙리스트</a></li>
+         <li><a href="kick">제명목록</a></li>
       </ul>
       <div id="memberManage">
          <table>
@@ -147,24 +147,39 @@
                <td>${member.idx }</td>
                <td>${member.id }</td>
                <td>${member.name }</td>
-               <td><button>Button</button></td>
+               <td>
+               		<button onclick="location.href='detail?id=${member.id}'">상세보기</button>
+               		<button onclick="location.href='delete?id=${member.id}'">회원삭제</button>
+               </td>
             </tr>
             </c:forEach>
          </table>
+         <div class="pageArea">
+			<a href="./memberList?page=${currPage -1 }"><span id="spanPage">이전 페이지</span></a>
+			<span><b>${currPage }</b></span>
+			<a href="./memberList?page=${currPage+1 }"><span>다음 페이지</span></a>
+		</div>
       </div>
    </div>
    <!--중앙이미지 끝-->
    <div>
 
    </div>
-
-
     
-
    <!-- <footer>푸터 추가</footer> -->
    
 </body>
 <script>
-
+	var currPage = ${currPage};
+	console.log(currPage);
+	
+	if(currPage<1){
+		alert("이전 페이지가 없습니다.");
+		location.href="memberList";
+	}
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg);
+	}
 </script>
 </html>

@@ -128,10 +128,7 @@
             </div>        
             <div id="join">
                 <input type="button" onclick="location.href='member02_join.jsp'" value="회원가입">
-            </div>              
-            <div id="keep">
-                <input type="checkbox" id="keepLogin" name="keepLogin">
-            </div> 
+            </div>
         </form>
     </body>
     <script>

@@ -262,7 +262,7 @@
 <script>
 	var msg = "${msg}";
 	if(msg != ""){
-		alert(msg)	
+		alert(msg);
 	}
 </script>
 </html>
