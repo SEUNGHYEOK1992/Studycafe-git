@@ -142,7 +142,11 @@
      <li><a href="#">고객센터</a></li>
   </ul>
   </div>
-      <div id="log"><a href="#">로그인/회원가입</a></div>  
+      <div id="log"><a href="admin00_Main.jsp"><%if(session.getAttribute("id") != null){%>
+         							${id } 님</a>
+         						<%}else{ %>
+         							<a href="member01_login.jsp">로그인/회원가입</a> 
+         						<%} %></div>  
   </div>
    <!--헤더 끝--> 
 
