@@ -98,7 +98,6 @@
 		<div class="boardTitle"><h1>문의하기</h1><hr></div>
 		<div class="board_zone">
 			<div class="board_list_table" style="width: 35%;">
-				<form action="write" method="post" enctype="multipart/form-data">
 				<table class="table">
 					<thead>
 						<tr>
@@ -125,7 +124,6 @@
 				</table>
 				<a class="btn btn-default pull-right" onclick="location.href='#.jsp'" style="margin-right: 30px;">취소</a>
 				<a class="btn btn-default pull-right" onclick="location.href='#.jsp'" style="margin-right: 10px;">수정</a>
-				</form>
 			</div>
 		</div>
 	</body>

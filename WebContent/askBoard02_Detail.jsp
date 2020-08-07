@@ -113,7 +113,7 @@
 				</table>
 				<br>
 				<a class="btn btn-default pull-right" href="./ask">목록</a>
-				<a class="btn btn-default" onclick="location.href='#.jsp'" style="margin-right: 10px;">수정</a>
+				<a class="btn btn-default" onclick="location.href='askBoard03_UpdateForm.jsp'" style="margin-right: 10px;">수정</a>
 				<a class="btn btn-default" onclick="location.href='#.jsp'" style="margin-right: 10px;">삭제</a>
 			</div>
 		</div>
