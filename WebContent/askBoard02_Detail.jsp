@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%
+	String id = (String)session.getAttribute("id"); 
+%>   
+
 
 <!DOCTYPE html>
 <html>
@@ -80,31 +84,36 @@
 			   <li><a href="#">예약하기</a></li>
 			   <li><a href="#">자유게시판</a></li>
 			   <li><a href="#">후기게시판</a></li>
-			   <li><a href="#">고객센터</a></li>
+			   <li><a href="./ask">고객센터</a></li>
 			</ul>
 			</div>
 			<div id="log"><a href="#">로그인/회원가입</a></div>  
 		</div>
 		<!----------------------------------------------------->
+		<c:choose>
+		<c:when test="${id== bbs.id}">
 		<div class="boardTitle"><h1>문의하기</h1><hr></div>
 		<div class="board_zone">
 			<div class="board_list_table" style="width: 55%;">
 				<table class="table">
 					<thead>
 						<tr>
-							<th style="background-color: rgba(223, 223, 223, 0.719); font-size: 17px;">${bbs.subject}</th>
+							<td id=b_dix>${bbs.b_idx}</td>
+						</tr>
+						<tr>
+							<th id= subject style="background-color: rgba(223, 223, 223, 0.719); font-size: 17px;">${bbs.subject}</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td>
-								<span style="margin-right: 10px; font-weight: 800;">${bbs.id}</span>
-								<span style="font-size: 13px;">${bbs.reg_date}</span>
+								<span id= id style="margin-right: 10px; font-weight: 800;">${bbs.id}</span>
+								<span id = rge_date style="font-size: 13px;">${bbs.reg_date}</span>
 							</td>
 						</tr>
 						<tr>
 							<td style="text-align: center; padding-top: 30px;">
-								<span>
+								<span id = content>
 									${bbs.content}
 								</span>
 							</td>
@@ -113,12 +122,51 @@
 				</table>
 				<br>
 				<a class="btn btn-default pull-right" href="./ask">목록</a>
-				<a class="btn btn-default" onclick="location.href='askBoard03_UpdateForm.jsp'" style="margin-right: 10px;">수정</a>
-				<a class="btn btn-default" onclick="location.href='#.jsp'" style="margin-right: 10px;">삭제</a>
+				<a class="btn btn-default" href='askupdateform?b_idx=${bbs.b_idx}' style="margin-right: 10px;">수정</a>
+				<a class="btn btn-default" href='askdel?b_idx=${bbs.b_idx}' style="margin-right: 10px;">삭제</a>
 			</div>
 		</div>
+		</c:when>
+		<c:otherwise>
+		<div class="boardTitle"><h1>문의하기</h1><hr></div>
+		<div class="board_zone">
+			<div class="board_list_table" style="width: 55%;">
+				<table class="table">
+					<thead>
+						<tr>
+							<td id=b_dix>${bbs.b_idx}</td>
+						</tr>
+						<tr>
+							<th id= subject style="background-color: rgba(223, 223, 223, 0.719); font-size: 17px;">${bbs.subject}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<span id= id style="margin-right: 10px; font-weight: 800;">${bbs.id}</span>
+								<span id = rge_date style="font-size: 13px;">${bbs.reg_date}</span>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: center; padding-top: 30px;">
+								<span id = content>
+									${bbs.content}
+								</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<br>
+				<a class="btn btn-default pull-right" href="./ask">목록</a>
+			</div>
+		</div>
+		</c:otherwise>
+		</c:choose>
 	</body>
 	<script>
-		
+	var msg = "${msg}";
+	if(msg !=""){
+		alert(msg);
+	}
 	</script>
 </html>

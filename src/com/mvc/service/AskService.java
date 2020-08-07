@@ -48,13 +48,59 @@ public class AskService {
 	}
 
 	public void askdetail() throws ServletException, IOException {
-		String b_idx = req.getParameter("b_idx");
+		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
 		System.out.println("에스크디테일 값은?"+b_idx);
 		AskDAO dao = new AskDAO();
 		req.setAttribute("bbs", dao.askdetail(b_idx));
 		RequestDispatcher dis = req.getRequestDispatcher("askBoard02_Detail.jsp");
 		dis.forward(req, resp);
 		
+	}
+
+	public void askupdateform() throws ServletException, IOException {
+		AskDAO dao = new AskDAO();
+		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
+		System.out.println("수정을 할 b_idx : "+b_idx);
+		AskDTO dto = dao.askdetail(b_idx);
+		req.setAttribute("bbs", dto);
+		System.out.println("넘어갔을까?");
+		RequestDispatcher dis = req.getRequestDispatcher("askBoard03_UpdateForm.jsp");
+		dis.forward(req, resp);
+		
+	}
+
+	public void askupdate() throws ServletException, IOException {
+		System.out.println("넘어왔나?");
+		req.setCharacterEncoding("UTF-8");
+		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
+		String subject = req.getParameter("askingTypes");
+		String content = req.getParameter("content");
+		System.out.println(b_idx+" / "+subject+" / "+content);
+		AskDAO dao = new AskDAO();
+		String page = "askdetail?b_idx="+b_idx;
+		String msg = "수정에 실패했습니다.";
+		if(dao.askupdate(b_idx,subject,content)) {
+			msg = "수정에 성공하였습니다.";
+		}
+		req.setAttribute("msg", msg);
+		RequestDispatcher dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+		
+	}
+
+	public void askdel() throws ServletException, IOException {
+		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
+		System.out.println("삭제 b_idx는?"+b_idx);
+		AskDAO dao = new AskDAO();
+		String page = "askdetail";
+		 String msg = "삭제에  실패했습니다!"; 
+		if(dao.askdel(b_idx)) {
+			page = "/ask";
+			 msg = "삭제에 성공했습니다!"; 
+		}
+		 req.setAttribute("msg", msg);
+		RequestDispatcher dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);		
 	}
 
 }

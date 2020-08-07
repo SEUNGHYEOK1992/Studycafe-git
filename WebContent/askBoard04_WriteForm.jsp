@@ -89,7 +89,7 @@
 			   <li><a href="#">예약하기</a></li>
 			   <li><a href="#">자유게시판</a></li>
 			   <li><a href="#">후기게시판</a></li>
-			   <li><a href="#">고객센터</a></li>
+			   <li><a href="./ask">고객센터</a></li>
 			</ul>
 			</div>
 			<div id="log"><a href="#">로그인/회원가입</a></div>  
@@ -125,11 +125,14 @@
 				</table>
 				<input type = "submit" value = "작성"/>
 				</form>
-				<a class="btn btn-default pull-right" onclick="location.href='#.jsp'" style="margin-right: 30px;">취소</a>
+				<a class="btn btn-default pull-right" href='./ask' style="margin-right: 30px;">취소</a>
 			</div>
 		</div>
 	</body>
 	<script>
-		
+	var msg = "${msg}";
+	if(msg !=""){
+		alert(msg);
+	}
 	</script>
 </html>

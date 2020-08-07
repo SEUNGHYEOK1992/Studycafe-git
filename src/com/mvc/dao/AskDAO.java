@@ -86,19 +86,19 @@ public class AskDAO {
 		return success;
 	}
 
-	public AskDTO askdetail(String b_idx) {
+	public AskDTO askdetail(int b_idx) {
 		String sql = "SELECT b_idx, id, subject, content, reg_date FROM bbs WHERE b_idx=?";
 		AskDTO dto = null;
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, b_idx);
+			ps.setInt(1, b_idx);
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				dto = new AskDTO();
 				dto.setB_idx(rs.getInt("b_idx"));
 				dto.setId(rs.getString("id"));
 				dto.setSubject(rs.getString("subject"));
-				dto.setContent(rs.getString("content")); /*안되면 체크해보기 askingTypes*/
+				dto.setContent(rs.getString("content")); 
 				dto.setReg_date(rs.getDate("reg_date"));
 			}
 		} catch (SQLException e) {
@@ -108,6 +108,42 @@ public class AskDAO {
 			resClose();
 		}
 		return dto;
+	}
+
+	public boolean askupdate(int b_idx, String subject, String content) {
+		boolean result = false;
+		String sql = "UPDATE bbs SET subject=?,content=? WHERE b_idx=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, subject);
+			ps.setString(2, content);
+			ps.setInt(3, b_idx);
+			if(ps.executeUpdate()>0) {
+				result = true;
+			}System.out.println("askupdte dao입니다");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return result;
+	}
+
+	public boolean askdel(int b_idx) {
+		String sql = "DELETE FROM bbs WHERE b_idx=?";
+		boolean result = false;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, b_idx);
+			if(ps.executeUpdate()>0) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return result;
 	}
 	
 }

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mvc.service.AskService;
 
-@WebServlet({"/ask","/askwrite","/askdetail"})
+@WebServlet({"/ask","/askwrite","/askdetail","/askupdateform","/askupdate","/askdel"})
 public class AskController extends HttpServlet {
 
 	@Override
@@ -48,6 +48,21 @@ public class AskController extends HttpServlet {
 			case "/askdetail":
 				System.out.println("글 상세보기 요청");
 				service.askdetail();
+				break;
+				
+			case "/askupdateform":
+				System.out.println("수정 폼으로 이동 요청");
+				service.askupdateform();
+				break;
+				
+			case "/askupdate":
+				System.out.println("수정!");
+				service.askupdate();
+				break;
+				
+			case "/askdel":
+				System.out.println("삭제 요청!!!!");
+				service.askdel();
 				break;
 		}
 	}
