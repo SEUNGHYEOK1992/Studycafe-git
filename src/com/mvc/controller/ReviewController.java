@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mvc.dao.ReviewDAO;
 import com.mvc.service.ReviewService;
 
-@WebServlet({"/list","/write","/update"})
+@WebServlet({"/rvlist","/rvwrite","/rvupdate"})
 public class ReviewController extends HttpServlet {
 	
 
@@ -36,18 +36,17 @@ public class ReviewController extends HttpServlet {
 		
 		switch(reqAddr) {
 		
-		case"/list":
-			System.out.println("글 리스트 보기 요청");
-			
+		case"/rvlist":
+			System.out.println("글 리스트 보기 요청");			
 			revservice.list();
 			break;
 						
-		case"/write":
+		case"/rvwrite":
 			System.out.println("글쓰기요청");
 			revservice.write();
 			break;
 			
-		case"/detail":
+		case"/rvdetail":
 			break;
 		}
 

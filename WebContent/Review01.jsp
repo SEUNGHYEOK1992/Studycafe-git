@@ -147,7 +147,7 @@
             <li><a href="#">스터디룸 소개</a></li>
             <li><a href="#">예약하기</a></li>
             <li><a href="#">자유게시판</a></li>
-            <li><a href="./list">후기게시판</a></li>
+            <li><a href="./rvlist">후기게시판</a></li>
             <li><a href="#">고객센터</a></li>
          </ul>
          </div>
@@ -160,7 +160,7 @@
          </div>  
       
  <!--헤더 끝-->
- 	<div style="width:800px; height:150px; outline:1px solid red">
+ 	<!-- <div style="width:800px; height:150px; outline:1px solid red"> -->
 	    <form action="write" method="post">
 	        <div class="reviewBox" style="top: 30%; left: 50%; position: absolute; transform: translate(-50%,-50%);">
 	            <h2>후기게시판</h2>
@@ -170,13 +170,19 @@
 	            </div>
 	        </div>
 	    </form>
-	</div>
+	<!-- </div> -->
 	
-	<div style="width:800px; height:1000px; margin-top:100px; outline:1px solid green;">
-	    <table class="aa" style="width: 800px; top: 55%; left: 50%; position: absolute; transform: translate(-50%,-50%);">
+	<!-- <div style="width:800px; height:1000px; margin-top:100px; outline:1px solid green;"> -->
+	    <table class="aa" style="width: 800px; top: 55%; left: 50%; position: absolute; transform: translate(-50%,-50%); margin-top: 100px; margin-bottom: 30px;">
 	        <c:forEach items="${list}" var="bbs">
 	       		 <tr>                		
-	                <td >${bbs.id}&nbsp; &nbsp; &nbsp; &nbsp;<input type="button" value="수정"/>&nbsp; &nbsp; &nbsp; &nbsp;<input type="button" value="삭제"/> </td>
+	                <td >
+		                ${bbs.id}
+		                &nbsp; &nbsp; &nbsp; &nbsp;
+		                <input type="button" id="updateBtn" value="수정" onclick="updateBtnClick();"/>
+		                &nbsp; &nbsp; &nbsp; &nbsp;
+		                <input type="button" value="삭제"/> 
+	                </td>
 	  
 	        	</tr>       	
 		        <tr>
@@ -184,7 +190,18 @@
 		        </tr>	
 		        </c:forEach>
 	    </table>
-    </div>
+	    <div><!--  dispaly none주고 수정 클릭시 뜨게  -->
+		    <form action="rvupdateForm" method="post">
+		        <div class="updateBox" style="top: 55%; left: 50%; position: absolute; transform: translate(-50%,-50%);">
+		            <h2>후기게시판</h2>
+		            <textarea id="content" name = "content" placeholder="내용을 입력해주세요." style="width: 800px; height: 100px; outline: 1px solid #666; resize: none;" ></textarea>
+		            <div id="sendBox" style="width: 800px; height: 20;">
+		                <input type="submit" id="rvsendbtn" value="저장" style="float: right; margin-top: 5px;">
+		            </div>
+		        </div>
+		    </form>
+	    </div>
+    <!-- </div> -->
     <!--footer시작-->
    <footer id="footerBox"> 
     <div id="infoBox"> <!--@@width:1100px infoBox시작 -->
@@ -210,6 +227,8 @@
  </footer>
 </body>
 <script>
-
+	/* function updateBtnClick(){
+		//클릭시 수정폼 div뜨게 하기
+	} */
 </script>
 </html>
