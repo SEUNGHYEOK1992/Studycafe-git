@@ -41,7 +41,7 @@ public class ReviewService {
 	
 	}
 	
-	public void write() throws IOException {  //세션확인해야됨
+	public void write() throws IOException {
 		ReviewDAO dao = new ReviewDAO();
 		req.setCharacterEncoding("UTF-8");
 		String id = (String) req.getSession().getAttribute("id");
@@ -49,10 +49,48 @@ public class ReviewService {
 		String content = req.getParameter("content");
 		System.out.println(content);
 		dao.write(content,id);
-		String page = "Review01.jsp";
+		String page = "rvlist";
 		
 		resp.sendRedirect(page);
 	}
+
+	public void del() throws ServletException, IOException {
+		String idx = req.getParameter("idx");
+		System.out.println("b_idx : "+idx);
+		ReviewDAO dao = new ReviewDAO();
+		String page = "/rvlist";
+		boolean success = dao.del(idx);
+		String msg = "삭제 실패 하였습니다.";
+		req.setAttribute("msg", msg);
+		
+		if(success) {
+			page = "/rvlist";
+			msg = "삭제 성공하였습니다.";
+		}
+		RequestDispatcher dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+
+		
+	}
+
+	public void updateForm() throws ServletException, IOException {
+		System.out.println("서비스 들어옴");
+		String idx = req.getParameter("idx");
+		ReviewDAO dao = new ReviewDAO();		
+		System.out.println("수정idx : "+idx);
+		req.setAttribute("bbs", dao.updateForm(idx));
+		dao = new ReviewDAO();	
+		ReviewDTO dto = dao.updateForm(idx);
+		System.out.println("여기까지");
+		req.setAttribute("review_bbs", dto);
+		RequestDispatcher dis = req.getRequestDispatcher("revUpdateForm.jsp");
+		dis.forward(req, resp);
+		
+		
+		
+		
+	}
+
 
 	
 	

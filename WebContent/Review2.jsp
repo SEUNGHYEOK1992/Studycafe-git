@@ -178,19 +178,30 @@
 	       		 <tr>                		
 	                <td >
 		                ${bbs.id}
-		                <input type="hidden" name="b_idx" value="${bbs.b_idx}"/>
+		                <input type="hidden" name="b_idx" value="${bbs.b_idx}">
 		                &nbsp; &nbsp; &nbsp; &nbsp;
-		                <button id="updateBtn" onclick="location.href='rvupdateForm?idx=${bbs.b_idx}'">수정</button>
+		                <input type="button" id="updateBtn" value="수정"/>
 		                &nbsp; &nbsp; &nbsp; &nbsp;
-		                <button onclick="location.href='rvdel?idx=${bbs.b_idx}'">삭제</button> 
-	                </td>	  
+		                <input type="button" value="삭제" onclick="location.href='rvdel?idx=${bbs.b_idx}'"/> 
+	                </td>
+	  
 	        	</tr>       	
 		        <tr>
 		            <td style="resize: none width: 800px; height: 80px;">${bbs.content}</td>
 		        </tr>	
 		        </c:forEach>
 	    </table>
-
+	    <!-- <div> dispaly none주고 수정 클릭시 뜨게 
+		    <form action="rvupdateForm" method="post">
+		        <div class="updateBox" style="top: 55%; left: 50%; position: absolute; transform: translate(-50%,-50%);">
+		            <textarea id="content" name = "content" placeholder="내용을 입력해주세요." style="width: 800px; height: 100px; outline: 1px solid #666; resize: none;" ></textarea>
+		            <div id="sendBox" style="width: 800px; height: 20;">
+		                <input type="submit" id="rvsendbtn" value="저장" style="float: right; margin-top: 5px;">
+		            </div>
+		        </div>
+		    </form>
+	    </div> -->
+    <!-- </div> -->
     <!--footer시작-->
 <!--    <footer id="footerBox"> 
     <div id="infoBox"> @@width:1100px infoBox시작
@@ -219,9 +230,5 @@
 	/* function updateBtnClick(){
 		//클릭시 수정폼 div뜨게 하기
 	} */
-	var msg = "${msg}";
-	if(msg!="''){
-		alert(msg)
-	}
 </script>
 </html>

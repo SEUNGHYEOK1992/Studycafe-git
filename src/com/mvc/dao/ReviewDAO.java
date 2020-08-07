@@ -44,14 +44,15 @@ public class ReviewDAO {
 			
 			while(rs.next()) {
 				ReviewDTO dto = new ReviewDTO();
-				dto.setB_idx(rs.getInt("b_idx"));
-				System.out.println(dto.getB_idx());
+				dto.setB_idx(rs.getString("b_idx"));
+//				System.out.println(dto.getB_idx());
 				dto.setId(rs.getString("id"));
-				System.out.println(dto.getId());
+//				System.out.println(dto.getId());
 				dto.setContent(rs.getString("content"));
-				System.out.println(dto.getContent());
+//				System.out.println(dto.getContent());
 				list.add(dto);
-			}System.out.println("dto받아왔냐?");
+		}
+//			System.out.println("dto받아왔냐?");
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -94,6 +95,52 @@ public class ReviewDAO {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}		
+	}
+
+	public boolean del(String b_idx) {
+		String sql = "DELETE FROM bbs WHERE category=2 AND b_idx=?";
+		boolean result = false;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, b_idx);
+			int success = ps.executeUpdate();
+			
+			if(success>0) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		
+		return result;
+		
+	}
+
+	public ReviewDTO updateForm(String b_idx) {
+		String sql = "SELECT b_idx,id,content FROM bbs WHERE b_idx=?";
+		ReviewDTO dto = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, b_idx);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				dto = new ReviewDTO();
+				dto.setB_idx(rs.getString("b_idx"));
+				System.out.println(dto.getB_idx());
+				dto.setId(rs.getString("id"));
+				System.out.println(dto.getId());
+				dto.setContent(rs.getString("content"));
+				System.out.println(dto.getContent());
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return dto;
 	}
 
 

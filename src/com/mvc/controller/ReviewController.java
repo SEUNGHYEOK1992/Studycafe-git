@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mvc.dao.ReviewDAO;
 import com.mvc.service.ReviewService;
 
-@WebServlet({"/rvlist","/rvwrite","/rvupdate"})
+@WebServlet({"/rvlist","/rvwrite","/rvdel","/rvupdateForm","/rvupdate"})
 public class ReviewController extends HttpServlet {
 	
 
@@ -46,7 +46,15 @@ public class ReviewController extends HttpServlet {
 			revservice.write();
 			break;
 			
-		case"/rvdetail":
+		case"/rvdel":
+			System.out.println("삭제요청");
+			revservice.del();
+			break;
+		
+			
+		case"/rvupdateForm":
+			System.out.println("수정 폼 이동 요청");
+			revservice.updateForm();
 			break;
 		}
 
