@@ -71,7 +71,7 @@ public class MemberService {
 	}
 
 	
-	public void updateProfile() throws ServletException, IOException { 
+	public void profileUpdate() throws ServletException, IOException { 
 	    req.setCharacterEncoding("UTF-8");
 	    String id = req.getParameter("id");
 	    String name = req.getParameter("name");
@@ -82,11 +82,11 @@ public class MemberService {
 	    
 	    System.out.println("수정 할 파라미터 값 : " + id + " / " + name + " 기타등등");
 	    
-	    String page = "detail?id="+id;
+	    String page = "profileDetail?id="+id;
 	    String msg = "수정에 실패했습니다";
 	    
 	    MemberDAO dao = new MemberDAO();
-	    if(dao.updateProfile(id, name, birth, email, phone, addr)) {
+	    if(dao.profileUpdate(id, name, birth, email, phone, addr)) {
 	    	msg = "수정 성공";
 	    }
 	    

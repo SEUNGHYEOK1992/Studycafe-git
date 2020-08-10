@@ -149,7 +149,7 @@ public class MemberDAO {
 		return dto;
 	}
 
-	public boolean updateProfile(String id, String name, String birth, String email, String phone, String addr) {
+	public boolean profileUpdate(String id, String name, String birth, String email, String phone, String addr) {
 		boolean result = false;
 		
 		String sql = "UPDATE memberlist SET name=?, birth=?, email=?, addr=?, phone=? WHERE id=?";

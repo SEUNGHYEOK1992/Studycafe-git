@@ -181,7 +181,7 @@
                 <a href="#">로그인/회원가입</a>
             </div>  
         </div>
-        <form action="updateProfile" method="post">       
+        <form action="profileUpdate" method="post">       
 	        <table>          
 	            <div id=profile>
 	               ${profileUpdateForm.id}님의 프로필
