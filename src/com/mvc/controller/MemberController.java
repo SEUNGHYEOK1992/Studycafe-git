@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
+import com.mvc.dto.AdminDTO;
 import com.mvc.service.MemberService;
 
-@WebServlet({"/login","/logout","/join","/overlay"})
+@WebServlet({"/login","/logout","/join","/overlay", "/profileDetail", "/profileUpdate", "/profileUpdateForm", "/delProfile"})
 public class MemberController extends HttpServlet {
 	
 	@Override
@@ -95,6 +96,43 @@ public class MemberController extends HttpServlet {
 				System.out.println("result : "+obj);
 				resp.getWriter().println(obj);	
 			break;
+			
+			case "/profileDetail":
+				System.out.println("프로필 상세보기 요청");
+				String detailId = req.getParameter("id");
+				System.out.println("확인할 ID : " + detailId);
+				AdminDTO dto = service.profileDetail(detailId);
+				req.setAttribute("profileDetail", dto);
+				dis = req.getRequestDispatcher("member03_profile.jsp");
+				dis.forward(req, resp);
+				break;
+				
+			case "/profileUpdateForm":
+				System.out.println("수정폼으로 이동 요청 발생");
+				String upId = req.getParameter("id");
+ 				String upName = req.getParameter("name");
+ 				String upBirth = req.getParameter("birth");
+ 				String upEmail = req.getParameter("email");
+ 				String upAddr = req.getParameter("addr");
+ 				String upPhone = req.getParameter("phone");
+ 				System.out.println("사용할 파라메터 값 : " + upId + " / " + upName + " / " + upBirth + " / " + upEmail + " / " + upAddr + " / " + upPhone);
+ 				
+ 				dto = service.profileUpdateForm(upId);
+ 				req.setAttribute("profileUpdateForm", dto);
+ 				dis = req.getRequestDispatcher("member04_profileupdate.jsp");
+ 				dis.forward(req, resp);
+				
+				break;
+				
+			case "/profileUpdate":
+				System.out.println("수정 요청 발생");
+				service.profileUpdate();
+				break;
+				
+			case "/delProfile":
+				System.out.println("삭제 요청 발생");
+				service.delProfile();
+				break;
 		}
 		
 		
