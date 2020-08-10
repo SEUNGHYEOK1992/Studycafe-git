@@ -84,7 +84,12 @@
 			   <li><a href="#">고객센터</a></li>
 			</ul>
 			</div>
-			<div id="log"><a href="#">로그인/회원가입</a></div>  
+         <div id="log"><%if(session.getAttribute("id") != null){%>
+      							${id} 님
+      						<%}else{ %>
+      							<a href="member01_login.jsp">로그인/회원가입</a> 
+      						<%} %>
+         </div> 
 		</div>
 		<!----------------------------------------------------->
 		<div class="boardTitle"><h1>공지사항</h1><hr></div>

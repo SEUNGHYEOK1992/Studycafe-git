@@ -31,7 +31,7 @@ public class ReportboardDAO {
 	}
 	
 	public ArrayList<ReportboardDTO> list() {
-		String sql = "SELECT b_idx, id, subject content, reg_date, bHit FROM bbs WHERE id='admin' ORDER BY b_idx DESC";
+		String sql = "SELECT b_idx, id, subject, reg_date, bHit FROM bbs WHERE id='admin' ORDER BY b_idx DESC";
 		ArrayList<ReportboardDTO> list = new ArrayList<ReportboardDTO>();
 		try {
 			ps = conn.prepareStatement(sql);
