@@ -197,13 +197,8 @@
             <li><a href="#">스터디룸 소개</a></li>
             <li><a href="#">예약하기</a></li>
             <li><a href="#">자유게시판</a></li>
-<<<<<<< HEAD
             <li><a href="./rvlist">후기게시판</a></li>
-            <li><a href="#">고객센터</a></li>
-=======
-            <li><a href="#">후기게시판</a></li>
             <li><a href="./ask">고객센터</a></li>
->>>>>>> 895a22ff7d0731b96eef59e6c8d0c7272299517a
          </ul>
          </div>
          <div id="log"><%if(session.getAttribute("id") != null){%>
