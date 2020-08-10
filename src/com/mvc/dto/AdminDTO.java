@@ -12,7 +12,6 @@ public class AdminDTO {
 	private String blacklist;
 	private int k_idx;
 	private String cause;
-	
 	public String getId() {
 		return id;
 	}
