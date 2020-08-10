@@ -140,25 +140,25 @@
           <tr>
               <th>체크</th>
               <th>번호</th>
-              <th>보낸 사람</th>
+              <th>받는 사람</th>
               <th>내용</th>
               <th>날짜</th>
           </tr>
-          <c:forEach items="${m_list }" var="message">
+          <c:forEach items="${send_List }" var="sendList">
           <tr>
-              <td><input type="checkbox" value="${message.m_idx }" /></td> <!-- 체크박스는 mvc 에서 코딩할 때 했던 방법 사용할지?-->
-              <td>${message.m_idx }</td>
-              <td>${message.send_id }</td>
-              <td><div class="txt_line"><a href="messageDetail?m_idx=${message.m_idx }">${message.mess_content }</a></div></td>
+              <td><input type="checkbox" value="${sendList.m_idx }" /></td> <!-- 체크박스는 mvc 에서 코딩할 때 했던 방법 사용할지?-->
+              <td>${sendList.m_idx }</td>
+              <td>${sendList.recv_id }</td>
+              <td><div class="txt_line"><a href="sendDetail?m_idx=${sendList.m_idx }">${sendList.mess_content }</a></div></td>
               <!--showpopup(); = 쪽지 상세보기 팝업 함수-->
-              <td>${message.mess_reg_date }</td>
+              <td>${sendList.mess_reg_date }</td>
           </tr>
           </c:forEach>
       </table>
             <div class="pageArea">
-				<a href="./messageList?page=${currPage -1 }"><span id="spanPage">이전 페이지</span></a>
+				<a href="./sendList?page=${currPage -1 }"><span id="spanPage">이전 페이지</span></a>
 				<span><b>${currPage }</b></span>
-				<a href="./messageList?page=${currPage+1 }"><span>다음 페이지</span></a>
+				<a href="./sendList?page=${currPage+1 }"><span>다음 페이지</span></a>
 		</div>
    </div>
    <!--중앙이미지 끝-->
@@ -169,11 +169,11 @@
 <script>
 
 	var currPage = ${currPage};
-	console.log(currPage);
+	//console.log(currPage);
 	
 	if(currPage<1){
 		alert("이전 페이지가 없습니다.");
-		location.href="messageList";
+		location.href="sendList";
 	}
 	
 	function del(){
@@ -194,7 +194,7 @@
 				if(result.msgDelete){
 					alert("게시물 삭제에 성공 했습니다.");
 				}
-				location.href="messageList";
+				location.href="sendList";
 			},
 			error:function(e){
 				console.log(e);

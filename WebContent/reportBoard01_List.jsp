@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -102,76 +101,12 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="##" var="##">
+						<c:forEach items="${list}" var="bbs">
 							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
+								<td style="text-align: center;">${bbs.b_idx}</td>
+								<td style="text-align: center;">${bbs.subject}</td>
+								<td style="text-align: center;">${bbs.id}</td>
+								<td style="text-align: center;">${bbs.reg_date}</td>
 							</tr>
 						</c:forEach>
 					</tbody>

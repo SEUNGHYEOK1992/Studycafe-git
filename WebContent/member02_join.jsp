@@ -4,7 +4,7 @@
 <html>
 <head>
     <script type="text/javascript" src="event.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <meta charset="UTF-8"/>
     <title> html </title>
     <style>
