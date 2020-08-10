@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%String id = (String)session.getAttribute("id");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,8 +12,10 @@
 		body{
                 font-family: 'Noto Sans KR', sans-serif;
             	margin: 0px;
+            	overflow:scroll;
+            	height: 100%
       	}
-#header{
+		#header{
             width: 100%;   
             height: 150px;
             background-color: #333;
@@ -48,13 +51,6 @@
             color: white;   
             text-decoration: none;
          }
-
-		table,th,td{
-            border:1px solid black;
-            border-collapse: collapse;
-            padding: 0px;
-            margin: 0px;
-       	}
         
        	.pageArea{
 			margin:10px;
@@ -143,57 +139,70 @@
             <img src=""/>
          </div>
          <div>
-         <ul id="top_navi">
-            <li><a href="#">스터디룸 소개</a></li>
-            <li><a href="#">예약하기</a></li>
-            <li><a href="#">자유게시판</a></li>
-            <li><a href="./rvlist">후기게시판</a></li>
-            <li><a href="#">고객센터</a></li>
-         </ul>
+	         <ul id="top_navi">
+	            <li><a href="#">스터디룸 소개</a></li>
+	            <li><a href="#">예약하기</a></li>
+	            <li><a href="#">자유게시판</a></li>
+	            <li><a href="./rvlist">후기게시판</a></li>
+	            <li><a href="#">고객센터</a></li>
+	         </ul>
          </div>
          <div id="log">
          		<%if(session.getAttribute("id") != null){%>
          							${id } 님
          						<%}else{ %>
-         							<a href="member01_login.jsp">로그인/회원가입</a></div> 
+         							<a href="member01_login.jsp">로그인/회원가입</a>
+         </div> 
          						<%} %>
-         </div>  
+	</div>  
       
  <!--헤더 끝-->
- 	<!-- <div style="width:800px; height:150px; outline:1px solid red"> -->
-	    <form action="rvwrite" method="post">
-	        <div class="reviewBox" style="top: 30%; left: 50%; position: absolute; transform: translate(-50%,-50%);">
-	            <h2>후기게시판</h2>
-	            <textarea id="content" name = "content" placeholder="내용을 입력해주세요." style="width: 800px; height: 100px; outline: 1px solid #666; resize: none;" ></textarea>
-	            <div id="sendBox" style="width: 800px; height: 20;">
-	                <input type="submit" id="sendbtn" value="저장" style="float: right; margin-top: 5px;">
-	            </div>
-	        </div>
-	    </form>
-	<!-- </div> -->
+ 	<!-- <div style="width:800px; height:150px; outline:1px solid red"> --> 
+ 	<!-- --------------------------------------------- -->
+		    <form action="rvwrite" method="post">
+		        <div class="reviewBox" style="top: 30%; left: 50%; position: absolute; transform: translate(-50%,-50%);">
+		            <h2>후기게시판</h2>
+		            <div>
+		            	<textarea id="content" name = "content" placeholder="내용을 입력해주세요." style="width: 800px; height: 100px; outline: 1px solid #666; resize: none;" ></textarea>
+		            </div>
+		            <div id="sendBox" style="width: 800px; height: 20;">
+		                <input type="submit" id="sendbtn" value="저장" style="float: right; margin-top: 5px;">
+		            </div>
+		        </div>
+		    </form>
 	
-	<!-- <div style="width:800px; height:1000px; margin-top:100px; outline:1px solid green;"> -->
-	    <table class="aa" style="width: 800px; top: 55%; left: 50%; position: absolute; transform: translate(-50%,-50%); margin-top: 100px; margin-bottom: 30px;">
-	        <c:forEach items="${list}" var="bbs">
-	       		 <tr>                		
-	                <td >
-		                ${bbs.id}
-		                <input type="hidden" name="b_idx" value="${bbs.b_idx}"/>
-		                &nbsp; &nbsp; &nbsp; &nbsp;
-		                <button id="updateBtn" onclick="location.href='rvupdateForm?idx=${bbs.b_idx}'">수정</button>
-		                &nbsp; &nbsp; &nbsp; &nbsp;
-		                <button onclick="location.href='rvdel?idx=${bbs.b_idx}'">삭제</button> 
-	                </td>	  
-	        	</tr>       	
-		        <tr>
-		            <td style="resize: none width: 800px; height: 80px;">${bbs.content}</td>
-		        </tr>	
-		        </c:forEach>
-	    </table>
-
+<!-- 		<div style="width:800px; height:800px; outline:1px solid green; dispaly:table; top: 400px; left: 29%; position: relative; "> -->
+		    <div class="aa" style="width: 800px; height: 600px; position: absolute; top:50%; left:29%;">
+                <c:forEach items="${list}" var="bbs">
+                    <c:choose>
+                        <c:when test="${id==bbs.id}">		        
+                                <div style="border:1px solid #666; border-bottom:none; height:30px;">
+                                        ${bbs.id}
+                                        <input type="hidden" name="b_idx" value="${bbs.b_idx}"/>
+                                        &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <button id="updateBtn" style="float: right;" onclick="location.href='rvupdateForm?idx=${bbs.b_idx}'">수정</button>
+                                        &nbsp; &nbsp; &nbsp; &nbsp;
+                                        <button style="float: right; margin-right: 30px;" onclick="location.href='rvdel?idx=${bbs.b_idx}'">삭제</button> 
+                                </div>      	
+                                <div style="border:1px solid #666;  border-bottom:none; resize: none width: 800px; height: 80px;">${bbs.content}</div>
+                                                        
+                        </c:when>
+                            
+                        <c:when test="${id != bbs.id}">                		
+                                <div style="border:1px solid #666; border-bottom:none;" >
+                                    ${bbs.id}
+                                    <input type="hidden" name="b_idx" value="${bbs.b_idx}"/>
+                                </div>	         	
+                            <div style="resize: none width: 800px; height: 80px; border:1px solid #666;  border-bottom:none;">${bbs.content}</div>
+                            
+                        </c:when>
+                    </c:choose>	
+                </c:forEach>
+		    </div>
+		<!-- </div> -->
     <!--footer시작-->
-<!--    <footer id="footerBox"> 
-    <div id="infoBox"> @@width:1100px infoBox시작
+ <!--   <footer id="footerBox"> 
+    <div id="infoBox">
  
          <a href="#"><div id="footerLogo"></div></a>
 
@@ -216,12 +225,13 @@
  </footer> -->
 </body>
 <script>
-	/* function updateBtnClick(){
-		//클릭시 수정폼 div뜨게 하기
-	} */
 	var msg = "${msg}";
 	if(msg!=""){
 		alert(msg)
 	}
+
+
+
+
 </script>
 </html>

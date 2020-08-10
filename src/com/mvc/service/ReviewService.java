@@ -41,7 +41,7 @@ public class ReviewService {
 	
 	}
 	
-	public void write() throws IOException {
+	public void write() throws IOException, ServletException {
 		ReviewDAO dao = new ReviewDAO();
 		req.setCharacterEncoding("UTF-8");
 		String id = (String) req.getSession().getAttribute("id");
@@ -51,6 +51,12 @@ public class ReviewService {
 		dao.write(content,id);
 		String page = "rvlist";
 		
+		if(id==null) {
+			String msg = "로그인여부를 확인해주세요.";
+			req.setAttribute("msg", msg);
+			RequestDispatcher dis = req.getRequestDispatcher("member01_login.jsp");
+			dis.forward(req, resp);
+		}
 		resp.sendRedirect(page);
 	}
 
@@ -58,15 +64,12 @@ public class ReviewService {
 		String idx = req.getParameter("idx");
 		System.out.println("b_idx : "+idx);
 		ReviewDAO dao = new ReviewDAO();
+		String id = (String) req.getSession().getAttribute("id");
 		String page = "/rvlist";
 		boolean success = dao.del(idx);
-		String msg = "삭제 실패 하였습니다.";
+		String msg = "삭제 성공하였습니다.";
 		req.setAttribute("msg", msg);
 		
-		if(success) {
-			page = "/rvlist";
-			msg = "삭제 성공하였습니다.";
-		}
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 
