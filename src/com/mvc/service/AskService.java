@@ -102,5 +102,4 @@ public class AskService {
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);		
 	}
-
 }
