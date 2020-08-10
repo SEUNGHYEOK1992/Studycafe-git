@@ -38,4 +38,15 @@ public class MessageService {
 		return dao.falseMsg(id, page);
 	}
 
+	public void messageSend() {
+		String id = (String) req.getSession().getAttribute("id");
+		System.out.println(id);
+		MessageDAO dao = new MessageDAO();
+		dao.messageSend(id);
+	}
+
+	public void msgSendForm() {
+		
+	}
+
 }

@@ -143,6 +143,10 @@ public class MessageDAO {
 		}
 		return list;
 	}
+
+	public void messageSend(String id) {
+		
+	}
 	
 	
 	

@@ -130,8 +130,8 @@
    <!--중앙이미지 시작-->
    <div class="main_img">
       <img src=""/>
-      <button id="btn_del">삭제</button>
-      <button id="btn_wri" onclick="sendmessage();">쓰기</button>
+      <button id="btn_del" onclick="">삭제</button>
+      <button id="btn_wri" onclick="sendmessage()">쓰기</button>
       <a href="messageList">전체보기</a>
       <a href="falseMsg">안읽은 쪽지 보기</a>
       <table>
@@ -173,5 +173,8 @@
 		alert("이전 페이지가 없습니다.");
 		location.href="messageList";
 	}
+    function sendmessage(){
+        window.open("messageSend","messagesend","width=515,height=651,left=550,top=150");
+       };
 </script>
 </html>

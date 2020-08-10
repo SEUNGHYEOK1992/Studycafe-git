@@ -75,8 +75,9 @@ public class MessageController extends HttpServlet {
 				dis.forward(req, resp);
 			break;
 			
-			case "/messageSend":
+			case "/msgSendForm":
 				System.out.println("메시지 작성 요청");
+				service.msgSendForm();
 			break;
 		
 		}

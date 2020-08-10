@@ -44,6 +44,7 @@
     <!--보낸사람 시간 확인-->
     <div id = "uptext">
         <p>보낸 사람 : ${m_info.send_id }<br>받은 시간 : ${m_info.mess_reg_date }</p>
+        <form><input type="hidden" name ="send_id" value="${m_info.send_id }"/></form>
     </div>
 
     <!--받은내용-->
@@ -52,7 +53,7 @@
     </div>
     <!--답장버튼-->
     <div id = "btn_reply">
-        <button id="btn_size" onclick="sendmessage();">답장</button>
+        <input type="submit" id="btn_size" onclick="sendmessage();" value="답장"/>
     </div>   
 
 </body>
