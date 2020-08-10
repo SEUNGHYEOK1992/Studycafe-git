@@ -74,14 +74,14 @@ public class ReviewService {
 	}
 
 	public void updateForm() throws ServletException, IOException {
-		System.out.println("서비스 들어옴");
+//		System.out.println("서비스 들어옴");
 		String idx = req.getParameter("idx");
 		ReviewDAO dao = new ReviewDAO();		
-		System.out.println("수정idx : "+idx);
+//		System.out.println("수정idx : "+idx);
 		req.setAttribute("bbs", dao.updateForm(idx));
 		dao = new ReviewDAO();	
 		ReviewDTO dto = dao.updateForm(idx);
-		System.out.println("여기까지");
+//		System.out.println("여기까지");
 		req.setAttribute("review_bbs", dto);
 		RequestDispatcher dis = req.getRequestDispatcher("revUpdateForm.jsp");
 		dis.forward(req, resp);
@@ -89,6 +89,23 @@ public class ReviewService {
 		
 		
 		
+	}
+
+	public void update() throws IOException, ServletException {
+		req.setCharacterEncoding("UTF-8");
+		System.out.println("서비스 들어옴");
+		String idx = req.getParameter("idx");
+		String content = req.getParameter("content");
+		System.out.println(idx+"/"+content);
+		ReviewDAO dao = new ReviewDAO();
+		String page = "rvlist?idx="+idx;
+		String msg = "수정실패";
+		if(dao.update(idx,content)) {
+			msg = "수정 성공";
+		}
+		req.setAttribute("msg", msg);
+		RequestDispatcher dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
 	}
 
 

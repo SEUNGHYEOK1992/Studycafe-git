@@ -23,11 +23,16 @@
 						<textarea id="content" name = "content" style="width: 800px; height: 100px; outline: 1px solid #666; resize: none;" >${bbs.content}</textarea>
 					</td>
 				</tr>
-				<td><input type="submit" value="저장" style="float:right;"/></td>
+				<td><input type="submit" value="저장" style="float:right;" /></td>
 			</table>
 		</form>
 	</div>
 
 </body>
-<script></script>
+<script>
+	var msg = "${msg}";
+	if(msg!=""){
+		alert(msg)
+	}
+</script>
 </html>

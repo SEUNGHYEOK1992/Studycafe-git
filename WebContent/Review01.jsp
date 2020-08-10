@@ -220,7 +220,7 @@
 		//클릭시 수정폼 div뜨게 하기
 	} */
 	var msg = "${msg}";
-	if(msg!="''){
+	if(msg!=""){
 		alert(msg)
 	}
 </script>

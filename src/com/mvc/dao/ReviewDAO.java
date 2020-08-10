@@ -143,6 +143,27 @@ public class ReviewDAO {
 		return dto;
 	}
 
+	public boolean update(String idx, String content) {
+		boolean result = false;
+		String sql = "UPDATE bbs SET content=? WHERE b_idx=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, content);
+			ps.setString(2, idx);
+			
+			if(ps.executeUpdate()>0) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return result;
+		
+			
+	}
+
 
 
 

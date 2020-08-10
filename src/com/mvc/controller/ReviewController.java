@@ -56,6 +56,11 @@ public class ReviewController extends HttpServlet {
 			System.out.println("수정 폼 이동 요청");
 			revservice.updateForm();
 			break;
+			
+		case"/rvupdate":
+			System.out.println("수정 요청");
+			revservice.update();
+			break;
 		}
 
 	}
