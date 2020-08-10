@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import com.mvc.dto.AdminDTO;
 import com.mvc.service.MemberService;
 
-@WebServlet({"/login","/logout","/join","/overlay", "/profileDetail", "/updateProfile", "/profileUpdateForm", "/delProfile"})
+@WebServlet({"/login","/logout","/join","/overlay", "/profileDetail", "/profileUpdate", "/profileUpdateForm", "/delProfile"})
 public class MemberController extends HttpServlet {
 	
 	@Override
@@ -124,9 +124,9 @@ public class MemberController extends HttpServlet {
 				
 				break;
 				
-			case "/updateProfile":
+			case "/profileUpdate":
 				System.out.println("수정 요청 발생");
-				service.updateProfile();
+				service.profileUpdate();
 				break;
 				
 			case "/delProfile":
