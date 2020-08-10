@@ -93,12 +93,9 @@ public class AskService {
 		System.out.println("삭제 b_idx는?"+b_idx);
 		AskDAO dao = new AskDAO();
 		String page = "askdetail";
-		 String msg = "삭제에  실패했습니다!"; 
 		if(dao.askdel(b_idx)) {
 			page = "/ask";
-			 msg = "삭제에 성공했습니다!"; 
 		}
-		 req.setAttribute("msg", msg);
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);		
 	}

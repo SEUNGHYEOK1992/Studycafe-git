@@ -89,7 +89,7 @@
 			   <li><a href="#">예약하기</a></li>
 			   <li><a href="#">자유게시판</a></li>
 			   <li><a href="#">후기게시판</a></li>
-			   <li><a href="./ask">고객센터</a></li>
+			   <li><a onclick="conf()">고객센터</a></li> <!-- 이거는 하나하나 해보기 -->
 			</ul>
 			</div>
 			<div id="log"><a href="#">로그인/회원가입</a></div>  
@@ -133,6 +133,14 @@
 	var msg = "${msg}";
 	if(msg !=""){
 		alert(msg);
+	}
+	function conf(){
+        if(confirm("이사이트를 나갈 경우 저장이 되지 않을 수 있습니다. 나가시겠습니까?")==true){
+        	location.href="./ask";
+        }else{
+        	return false;
+        }
+        
 	}
 	</script>
 </html>

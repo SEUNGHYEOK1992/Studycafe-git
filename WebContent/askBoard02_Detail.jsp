@@ -123,7 +123,7 @@
 				<br>
 				<a class="btn btn-default pull-right" href="./ask">목록</a>
 				<a class="btn btn-default" href='askupdateform?b_idx=${bbs.b_idx}' style="margin-right: 10px;">수정</a>
-				<a class="btn btn-default" href='askdel?b_idx=${bbs.b_idx}' style="margin-right: 10px;">삭제</a>
+				<a class="btn btn-default" onclick="del();" style="margin-right: 10px;">삭제</a>
 			</div>
 		</div>
 		</c:when>
@@ -167,6 +167,17 @@
 	var msg = "${msg}";
 	if(msg !=""){
 		alert(msg);
+	}
+
+
+	function del(){
+        if(confirm("정말로 삭제 하시겠습니까?")==true){
+            alert('삭제 되었습니다.');
+            location.href='askdel?b_idx=${bbs.b_idx}';
+        }else{
+        	alert('삭제가 취소되었습니다.');
+            return false;
+        }
 	}
 	</script>
 </html>
