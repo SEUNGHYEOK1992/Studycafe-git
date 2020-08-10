@@ -9,14 +9,9 @@ public class AdminDTO {
 	private String email;
 	private String phone;
 	private String addr;
-<<<<<<< HEAD
-	private char blacklist;
-=======
 	private String blacklist;
 	private int k_idx;
 	private String cause;
->>>>>>> 2ddaece229b1f5bea5d06cfd24523bf803d32a6c
-	
 	public String getId() {
 		return id;
 	}
