@@ -220,7 +220,7 @@
             </ul>
         </div>
         <div id="msg">
-            <a href="#">메시지</a>
+            <a href="messageList">메시지</a>
         </div>
     </div>
    <!--중앙이미지 시작-->

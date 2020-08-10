@@ -43,14 +43,13 @@
 <body>
     <!--보낸사람 시간 확인-->
     <div id = "uptext">
-        <p>보낸 사람:누구누구<br>받은 시간:2020</p>
+        <p>보낸 사람 : ${m_info.send_id }<br>받은 시간 : ${m_info.mess_reg_date }</p>
     </div>
 
     <!--받은내용-->
     <div id = "downtext">
-        <p>안녕하세요 가나다라마바사 이것은 100자이내로 쓸 수 있습니다.</p>
+        <p>${m_info.mess_content }</p>
     </div>
-
     <!--답장버튼-->
     <div id = "btn_reply">
         <button id="btn_size" onclick="sendmessage();">답장</button>
@@ -60,7 +59,7 @@
 <script>
     /*쪽지 보내기 함수*/
     function sendmessage(){
-     window.open("messagesend.html","messagesend","width=515,height=651,left=550,top=150");
+     window.open("message02_send.jsp","messagesend","width=515,height=651,left=550,top=150");
     };
 </script>
 </html>

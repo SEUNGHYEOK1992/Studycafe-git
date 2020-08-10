@@ -142,21 +142,21 @@
               <th>내용</th>
               <th>날짜</th>
           </tr>
-          <c:forEach items="${m_list }" var="message">
+          <c:forEach items="${mchk_list }" var="msgChk">
           <tr>
               <td><input type="checkbox"/></td> <!-- 체크박스는 mvc 에서 코딩할 때 했던 방법 사용할지?-->
-              <td>${message.m_idx }</td>
-              <td>${message.send_id }</td>
-              <td><div class="txt_line"><a href="messageDetail?m_idx=${message.m_idx }">${message.mess_content }</a></div></td>
+              <td>${msgChk.m_idx }</td>
+              <td>${msgChk.send_id }</td>
+              <td><div class="txt_line"><a href="messageDetail?m_idx=${msgChk.m_idx }">${msgChk.mess_content }</a></div></td>
               <!--showpopup(); = 쪽지 상세보기 팝업 함수-->
-              <td>${message.mess_reg_date }</td>
+              <td>${msgChk.mess_reg_date }</td>
           </tr>
           </c:forEach>
       </table>
             <div class="pageArea">
-				<a href="./messageList?page=${currPage -1 }"><span id="spanPage">이전 페이지</span></a>
+				<a href="./falseMsg?page=${currPage -1 }"><span id="spanPage">이전 페이지</span></a>
 				<span><b>${currPage }</b></span>
-				<a href="./messageList?page=${currPage+1 }"><span>다음 페이지</span></a>
+				<a href="./falseMsg?page=${currPage+1 }"><span>다음 페이지</span></a>
 		</div>
    </div>
    <!--중앙이미지 끝-->
@@ -171,7 +171,7 @@
 	
 	if(currPage<1){
 		alert("이전 페이지가 없습니다.");
-		location.href="messageList";
+		location.href="falseMsg";
 	}
 </script>
 </html>
