@@ -41,18 +41,17 @@
    </style>
 </head>
 <body>
-    <!--보낸사람 시간 확인-->
+    <!--받는사람 시간 확인-->
     <div id = "uptext">
-        <p>보낸 사람 : ${m_info.send_id }<br>받은 시간 : ${m_info.mess_reg_date }</p>
+        <p>받는 사람 : ${m_sendInfo.recv_id }<br>보낸 날짜 : ${m_sendInfo.mess_reg_date }</p>
     </div>
 
-    <!--받은내용-->
+    <!--보낸 내용-->
     <div id = "downtext">
-        <p>${m_info.mess_content }</p>
+        <p>${m_sendInfo.mess_content }</p>
     </div>
-    <!--답장버튼-->
     <div id = "btn_reply">
-        <input type="button" id="btn_size" onclick="location.href='message02_send.jsp?recv_id=${m_info.send_id}'" value="답장"/>
+        <input type="button" id="btn_size" onclick="location.href='sendList'" value="돌아가기"/>
     </div>   
 
 </body>

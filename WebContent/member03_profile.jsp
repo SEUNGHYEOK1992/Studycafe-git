@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <title>02 Query Selector</title>
         <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
