@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+	String delete_id = (String)request.getAttribute("delete_id");
+	//System.out.println(delete_id);
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>member05_Kick</title>
+<title>member02_View</title>
    <style>
       @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
       body{
@@ -90,8 +94,11 @@
          height: 450px;
       }
       /*테이블 div 영역 끝*/
-
+      
       /*테이블 영역 시작*/
+      table{
+          margin-bottom: 10px;
+      }
       table,th,td{
          border: 1px solid black;
          border-collapse: collapse;
@@ -102,6 +109,22 @@
          height: 30px;
       }
       /*테이블 영역 끝*/
+
+      /*수정, 취소 버튼 영역*/
+      #btn_update{
+        position: relative;
+        width: 100px;
+        height: 40px;
+        left: 100px;
+      }
+      #btn_cancel{
+        position: relative;
+        width: 100px;
+        height: 40px;
+        left: 150px;
+      }
+
+      /*수정, 취소 버튼 영역*/
    </style>
 </head>
 <body>
@@ -138,27 +161,22 @@
          <li><a href="kick">제명목록</a></li>
       </ul>
       <div id="memberManage">
-         <table>
-            <tr>
-                <th>번호</th>
-                <th>아이디</th>
-                <th>사유</th>
-             </tr>
-             <c:forEach items="${k_list }" var="kick">
-             <tr>
-                <td>${kick.k_idx }</td>
-                <td>${kick.id }</td>
-                <td>${kick.cause }</td>
-             </tr>
-             </c:forEach>
-         </table>
-          <div class="pageArea">
-			<a href="./kick?page=${currPage -1 }"><span id="spanPage">이전 페이지</span></a>
-			<span><b>${currPage }</b></span>
-			<a href="./kick?page=${currPage+1 }"><span>다음 페이지</span></a>
-		</div>          
+        <form method="post" action="kickAdd">
+            <table>
+            	<tr>
+            		<td><input type="hidden" name="id" value="<%=delete_id %>"/></td>
+            	</tr>
+                <tr>
+                <th>삭제 사유</th>
+                <td><input type="text" name="cause" placeholder="삭제 사유를 입력해주세요" /></td>
+                </tr>       
+            </table>
+ 			<input type="submit" id="btn_Update" value="삭제"/>
+        </form>
+        <button id="btn_cancel" onclick="location.href='memberList'">취소</button>
       </div>
    </div>
+   
    <!--중앙이미지 끝-->
    <div>
 
@@ -171,12 +189,13 @@
    
 </body>
 <script>
-	var currPage = ${currPage};
-	console.log(currPage);
-	
-	if(currPage<1){
-		alert("이전 페이지가 없습니다.");
-		location.href="kick";
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg);
 	}
+	
+	
+	
+	
 </script>
 </html>

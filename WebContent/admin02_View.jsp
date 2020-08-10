@@ -138,7 +138,11 @@
      <li><a href="#">고객센터</a></li>
   </ul>
   </div>
-      <div id="log"><a href="#">로그인/회원가입</a></div>  
+      <div id="log"><a href="admin00_Main.jsp"><%if(session.getAttribute("id") != null){%>
+         							${id } 님</a>
+         						<%}else{ %>
+         							<a href="member01_login.jsp">로그인/회원가입</a> 
+         						<%} %></div>  
   </div>
    <!--헤더 끝--> 
 
@@ -147,61 +151,56 @@
       <img src=""/>
       <span>관리자 프로필 폼</span>
       <ul>
-         <li><a href="#">회원관리</a></li>
-         <li><a href="#">신고내역</a></li>
-         <li><a href="#">블랙리스트</a></li>
-         <li><a href="#">제명목록</a></li>
+         <li><a href="memberList">회원관리</a></li>
+         <li><a href="report">신고내역</a></li>
+         <li><a href="blackList">블랙리스트</a></li>
+         <li><a href="kick">제명목록</a></li>
       </ul>
       <div id="memberManage">
-        <form method="post">
+        <form method="post" action="update">
             <table>
                 <tr>
                 <th>아이디</th>
-                <td></td>
+                <td><input type="text" name="id" value="${info.id }" readonly/></td>
                 </tr>
                 <tr>
                 <th>성명</th>
-                <td></td>
+                <td><input type="text" name="name" value="${info.name }"/></td>
                 </tr>
                 <tr>
                 <th>생년월일</th>
-                <td></td>
+                <td><input type="text" name="birth" value="${info.birth }"/></td>
                 </tr>
                 <tr>
                 <th>이메일</th>
-                <td></td>
+                <td><input type="text" name="email" value="${info.email }"/></td>
                 </tr>
                 <tr>
                 <th>전화번호</th>
-                <td></td>
+                <td><input type="text" name="phone" value="${info.phone }"/></td>
                 </tr>
                 <tr>
                 <th>주소</th>
-                <td></td>
+                <td><input type="text" name="addr" value="${info.addr }"/></td>
                 </tr>
                 <tr>
                 <th>블랙리스트</th>
-                <td>
+                <td><input type="text" name="blacklist" value="${info.blacklist }"/>
+                <!--  
                         &nbsp;&nbsp;&nbsp;
                     <input type="radio" name="blackList" value="True"/>등록
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type="radio" name="blackList" value="False"/>해제
+                    -->
                     </td>
                 </tr>
                 <tr>
-                <th>제명처리</th>
-                <td>
-                        &nbsp;&nbsp;&nbsp;
-                        <input type="radio" name="kick" value="True"/>등록
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input type="radio" name="kick" value="False"/>해제
-                </td>
                 </tr>
             </table>
-            <button id="btn_Update">수정</button>
-            <button id="btn_cancel">취소</button>
+ 			<input type="submit" id="btn_Update" value="수정"/>
         </form>
-        
+        <button id="btn_delete">삭제</button>
+        <button id="btn_cancel" onclick="location.href='memberList'">취소</button>
       </div>
    </div>
    <!--중앙이미지 끝-->
@@ -216,6 +215,13 @@
    
 </body>
 <script>
-
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg);
+	}
+	
+	
+	
+	
 </script>
 </html>

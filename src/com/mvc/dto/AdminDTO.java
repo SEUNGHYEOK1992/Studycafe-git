@@ -9,7 +9,13 @@ public class AdminDTO {
 	private String email;
 	private String phone;
 	private String addr;
+<<<<<<< HEAD
 	private char blacklist;
+=======
+	private String blacklist;
+	private int k_idx;
+	private String cause;
+>>>>>>> 2ddaece229b1f5bea5d06cfd24523bf803d32a6c
 	
 	public String getId() {
 		return id;
@@ -53,11 +59,23 @@ public class AdminDTO {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	public char getBlacklist() {
+	public String getBlacklist() {
 		return blacklist;
 	}
-	public void setBlacklist(char blacklist) {
-		this.blacklist = blacklist;
+	public void setBlacklist(String string) {
+		this.blacklist = string;
+	}
+	public int getK_idx() {
+		return k_idx;
+	}
+	public void setK_idx(int k_idx) {
+		this.k_idx = k_idx;
+	}
+	public String getCause() {
+		return cause;
+	}
+	public void setCause(String cause) {
+		this.cause = cause;
 	}
 	
 	

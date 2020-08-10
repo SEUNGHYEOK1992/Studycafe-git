@@ -204,8 +204,9 @@
          <div id="log"><%if(session.getAttribute("id") != null){%>
          							${id} 님
          						<%}else{ %>
-         							<a href="member01_login.jsp">로그인/회원가입</a></div> 
+         							<a href="member01_login.jsp">로그인/회원가입</a> 
          						<%} %>
+         </div>
          </div>
    <!--헤더 끝--> 
 

@@ -119,7 +119,11 @@
      <li><a href="#">고객센터</a></li>
   </ul>
   </div>
-      <div id="log"><a href="#">로그인/회원가입</a></div>  
+      <div id="log"><a href="admin00_Main.jsp"><%if(session.getAttribute("id") != null){%>
+         							${id } 님</a>
+         						<%}else{ %>
+         							<a href="member01_login.jsp">로그인/회원가입</a> 
+         						<%} %></div>  
   </div>
    <!--헤더 끝--> 
 
@@ -128,10 +132,10 @@
       <img src=""/>
       <span>관리자 프로필 폼</span>
       <ul>
-         <li><a href="#">회원관리</a></li>
-         <li><a href="#">신고내역</a></li>
-         <li><a href="#">블랙리스트</a></li>
-         <li><a href="#">제명목록</a></li>
+         <li><a href="memberList">회원관리</a></li>
+         <li><a href="report">신고내역</a></li>
+         <li><a href="blackList">블랙리스트</a></li>
+         <li><a href="kick">제명목록</a></li>
       </ul>
       <div id="memberManage">
          <table>
@@ -142,14 +146,21 @@
                <th>신고내용</th>
                <th>신고일</th>
             </tr>
+            <c:forEach items="${r_list }" var="report">
             <tr>
-               <td></td>
-               <td><a href="#">글로이동</a></td>
-               <td><a href="#">회원관리로 이동</a></td>
-               <td></td>
-               <td></td>
+               <td>${report.repo_idx }</td>
+               <td><a href="#">${report.b_idx }</a></td>
+               <td><a href="detail?id=${report.id}">${report.id}</a></td>
+               <td>${report.repo_content }</td>
+               <td>${report.repo_reg_date }</td>
             </tr>
+            </c:forEach>
          </table>
+         <div class="pageArea">
+			<a href="./report?page=${currPage -1 }"><span id="spanPage">이전 페이지</span></a>
+			<span><b>${currPage }</b></span>
+			<a href="./report?page=${currPage+1 }"><span>다음 페이지</span></a>
+		</div>         
       </div>
    </div>
    <!--중앙이미지 끝-->
@@ -158,12 +169,16 @@
    </div>
 
 
-    
-
    <!-- <footer>푸터 추가</footer> -->
    
 </body>
 <script>
-
+	var currPage = ${currPage};
+	console.log(currPage);
+	
+	if(currPage<1){
+		alert("이전 페이지가 없습니다.");
+		location.href="report";
+	}
 </script>
 </html>
