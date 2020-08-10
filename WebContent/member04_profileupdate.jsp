@@ -180,95 +180,74 @@
             <div id="log">
                 <a href="#">로그인/회원가입</a>
             </div>  
-        </div>       
-        <table>          
-            <div id=profile>
-                님의 프로필
-            </div>
-            <tr>
-                <td>
-                    <div id="name">이름</div>
-                </td>
-                <td>
-                    <input type="text" id="sname"></div>
-                </td>        
-            </tr>
-            <tr>
-                <td>
-                    <div id="birth">생년월일</div>
-                    
-                </td>
-                <td>
-                    <div id="sbirth">
-                    <script type="text/javascript">
-                         var today = new Date();
-                         var toyear = parseInt(today.getFullYear ());
-                         var start = toyear;
-                         var end = toyear - 60;
-    
-                         document.write("<select name=birth1> ");
-                         document.write("<option value='2015' selected>");
-                         for (i=start;i>=end;i--) document.write("<option>"+i);
-                         document.write("</select>년  ");
-    
-                         document.write("<select name=birth2>");
-                         document.write("<option value='' selected>");
-                         for (i=1;i<=12;i++) document.write("<option>"+i);
-                         document.write("</select>월  ");
-    
-                         document.write("<select name=birth3>");
-                         document.write("<option value='' selected>");
-                         for (i=1;i<=31;i++) document.write("<option>"+i);
-                         document.write("</select>일  </font>");
-                         </script>
-                         <input type="radio" name="gender" value="남">남
-                         <input type="radio" name="gender" value="여" checked>여
-                        </div>
-                </td>
-                    
-            </tr>
-            <tr>
-                <td>
-                    <div id="email">이메일</div>
-                </td>
-                <td>
-                    <div id="semail">
-                        <input type="text"/>@<input type="text"/>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div id="smartphone">휴대폰</div>
-                </td>
-                <td>
-                    <div id="ssmartphone">010-0000-0000</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div id="live">주소</div>
-                </td>
-                <td>
-                    <div id="slive">
-                        <input type="text"/>
-                    </div>
-                </td>
-            </tr>
-           <tr>
-               <td>
-                    <div id="propic">프로필사진</div>
-               </td>
-               <td>
-                    <input type="text" id="picbox"/>
-               </td>
-           </tr>        
-            <button type="button" id="upload" >첨부파일</button>
-            <button type="button" id="save" onclick="location.href='03_profile.html'">저장</button>
-           
-     
-        </form>  
-        </table>
+        </div>
+        <form action="updateProfile" method="post">       
+	        <table>          
+	            <div id=profile>
+	               ${profileUpdateForm.id}님의 프로필
+	               <input type="hidden" name="id" value="${profileUpdateForm.id}">
+	            </div>
+	            <tr>
+	                <td>
+	                    <div id="name">이름</div>
+	                </td>
+	                <td>
+	                    <input type="text" id="sname" name="name" value="${profileUpdateForm.name}"></div>
+	                </td>        
+	            </tr>
+	            <tr>
+	                <td>
+	                    <div id="birth">생년월일</div>
+	                    
+	                </td>
+	                <td>
+	                    <div id="sbirth">
+	                    	<input type="text" name="birth" value="${profileUpdateForm.birth}">
+	                    </div>
+	                </td>
+	                    
+	            </tr>
+	            <tr>
+	                <td>
+	                    <div id="email">이메일</div>
+	                </td>
+	                <td>
+	                    <div id="semail">
+	                        <input type="text" name="email" value="${profileUpdateForm.email}">
+	                    </div>
+	                </td>
+	            </tr>
+	            <tr>
+	                <td>
+	                    <div id="smartphone">휴대폰</div>
+	                </td>
+	                <td>
+	                    <div id="ssmartphone">
+	                    	<input type="text" name="phone" value="${profileUpdateForm.phone}">
+	                    </div>
+	                </td>
+	            </tr>
+	            <tr>
+	                <td>
+	                    <div id="live">주소</div>
+	                </td>
+	                <td>
+	                    <div id="slive">
+	                        <input type="text" name="addr" value="${profileUpdateForm.addr}">
+	                    </div>
+	                </td>
+	            </tr>
+	           <tr>
+	               <td>
+	                    <div id="propic">프로필사진</div>
+	               </td>
+	               <td>
+	                    <input type="file" id="upload" value="첨부파일">
+	               </td>
+	           </tr>        
+	            <input type="submit" id="save" value="저장">
+	        </table>
+        </form>
     <script  type="text/javascript">
         $("#save").click(function(){
             if(confirm("저장하시겠습니까?")==true){

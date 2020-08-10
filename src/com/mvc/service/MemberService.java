@@ -1,13 +1,18 @@
 package com.mvc.service;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.mvc.dao.MemberDAO;
+import com.mvc.dto.AdminDTO;
 
 public class MemberService {
 
@@ -54,5 +59,60 @@ public class MemberService {
 		success = dao.overlay(id);
 		return success;
 	}
+
+	public AdminDTO profileDetail(String detailId) {
+		MemberDAO dao = new MemberDAO();
+		return dao.profileDetail(detailId);
+	}
+
+	public AdminDTO profileUpdateForm(String upId) {
+		MemberDAO dao = new MemberDAO();
+		return dao.profileUpdateForm(upId);
+	}
+
+	
+	public void updateProfile() throws ServletException, IOException { 
+	    req.setCharacterEncoding("UTF-8");
+	    String id = req.getParameter("id");
+	    String name = req.getParameter("name");
+	    String birth = req.getParameter("birth");
+	    String email = req.getParameter("email");
+	    String phone = req.getParameter("phone");
+	    String addr = req.getParameter("addr");
+	    
+	    System.out.println("수정 할 파라미터 값 : " + id + " / " + name + " 기타등등");
+	    
+	    String page = "detail?id="+id;
+	    String msg = "수정에 실패했습니다";
+	    
+	    MemberDAO dao = new MemberDAO();
+	    if(dao.updateProfile(id, name, birth, email, phone, addr)) {
+	    	msg = "수정 성공";
+	    }
+	    
+	    req.setAttribute("msg", msg);
+	    RequestDispatcher dis = req.getRequestDispatcher(page);
+	    dis.forward(req, resp);
+	    
+	}
+
+	public void delProfile() throws ServletException, IOException {
+		String id = req.getParameter("id");
+		
+		System.out.println("삭제할 아이디는 " + id + "입니다.");
+		
+		String page = "/";
+		String msg = "탈퇴 실패";
+		
+		MemberDAO dao = new MemberDAO();
+		if(dao.delProfile(id)) {
+			msg = "탈퇴가 완료되었습니다";
+		}
+		
+		req.setAttribute("msg", msg);
+		RequestDispatcher dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+	}
+	
 
 }

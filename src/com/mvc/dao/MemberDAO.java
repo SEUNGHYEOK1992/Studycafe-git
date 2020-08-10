@@ -9,6 +9,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.mvc.dto.AdminDTO;
+
 public class MemberDAO {
 
 	Connection conn = null;
@@ -93,6 +95,102 @@ public class MemberDAO {
 		}
 		return success;
 	}
+
+	public AdminDTO profileDetail(String detailId) {
+		String sql = "SELECT * FROM memberlist WHERE id=?";
+		AdminDTO dto = new AdminDTO();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, detailId);
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setBirth(rs.getString("birth"));
+				dto.setEmail(rs.getString("email"));
+				dto.setAddr(rs.getString("addr"));
+				dto.setPhone(rs.getString("phone"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		return dto;
+	}
+
+	public AdminDTO profileUpdateForm(String upId) {
+		
+		String sql = "SELECT * FROM memberlist WHERE id=?";
+		AdminDTO dto = new AdminDTO();
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, upId);
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				dto.setId(rs.getString("id"));
+				dto.setName(rs.getString("name"));
+				dto.setBirth(rs.getString("birth"));
+				dto.setEmail(rs.getString("email"));
+				dto.setAddr(rs.getString("addr"));
+				dto.setPhone(rs.getString("phone"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		
+		return dto;
+	}
+
+	public boolean updateProfile(String id, String name, String birth, String email, String phone, String addr) {
+		boolean result = false;
+		
+		String sql = "UPDATE memberlist SET name=?, birth=?, email=?, addr=?, phone=? WHERE id=?";
+		
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, birth);
+			ps.setString(3, email);
+			ps.setString(4, addr);
+			ps.setString(5, phone);
+			ps.setString(6, id);
+			if(ps.executeUpdate()>0) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		
+		return result;
+	}
+
+	public boolean delProfile(String id) {
+		String sql = "DELETE FROM memberlist WHERE id=?";
+		boolean result = false;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			if(ps.executeUpdate()>0) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			resClose();
+		}
+		return result;
+	}
+
 
 	
 	

@@ -163,56 +163,61 @@
                 <a href="#">로그인/회원가입</a>
             </div>  
         </div>       
-        <table>          
-            <div id=profile>
-                님의 프로필
-            </div>
-            <tr>
-                <td>
-                    <div id="name">이름</div>
-                </td>
-                <td>
-                    <div id="sname">이승혁</div>
-                </td>        
-            </tr>
-            <tr>
-                <td>
-                    <div id="birth">생년월일</div>                  
-                </td>
-                <td>
-                    <div id="sbirth">1992.01.23</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div id="email">이메일</div>
-                </td>
-                <td>
-                    <div id="semail">GoDEE@naver.com</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div id="smartphone">휴대폰</div>
-                </td>
-                <td>
-                    <div id="ssmartphone">010-0000-0000</div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div id="live">주소</div>
-                </td>
-                <td>
-                    <div id="slive">서울특별시 금천구 독산2동</div>
-                </td>
-            </tr>
-            <img src=펭수하이.png id="profilepic"/>                    
-            <button type="button" onclick="location.href='04.profile2.html'" id="modified" >수정
-            </button>        
-            <form action="03_delete.html" data-confirm="탈퇴하시겠습니까?">
-            <button type="submit" id="delete">탈퇴</button>
-        </form>  
+        <form action="profileUpdateForm" method="post">        
+	        <table>
+	            <div id=profile>
+	                ${profileDetail.id}님의 프로필
+	                <input type="hidden" name="id" value="${profileDetail.id}">
+	            </div>
+	            <tr>
+	                <td>
+	                    <div id="name">이름</div>
+	                </td>
+	                <td>
+	                    <div id="sname" >${profileDetail.name}</div>
+	                    <input type="hidden" name="name" value="${profileDetail.name}">
+	                </td>        
+	            </tr>
+	            <tr>
+	                <td>
+	                    <div id="birth">생년월일</div>                  
+	                </td>
+	                <td>
+	                    <div id="sbirth">${profileDetail.birth}</div>
+	                    <input type="hidden" name="birth" value="${profileDetail.birth}">
+	                </td>
+	            </tr>
+	            <tr>
+	                <td>
+	                    <div id="email">이메일</div>
+	                </td>
+	                <td>
+	                    <div id="semail">${profileDetail.email}</div>
+	                    <input type="hidden" name="email" value="${profileDetail.email}">
+	                </td>
+	            </tr>
+	            <tr>
+	                <td>
+	                    <div id="smartphone">휴대폰</div>
+	                </td>
+	                <td>
+	                    <div id="ssmartphone">${profileDetail.phone}</div>
+	                    <input type="hidden" name="phone" value="${profileDetail.phone}">
+	                </td>
+	            </tr>
+	            <tr>
+	                <td>
+	                    <div id="live">주소</div>
+	                </td>
+	                <td>
+	                    <div id="slive">${profileDetail.addr}</div>
+	                    <input type="hidden" name="addr" value="${profileDetail.addr}">
+	                </td>
+	            </tr>
+	            <%-- <img src="/photo/${detail.newFileName}" id="profilepic"/>         --%>            
+	            <input type="submit" id="modified" value="수정" >
+           <input type="button" id="delete" value="탈퇴" onclick="location.href='delProfile?id=${profileDetail.id}'">
+            </form>
         </table>
     <script  type="text/javascript">
      

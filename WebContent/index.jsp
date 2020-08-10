@@ -202,7 +202,7 @@
          </ul>
          </div>
          <div id="log"><%if(session.getAttribute("id") != null){%>
-         							${id } 님
+         							${id} 님
          						<%}else{ %>
          							<a href="member01_login.jsp">로그인/회원가입</a></div> 
          						<%} %>
@@ -213,9 +213,9 @@
         <div>
             <img src="" alt="">
             <ul id="gusetInfo">
-                <li style="margin-bottom: 5px;">${id }님</li>
-                <li style="margin-bottom: 5px;"><a href="member03_profile.jsp">프로필 보기</a></li>
-                <li style="margin-bottom: 5px;"><button onclick="location.href='logout'">로그아웃</button></li><br/>
+                <li style="margin-bottom: 5px;">${id}님</li>
+                <li style="margin-bottom: 5px;"><button type="submit" formmethod="post" onclick="location.href='profileDetail?id=${id}'">프로필 보기</button></li>
+                <li style="margin-bottom: 5px;"><button onclick="location.href='logout'">로그아웃</button></li><br>
             </ul>
         </div>
         <div id="msg">
