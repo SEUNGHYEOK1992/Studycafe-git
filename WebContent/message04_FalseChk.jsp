@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>message01_List</title>
    <style>
        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
@@ -130,10 +131,11 @@
    <!--중앙이미지 시작-->
    <div class="main_img">
       <img src=""/>
-      <button id="btn_del">삭제</button>
-      <button id="btn_wri" onclick="sendmessage();">쓰기</button>
+      <button id="btn_del" onclick="del()">삭제</button>
+      <button id="btn_wri" onclick="location.href='message02_send.jsp'">쓰기</button>
       <a href="messageList">전체보기</a>
-      <a href="falseMsg">안읽은 쪽지 보기</a>
+      <a href="falseMsg">안읽은 메시지 보기</a>
+      <a href="sendList">보낸 메시지 보기</a>
       <table>
           <tr>
               <th>체크</th>
@@ -144,7 +146,7 @@
           </tr>
           <c:forEach items="${mchk_list }" var="msgChk">
           <tr>
-              <td><input type="checkbox"/></td> <!-- 체크박스는 mvc 에서 코딩할 때 했던 방법 사용할지?-->
+              <td><input type="checkbox" value="${msgChk.m_idx }" /></td> <!-- 체크박스는 mvc 에서 코딩할 때 했던 방법 사용할지?-->
               <td>${msgChk.m_idx }</td>
               <td>${msgChk.send_id }</td>
               <td><div class="txt_line"><a href="messageDetail?m_idx=${msgChk.m_idx }">${msgChk.mess_content }</a></div></td>
@@ -172,6 +174,32 @@
 	if(currPage<1){
 		alert("이전 페이지가 없습니다.");
 		location.href="falseMsg";
+	}
+	
+	function del(){
+		var checkArr = [];
+		$("input[type='checkbox']:checked").each(function(idx,item){
+			console.log(idx,$(this).val());
+			checkArr.push($(this).val())
+		});
+		console.log(checkArr);
+		
+		$.ajax({
+			type:"get",
+			url:"msgDel",
+			data:{"delList":checkArr},
+			dataType:"JSON",
+			success:function(result){
+				console.log(result);
+				if(result.msgDelete){
+					alert("게시물 삭제에 성공 했습니다.");
+				}
+				location.href="falseMsg";
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});
 	}
 </script>
 </html>

@@ -2,6 +2,7 @@ package com.mvc.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,10 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.mvc.dto.MessageDTO;
 import com.mvc.service.MessageService;
 
-@WebServlet({"/messageList","/messageDetail","/falseMsg","/messageSend"})
+@WebServlet({"/messageList","/messageDetail","/falseMsg","/messageSend",
+	"/msgIdChk","/sendList","/sendDetail","/msgDel"})
 public class MessageController extends HttpServlet {
 
 	@Override
@@ -75,9 +78,62 @@ public class MessageController extends HttpServlet {
 				dis.forward(req, resp);
 			break;
 			
-			case "/msgSendForm":
+			case "/messageSend":
 				System.out.println("메시지 작성 요청");
-				service.msgSendForm();
+				boolean success =false;
+				success = service.messageSend();
+				HashMap<String, Object> map = new HashMap<String,Object>();
+				map.put("send",success);
+				Gson gson = new Gson();
+				String obj =gson.toJson(map);
+				System.out.println("result : " + obj);
+				resp.getWriter().println(obj);
+			break;
+			
+			case "/msgIdChk":
+				//System.out.println("id check 요청");
+				success =false;
+				success = service.msgIdChk();
+				map = new HashMap<String,Object>();
+				map.put("chk_id",success);
+				gson = new Gson();
+				obj =gson.toJson(map);
+				//System.out.println("result : " + obj);
+				resp.getWriter().println(obj);
+			break;
+			
+			case "/sendList":
+				//System.out.println("보낸 메시지 리스트");
+				pageParam = req.getParameter("page");
+				page = 1;
+				if(pageParam != null) {
+					page = Integer.parseInt(pageParam);
+				}
+				list = service.sendList(page);
+				req.setAttribute("send_List", list);
+				req.setAttribute("currPage", page);
+				dis = req.getRequestDispatcher("message05_SendList.jsp");
+				dis.forward(req, resp);
+			break;
+		
+			case "/sendDetail":
+				//System.out.println("보낸 메시지 상세보기");
+				dto = service.sendDetail();
+				req.setAttribute("m_sendInfo", dto);
+				dis = req.getRequestDispatcher("message06_SendDetails.jsp");
+				dis.forward(req, resp);
+			break;
+			
+			case "/msgDel":
+				//System.out.println("삭제 요청");
+				success =false;
+				success = service.msgDel();
+				map = new HashMap<String, Object>();
+				map.put("msgDelete",success);
+				gson = new Gson();
+				obj = gson.toJson(map);
+				//System.out.println(obj);
+				resp.getWriter().print(obj);
 			break;
 		
 		}

@@ -38,15 +38,46 @@ public class MessageService {
 		return dao.falseMsg(id, page);
 	}
 
-	public void messageSend() {
-		String id = (String) req.getSession().getAttribute("id");
-		System.out.println(id);
+	public boolean messageSend() {
+		String send_id = (String) req.getSession().getAttribute("id");
+		String recv_id = req.getParameter("recv_id");
+		String formtext = req.getParameter("formtext");
+		System.out.println(send_id);
+		System.out.println(recv_id +" / "+formtext );
 		MessageDAO dao = new MessageDAO();
-		dao.messageSend(id);
+		return dao.messageSend(send_id,recv_id,formtext);
 	}
 
-	public void msgSendForm() {
-		
+	public boolean msgIdChk() {
+		String id = req.getParameter("chk_id");
+		//System.out.println(id);
+		MessageDAO dao = new MessageDAO();
+		return dao.msgIdChk(id);
 	}
+
+	public ArrayList<MessageDTO> sendList(int page) {
+		String id = (String) req.getSession().getAttribute("id");
+		MessageDAO dao = new MessageDAO();
+		return dao.sendList(id,page);
+	}
+
+	public MessageDTO sendDetail() {
+		int m_idx = Integer.parseInt(req.getParameter("m_idx"));
+		//System.out.println(m_idx);
+		MessageDAO dao = new MessageDAO();
+		return dao.sendDetail(m_idx);
+	}
+
+	public boolean msgDel() {
+		String[] delList = req.getParameterValues("delList[]");
+		//System.out.println("length : " + delList.length);
+		boolean success = false;
+		MessageDAO dao = new MessageDAO();
+		if(dao.msgDel(delList) == delList.length) {
+			success = true;
+		}
+		return success;
+	}
+
 
 }
