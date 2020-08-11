@@ -160,65 +160,66 @@
             </ul>
             </div>
             <div id="log">
-                <a href="#">로그인/회원가입</a>
+                <%if(session.getAttribute("id") != null){%>
+         							${id} 님
+         						<%}else{ %>
+         							<a href="member01_login.jsp">로그인/회원가입</a> 
+         						<%} %>
             </div>  
-        </div>       
+        </div>
+        <img src="${path }" width="200px" />       
         <form action="profileUpdateForm" method="post">        
 	        <table>
-	            <div id=profile>
-	                ${profileDetail.id}님의 프로필
-	                <input type="hidden" name="id" value="${profileDetail.id}">
-	            </div>
+	      		<tr>
+	      			<th>${profileDetail.id}님의 프로필
+	        	        <input type="hidden" name="id" value="${profileDetail.id}" readonly />
+	            	</th>
+	            </tr>
 	            <tr>
+	                <th>이름</th>
 	                <td>
-	                    <div id="name">이름</div>
-	                </td>
-	                <td>
-	                    <div id="sname" >${profileDetail.name}</div>
-	                    <input type="hidden" name="name" value="${profileDetail.name}">
+	                	<input type="text" name="name" value="${profileDetail.name}" readonly />
 	                </td>        
 	            </tr>
 	            <tr>
+	                <th>생년월일</th>
 	                <td>
-	                    <div id="birth">생년월일</div>                  
-	                </td>
-	                <td>
-	                    <div id="sbirth">${profileDetail.birth}</div>
-	                    <input type="hidden" name="birth" value="${profileDetail.birth}">
+	                    <input type="text" name="birth" value="${profileDetail.birth}" readonly />
 	                </td>
 	            </tr>
 	            <tr>
+	                <th>이메일</th>
 	                <td>
-	                    <div id="email">이메일</div>
-	                </td>
-	                <td>
-	                    <div id="semail">${profileDetail.email}</div>
-	                    <input type="hidden" name="email" value="${profileDetail.email}">
+	                    <input type="text" name="email" value="${profileDetail.email}" readonly />
 	                </td>
 	            </tr>
 	            <tr>
+	                <th>휴대폰</th>
 	                <td>
-	                    <div id="smartphone">휴대폰</div>
-	                </td>
-	                <td>
-	                    <div id="ssmartphone">${profileDetail.phone}</div>
-	                    <input type="hidden" name="phone" value="${profileDetail.phone}">
+	                    <input type="text" name="phone" value="${profileDetail.phone}" readonly />
 	                </td>
 	            </tr>
 	            <tr>
+	                <th>주소</th>
 	                <td>
-	                    <div id="live">주소</div>
-	                </td>
-	                <td>
-	                    <div id="slive">${profileDetail.addr}</div>
-	                    <input type="hidden" name="addr" value="${profileDetail.addr}">
+	                    <input type="text" name="addr" value="${profileDetail.addr}" readonly />
 	                </td>
 	            </tr>
-	            <%-- <img src="/photo/${detail.newFileName}" id="profilepic"/>         --%>            
-	            <input type="submit" id="modified" value="수정" >
-           <input type="button" id="delete" value="탈퇴" onclick="location.href='delProfile?id=${profileDetail.id}'">
-            </form>
-        </table>
+	            <%-- <img src="/photo/${detail.newFileName}" id="profilepic"/>         --%>
+	            <tr>
+	            	<th>프로필 사진</th>
+	            	<td>
+	            		<input type ="text" value="${profileDetail.oriFileName}" readonly />
+	            	</td>
+	            </tr>     
+	            <tr>
+	            	<td colspan="2">       
+	            		<input type="submit" id="modified" value="수정" >
+           				<input type="button" id="delete" value="탈퇴" onclick="location.href='delProfile?id=${profileDetail.id}'">
+           			</td>
+           		</tr>
+        	</table>
+        </form>
     <script  type="text/javascript">
      
         $(document).on('click', ':not(form)[data-confirm]', function(e){

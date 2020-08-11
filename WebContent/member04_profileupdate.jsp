@@ -55,111 +55,7 @@
             color: white;   
             text-decoration: none;
         }
-      #profile{
-          position: absolute;
-          top: 33%;
-          left: 44%;
-        }
-
-        #profilepic{
-            position: absolute;
-            top: 33%;
-            left: 27%;
-            width: 200;
-            height: 200;
-        }
-        #name{
-            position: absolute;
-            top: 40%;
-            left: 40%;
-
-        }
-
-        #sname{
-            position: absolute;
-            top: 40%;
-            left: 43%;
-        }
-
-
-        #birth{
-            position: absolute;
-            top: 43%;
-            left: 40%;
-        }
-
-        #sbirth{
-            position: absolute;
-            top: 43%;
-            left: 44%;
-        }
-
-        #email{
-            position: absolute;
-            top: 46%;
-            left: 40%;
-        }
-
-        #semail{
-            position: absolute;
-            top: 46%;
-            left: 43%;
-        }
-
-        #live{
-            position: absolute;
-            top: 49%;
-            left: 40%;
-        }
-
-        #slive{
-            position: absolute;
-            top: 49%;
-            left: 43%;
-        }
-
-        #smartphone{
-            position: absolute;
-            top: 52%;
-            left: 40%;
-        }
-
-        #ssmartphone{
-            position: absolute;
-            top: 52%;
-            left: 43%;
-        }
-
-
-        #propic{
-            position: absolute;
-            top: 55%;
-            left: 40%;
-        }
-
-        #uploadbox{
-            position: absolute;
-            top: 55%;
-            left: 45%;
-        }
         
-        #upload{
-            position: absolute;
-            top: 55%;
-            left: 55%;
-        }
-
-        #picbox{
-            position: absolute;
-            top: 55%;
-            left: 45%;
-        }
-
-        #save{
-            position: absolute;
-            top: 60%;
-            left: 45%;
-        }
             
         </style>
     </head>
@@ -181,80 +77,60 @@
                 <a href="#">로그인/회원가입</a>
             </div>  
         </div>
-        <form action="profileUpdate" method="post">       
-	        <table>          
-	            <div id=profile>
-	               ${profileUpdateForm.id}님의 프로필
-	               <input type="hidden" name="id" value="${profileUpdateForm.id}">
-	            </div>
+        <div>
+        <form action="profileUpdate" method="post" enctype="multipart/form-data">       
+	        <table>  
+	        	<tr>
+	        		<td colspan="2">        
+	               		${profileUpdateForm.id}님의 프로필
+	               		<input type="hidden" name="id" value="${profileUpdateForm.id}"/>
+	            	</td>
+	            </tr>	
 	            <tr>
+	                <td>이름</td>
 	                <td>
-	                    <div id="name">이름</div>
-	                </td>
-	                <td>
-	                    <input type="text" id="sname" name="name" value="${profileUpdateForm.name}"></div>
+	                    <input type="text" id="sname" name="name" value="${profileUpdateForm.name}" />
 	                </td>        
 	            </tr>
 	            <tr>
+	                <td>생년월일</td>
 	                <td>
-	                    <div id="birth">생년월일</div>
-	                    
-	                </td>
-	                <td>
-	                    <div id="sbirth">
-	                    	<input type="text" name="birth" value="${profileUpdateForm.birth}">
-	                    </div>
-	                </td>
-	                    
-	            </tr>
-	            <tr>
-	                <td>
-	                    <div id="email">이메일</div>
-	                </td>
-	                <td>
-	                    <div id="semail">
-	                        <input type="text" name="email" value="${profileUpdateForm.email}">
-	                    </div>
+	                    <input type="text" name="birth" value="${profileUpdateForm.birth}" />
 	                </td>
 	            </tr>
 	            <tr>
+	                <td>이메일</td>
 	                <td>
-	                    <div id="smartphone">휴대폰</div>
-	                </td>
-	                <td>
-	                    <div id="ssmartphone">
-	                    	<input type="text" name="phone" value="${profileUpdateForm.phone}">
-	                    </div>
+	                     <input type="text" name="email" value="${profileUpdateForm.email}" />
 	                </td>
 	            </tr>
 	            <tr>
+	                <td>휴대폰</td>
 	                <td>
-	                    <div id="live">주소</div>
+	                    <input type="text" name="phone" value="${profileUpdateForm.phone}" />
 	                </td>
+	            </tr>
+	            <tr>
+	                <td>주소</td>
 	                <td>
-	                    <div id="slive">
-	                        <input type="text" name="addr" value="${profileUpdateForm.addr}">
-	                    </div>
+	                	<input type="text" name="addr" value="${profileUpdateForm.addr}" />
 	                </td>
 	            </tr>
 	           <tr>
+	               <td>프로필사진</td>
 	               <td>
-	                    <div id="propic">프로필사진</div>
+	               		<a href="/photo/${profileUpdateForm.newFileName }" target="_blank">${profileUpdateForm.oriFileName }</a>
+	                    <input type="file" id="upload" name="photo" />
 	               </td>
-	               <td>
-	                    <input type="file" id="upload" value="첨부파일">
-	               </td>
-	           </tr>        
-	            <input type="submit" id="save" value="저장">
+	           </tr>
+	           <tr>
+	           		<td colspan="2"><input type="submit" id="save" value="저장" /></td>
+	           	</tr>
 	        </table>
         </form>
-    <script  type="text/javascript">
-        $("#save").click(function(){
-            if(confirm("저장하시겠습니까?")==true){
-                alert("프로필이 저장되었습니다.");
-            }
-        });
-
+      </div>
+	</body>
+<script>
       
-    </script>
+</script>
 </html>
