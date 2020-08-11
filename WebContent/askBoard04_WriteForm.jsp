@@ -88,8 +88,8 @@
 			   <li><a href="#">스터디룸 소개</a></li>
 			   <li><a href="#">예약하기</a></li>
 			   <li><a href="#">자유게시판</a></li>
-			   <li><a href="#">후기게시판</a></li>
-			   <li><a onclick="conf()">고객센터</a></li> <!-- 이거는 하나하나 해보기 -->
+			   <li><a onclick="back()">후기게시판</a></li>
+			   <li><a onclick="back2()">고객센터</a></li> <!-- 이거는 하나하나 해보기 -->
 			</ul>
 			</div>
          <div id="log"><%if(session.getAttribute("id") != null){%>
@@ -139,9 +139,19 @@
 	if(msg !=""){
 		alert(msg);
 	}
-	function conf(){
-        if(confirm("이사이트를 나갈 경우 저장이 되지 않을 수 있습니다. 나가시겠습니까?")==true){
+	
+	function back2(){
+        if(confirm("저장이 되지 않을 수 있습니다. 나가시겠습니까?")==true){
         	location.href="./ask";
+        }else{
+        	return false;
+        }
+        
+	}
+	
+	function back(){
+        if(confirm("저장이 되지 않을 수 있습니다. 나가시겠습니까?")==true){
+        	location.href="./rvlist";
         }else{
         	return false;
         }

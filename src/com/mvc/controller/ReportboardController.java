@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mvc.service.ReportboardService;
 
-@WebServlet("/reportlist")
+@WebServlet({"/reportlist","/reportdetail"})
 public class ReportboardController extends HttpServlet {
 
 	@Override
@@ -35,6 +35,11 @@ public class ReportboardController extends HttpServlet {
 		case "/reportlist":
 			System.out.println("공지사항 리스트 요청하기");
 			service.list();
+			break;
+			
+		case "/reportdetail":
+			System.out.println("디테일 리스트 요청하기");
+			service.reportdetail();
 			break;
 			
 		}

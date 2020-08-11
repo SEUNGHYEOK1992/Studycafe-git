@@ -31,7 +31,7 @@ public class ReportboardDAO {
 	}
 	
 	public ArrayList<ReportboardDTO> list() {
-		String sql = "SELECT b_idx, id, subject, reg_date, bHit FROM bbs WHERE id='admin' ORDER BY b_idx DESC";
+		String sql = "SELECT b_idx, id, subject, reg_date, bHit FROM bbs WHERE id='admin' AND category IN(0 ,1) ORDER BY b_idx DESC";
 		ArrayList<ReportboardDTO> list = new ArrayList<ReportboardDTO>();
 		try {
 			ps = conn.prepareStatement(sql);
@@ -64,6 +64,30 @@ public class ReportboardDAO {
 			e.printStackTrace();
 		}
 		
+	}
+
+	public Object reportdetail(int b_idx) {
+		String sql = "SELECT b_idx, id, subject, content, reg_date FROM bbs WHERE b_idx=?";
+		ReportboardDTO dto = null;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, b_idx);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				dto = new ReportboardDTO();
+				dto.setB_idx(rs.getInt("b_idx"));
+				dto.setId(rs.getString("id"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setContent(rs.getString("content"));
+				dto.setReg_date(rs.getDate("reg_date"));
+			}System.out.println("report dto 받아옴 2");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			resClose();
+		}
+		return dto;
 	}
 
 }

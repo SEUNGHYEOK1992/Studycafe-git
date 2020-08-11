@@ -108,7 +108,7 @@
 						<c:forEach items="${list}" var="bbs">
 							<tr>
 								<td style="text-align: center;">${bbs.b_idx}</td>
-								<td style="text-align: center;">${bbs.subject}</td>
+								<td style="text-align: center;"><a href = "reportdetail?b_idx=${bbs.b_idx}">${bbs.subject}</a></td>
 								<td style="text-align: center;">${bbs.id}</td>
 								<td style="text-align: center;">${bbs.reg_date}</td>
 							</tr>

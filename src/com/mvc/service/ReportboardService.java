@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mvc.dao.AskDAO;
 import com.mvc.dao.ReportboardDAO;
 import com.mvc.dto.ReportboardDTO;
 
@@ -28,6 +29,16 @@ public class ReportboardService {
 		req.setAttribute("list", list);
 		RequestDispatcher dis = req.getRequestDispatcher("reportBoard01_List.jsp");
 		dis.forward(req, resp);
+	}
+
+	public void reportdetail() throws ServletException, IOException {
+		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
+		System.out.println("리포트 디테일 값 받아오기"+b_idx);
+		ReportboardDAO dao = new ReportboardDAO();
+		req.setAttribute("bbs", dao.reportdetail(b_idx));
+		RequestDispatcher dis = req.getRequestDispatcher("askBoard02_Detail.jsp");
+		dis.forward(req, resp);
+		
 	}
 
 }
