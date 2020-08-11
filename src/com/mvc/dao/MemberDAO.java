@@ -87,7 +87,7 @@ public class MemberDAO {
 			ps.setString(1, id);
 			rs = ps.executeQuery();
 			success = rs.next();
-			System.out.println("success : " + success); // 4차 확인
+			//System.out.println("success : " + success); // 4차 확인
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -97,7 +97,8 @@ public class MemberDAO {
 	}
 
 	public AdminDTO profileDetail(String detailId) {
-		String sql = "SELECT * FROM memberlist WHERE id=?";
+		String sql = "SELECT m.id, m.name, m.birth, m.email, m.phone, m.addr, p.oriFileName, p.newFileName  "
+				+ "FROM memberlist m, photo p WHERE m.id=p.id(+) AND m.id=?";
 		AdminDTO dto = new AdminDTO();
 		
 		try {
@@ -112,66 +113,15 @@ public class MemberDAO {
 				dto.setEmail(rs.getString("email"));
 				dto.setAddr(rs.getString("addr"));
 				dto.setPhone(rs.getString("phone"));
+				dto.setOriFileName(rs.getString("oriFileName"));
+				dto.setNewFileName(rs.getString("newFileName"));
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			resClose();
 		}
 		return dto;
-	}
-
-	public AdminDTO profileUpdateForm(String upId) {
-		
-		String sql = "SELECT * FROM memberlist WHERE id=?";
-		AdminDTO dto = new AdminDTO();
-		
-		try {
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, upId);
-			rs = ps.executeQuery();
-			
-			while (rs.next()) {
-				dto.setId(rs.getString("id"));
-				dto.setName(rs.getString("name"));
-				dto.setBirth(rs.getString("birth"));
-				dto.setEmail(rs.getString("email"));
-				dto.setAddr(rs.getString("addr"));
-				dto.setPhone(rs.getString("phone"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			resClose();
-		}
-		
-		return dto;
-	}
-
-	public boolean profileUpdate(String id, String name, String birth, String email, String phone, String addr) {
-		boolean result = false;
-		
-		String sql = "UPDATE memberlist SET name=?, birth=?, email=?, addr=?, phone=? WHERE id=?";
-		
-		try {
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, name);
-			ps.setString(2, birth);
-			ps.setString(3, email);
-			ps.setString(4, addr);
-			ps.setString(5, phone);
-			ps.setString(6, id);
-			if(ps.executeUpdate()>0) {
-				result = true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			resClose();
-		}
-		
-		return result;
 	}
 
 	public boolean delProfile(String id) {
@@ -190,6 +140,30 @@ public class MemberDAO {
 		}
 		return result;
 	}
+
+	public int profileUpdate(AdminDTO dto) {
+		String sql ="UPDATE memberlist SET name=?, birth=?, email=?, addr=?, phone=? WHERE id=?";
+		int success = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getName());
+			ps.setString(2, dto.getBirth());
+			ps.setString(3, dto.getEmail());
+			ps.setString(4, dto.getAddr());
+			ps.setString(5, dto.getPhone());
+			ps.setString(6, dto.getId());
+			success = ps.executeUpdate();
+			//System.out.println("success 수 : " + success);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+
+
 
 
 	

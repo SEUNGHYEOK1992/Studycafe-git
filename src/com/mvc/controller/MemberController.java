@@ -67,7 +67,7 @@ public class MemberController extends HttpServlet {
 			
 		
 			case "/join":
-				System.out.println("조인 창");
+				//System.out.println("조인 창");
 				success = service.join();
 				/*page = "member02_join.jsp";
 				msg="회원가입 실패";
@@ -82,41 +82,42 @@ public class MemberController extends HttpServlet {
 				map.put("join", success);
 				Gson gson = new Gson();
 				String obj = gson.toJson(map);
-				System.out.println("result : "+obj);
+				//System.out.println("result : "+obj);
 				resp.getWriter().println(obj);
 			break;
 			
 			case "/overlay":
-				System.out.println("중복 아이디 체크 요청");
+				//System.out.println("중복 아이디 체크 요청");
 				success = service.overlay();
 				map = new HashMap<String, Object>();
 				map.put("overlay", success);
 				gson = new Gson();
 				obj = gson.toJson(map);
-				System.out.println("result : "+obj);
+				//System.out.println("result : "+obj);
 				resp.getWriter().println(obj);	
 			break;
 			
 			case "/profileDetail":
-				System.out.println("프로필 상세보기 요청");
+				//System.out.println("프로필 상세보기 요청");
 				String detailId = req.getParameter("id");
-				System.out.println("확인할 ID : " + detailId);
+				//System.out.println("확인할 ID : " + detailId);
 				AdminDTO dto = service.profileDetail(detailId);
+				String uploadPath = "/photo/" +dto.getNewFileName();
+ 				req.setAttribute("path", uploadPath);
 				req.setAttribute("profileDetail", dto);
 				dis = req.getRequestDispatcher("member03_profile.jsp");
 				dis.forward(req, resp);
 				break;
 				
 			case "/profileUpdateForm":
-				System.out.println("수정폼으로 이동 요청 발생");
+				//System.out.println("수정폼으로 이동 요청 발생");
 				String upId = req.getParameter("id");
  				String upName = req.getParameter("name");
  				String upBirth = req.getParameter("birth");
  				String upEmail = req.getParameter("email");
  				String upAddr = req.getParameter("addr");
  				String upPhone = req.getParameter("phone");
- 				System.out.println("사용할 파라메터 값 : " + upId + " / " + upName + " / " + upBirth + " / " + upEmail + " / " + upAddr + " / " + upPhone);
- 				
+ 				//System.out.println("사용할 파라메터 값 : " + upId + " / " + upName + " / " + upBirth + " / " + upEmail + " / " + upAddr + " / " + upPhone);
  				dto = service.profileUpdateForm(upId);
  				req.setAttribute("profileUpdateForm", dto);
  				dis = req.getRequestDispatcher("member04_profileupdate.jsp");
@@ -125,12 +126,12 @@ public class MemberController extends HttpServlet {
 				break;
 				
 			case "/profileUpdate":
-				System.out.println("수정 요청 발생");
+				//System.out.println("수정 요청 발생");
 				service.profileUpdate();
 				break;
 				
 			case "/delProfile":
-				System.out.println("삭제 요청 발생");
+				//System.out.println("삭제 요청 발생");
 				service.delProfile();
 				break;
 		}
