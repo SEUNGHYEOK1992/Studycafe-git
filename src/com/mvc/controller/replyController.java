@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mvc.service.ReplyService;
 import com.mvc.service.ReviewService;
 
-@WebServlet({"/rplist","/rpwrite","/rpdel","rpupdateForm","rpupdate"})
+@WebServlet({"/rplist","/rpwrite","/rpdel","/rpupdateForm","/rpupdate"})
 
 public class replyController extends HttpServlet {
 
