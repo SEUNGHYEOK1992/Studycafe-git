@@ -92,21 +92,12 @@
 			   <li><a href="./ask">고객센터</a></li>
 			</ul>
 			</div>
-<<<<<<< HEAD
          <div id="log"><%if(session.getAttribute("id") != null){%>
       							${id} 님
       						<%}else{ %>
       							<a href="member01_login.jsp">로그인/회원가입</a> 
       						<%} %>
          </div> 
-=======
-			<div id="log"><%if(session.getAttribute("id") != null){%>
-         							${id} 님
-         						<%}else{ %>
-         							<a href="member01_login.jsp">로그인/회원가입</a> 
-         						<%} %>
-         						</div>  
->>>>>>> 80e9384ff013c2e4e9bf0c7b9d466cbb5d85eb94
 		</div>
 		<!----------------------------------------------------->
 		<div class="boardTitle"><h1>문의하기</h1><hr></div>

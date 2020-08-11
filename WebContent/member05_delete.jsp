@@ -88,6 +88,5 @@
         </div>
          <h1>탈퇴가 완료 되었습니다.</h1>
          <button type="button" onclick="location.href='00_index.html'" id="mainpage">메인페이지로 이동</button>
-        </form>
     </body>
 </html>
