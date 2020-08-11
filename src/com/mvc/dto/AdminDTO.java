@@ -12,6 +12,13 @@ public class AdminDTO {
 	private String blacklist;
 	private int k_idx;
 	private String cause;
+	
+	// 프로필 사진 관련
+	private int f_idx;
+	private String oriFileName;
+	private String newFileName;
+	private String file_category;
+	
 	public String getId() {
 		return id;
 	}
@@ -71,6 +78,30 @@ public class AdminDTO {
 	}
 	public void setCause(String cause) {
 		this.cause = cause;
+	}
+	public int getF_idx() {
+		return f_idx;
+	}
+	public void setF_idx(int f_idx) {
+		this.f_idx = f_idx;
+	}
+	public String getOriFileName() {
+		return oriFileName;
+	}
+	public void setOriFileName(String oriFileName) {
+		this.oriFileName = oriFileName;
+	}
+	public String getNewFileName() {
+		return newFileName;
+	}
+	public void setNewFileName(String newFileName) {
+		this.newFileName = newFileName;
+	}
+	public String getFile_category() {
+		return file_category;
+	}
+	public void setFile_category(String file_category) {
+		this.file_category = file_category;
 	}
 	
 	

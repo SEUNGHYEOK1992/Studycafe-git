@@ -87,6 +87,7 @@
 			<ul id="top_navi">
 			   <li><a href="#">스터디룸 소개</a></li>
 			   <li><a href="#">예약하기</a></li>
+<<<<<<< HEAD
 			   <li><a href="#">자유게시판</a></li>
 			   <li><a onclick="back()">후기게시판</a></li>
 			   <li><a onclick="back2()">고객센터</a></li> <!-- 이거는 하나하나 해보기 -->
@@ -98,6 +99,19 @@
       							<a href="member01_login.jsp">로그인/회원가입</a> 
       						<%} %>
          </div>
+=======
+			   <li><a href="./rvlist">자유게시판</a></li>
+			   <li><a href="#">후기게시판</a></li>
+			   <li><a onclick="conf()">고객센터</a></li> <!-- 이거는 하나하나 해보기 -->
+			</ul>
+			</div>
+			<div id="log"><%if(session.getAttribute("id") != null){%>
+         							${id} 님
+         						<%}else{ %>
+         							<a href="member01_login.jsp">로그인/회원가입</a> 
+         						<%} %>
+         						</div>  
+>>>>>>> 80e9384ff013c2e4e9bf0c7b9d466cbb5d85eb94
 		</div>
 		<!----------------------------------------------------->
 		<div class="boardTitle"><h1>문의하기</h1><hr></div>

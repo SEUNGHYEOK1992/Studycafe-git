@@ -31,21 +31,29 @@ public class AskService {
 		dis.forward(req, resp);
 	}
 
-	public void askwrite(String id) throws IOException {
+	public void askwrite(String id) throws IOException, ServletException {
 		AskDAO dao = new AskDAO();
 		req.setCharacterEncoding("UTF-8");
 		String subject = req.getParameter("askingTypes");
 		String content = req.getParameter("content");
-		System.out.println(id+"/"+subject+"/"+content);
-		
+		System.out.println(id+"/"+subject+"/"+content);	
 		String page = "askBoard04_WriteForm.jsp";
 		//성공했을경우 ask로 보내고 아니면 writeform으로 보낸다.
-		if(dao.askwrite(id,subject,content)) {
+		
+		if(id==null) {
+			String msg = "로그인여부를 확인해주세요.";
+			req.setAttribute("msg", msg);
+			RequestDispatcher dis = req.getRequestDispatcher("member01_login.jsp");
+			dis.forward(req, resp);
+		}else {
 			page ="./ask";
 		}
 		
+//		if(dao.askwrite(id,subject,content)) {
+
 		resp.sendRedirect(page);
-	}
+		}
+//	}
 
 	public void askdetail() throws ServletException, IOException {
 		int b_idx = Integer.parseInt(req.getParameter("b_idx"));

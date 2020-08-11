@@ -89,7 +89,11 @@
          						<%}else{ %>
          							<a href="member01_login.jsp">로그인/회원가입</a> 
          						<%} %>
+<<<<<<< HEAD
          </div> 
+=======
+         						</div>  
+>>>>>>> 80e9384ff013c2e4e9bf0c7b9d466cbb5d85eb94
 		</div>
 		<!----------------------------------------------------->
 		<div class="boardTitle"><h1>문의하기</h1><hr></div>
@@ -150,6 +154,18 @@
 	var msg = "${msg}";
 	if(msg !=""){
 		alert(msg);
-	}		
+	}	
+<%-- 	
+	var session = '<%(String)session.getAttribute("id")%>';
+	console.log(session);
+	
+	function loginchk(){
+		if(session==null){
+		alert("로그인 여부를 확인해주세요.");
+		location.href=''member01_login.jsp"
+	}else{
+		location.href=''askBoard04_WriteForm.jsp";
+	}
+	}; --%>
 </script>
 </html>
