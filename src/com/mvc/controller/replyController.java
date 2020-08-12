@@ -25,7 +25,7 @@ public class replyController extends HttpServlet {
 		process(req, resp);
 	}
 
-	private void process(HttpServletRequest req, HttpServletResponse resp) {
+	private void process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
 		String ctx = req.getContextPath();
 		String reqAddr = uri.substring(ctx.length());
@@ -37,8 +37,23 @@ public class replyController extends HttpServlet {
 			System.out.println("댓글 리스트 보기요청");
 			rpservice.list();
 			break;
+			
+		case"/rpwrite":
+			System.out.println("댓글 작성");
+			rpservice.write();
+			break;
+			
+		case"/rpdel":
+			System.out.println("댓글 삭제");
+			rpservice.del();
+			break;
+			
+		case"/rpupdateForm":
+			System.out.println("댓글 수정 폼");
+			rpservice.rpupdateForm();
+			break;
 		}
-	}
+}
 	
 
 		
