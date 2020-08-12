@@ -121,6 +121,11 @@
 				<a class="btn btn-default pull-right" onclick="location.href='fbList'">목록</a>
 				<input type="submit" class="btn btn-default" style="margin-right: 10px;" value="수정"/>
 				<a class="btn btn-default" onclick="location.href='fbDelete?b_idx=${bbs.b_idx}'" style="margin-right: 10px;">삭제</a>
+				<a class="btn btn-default" onclick="location.href='#'" style="margin-right: 10px;">추천</a>
+				<input type ="text" name="like" value="추천 수 " />
+				<a class="btn btn-default" onclick="location.href='#'" style="margin-right: 10px;">싫어요</a>
+				<input type ="text" name="dislike" value="싫어요 수 " />
+				<a class="btn btn-default pull-right" onclick="location.href='#'" style="margin-right: 10px;">신고</a>
 				</form>
 			</div>
 		</div>
