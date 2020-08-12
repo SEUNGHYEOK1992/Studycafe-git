@@ -97,30 +97,30 @@
 		<div class="boardTitle"><h1>자유게시판</h1><hr></div>
 		<div class="board_zone">
 			<div class="board_list_table" style="width: 55%;">
-				<form action="write" method="post" enctype="multipart/form-data">
+				<form action="fbwrite" method="post" enctype="multipart/form-data">
 				<table class="table">
 					<thead>
 						<tr>
-							<th><input type="text" style="border:none; background-color: rgb(238, 238, 238); width: 1040px; height: 30px;" placeholder="제목을 입력해주세요."></th>
+							<th><input type="text" style="border:none; background-color: rgb(238, 238, 238); width: 1040px; height: 30px;" name="subject"></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td style="text-align: center;">
 								<span>
-									<textarea name="" id="" cols="30" rows="10" style="margin: 0px; width: 1000px; height: 300px; resize: none; margin-top: 20px; margin-bottom: 20px;"></textarea>
+									<textarea name="content"  cols="30" rows="10" style="margin: 0px; width: 1000px; height: 300px; resize: none; margin-top: 20px; margin-bottom: 20px;"></textarea>
 								</span>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<span style="margin-right: 10px; font-weight: 800;"><input type="file"></span>
+								<span style="margin-right: 10px; font-weight: 800;"><input type="file" name="photo"></span>
 							</td>
 						</tr>
 					</tbody>
 				</table>
-				<a class="btn btn-default pull-right" onclick="location.href='#.jsp'" style="margin-right: 30px;">취소</a>
-				<a class="btn btn-default pull-right" onclick="location.href='#.jsp'" style="margin-right: 10px;">작성</a>
+				<input type="submit" value="작성"/>
+				<a class="btn btn-default pull-right" onclick="location.href='fbList'" style="margin-right: 30px;">취소</a>
 				</form>
 			</div>
 		</div>

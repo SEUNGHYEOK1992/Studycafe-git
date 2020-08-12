@@ -71,31 +71,6 @@ public class MemberService {
 		// 가져오는 내용이 profileDetail() 과 동일 
 		return dao.profileDetail(upId);
 	}
-	/*
-	public void profileUpdate() throws ServletException, IOException { 
-	    req.setCharacterEncoding("UTF-8");
-	    String id = req.getParameter("id");
-	    String name = req.getParameter("name");
-	    String birth = req.getParameter("birth");
-	    String email = req.getParameter("email");
-	    String phone = req.getParameter("phone");
-	    String addr = req.getParameter("addr");
-	    System.out.println("수정 할 파라미터 값 : " + id + " / " + name + " 기타등등");
-	    
-	    String page = "profileDetail?id="+id;
-	    String msg = "수정에 실패했습니다";
-	    
-	    MemberDAO dao = new MemberDAO();
-	    if(dao.profileUpdate(id, name, birth, email, phone, addr)) {
-	    	msg = "수정 성공";
-	    }
-	    
-	    req.setAttribute("msg", msg);
-	    RequestDispatcher dis = req.getRequestDispatcher(page);
-	    dis.forward(req, resp);
-	    
-	}
-*/
 	
 	public void delProfile() throws ServletException, IOException {
 		String id = req.getParameter("id");

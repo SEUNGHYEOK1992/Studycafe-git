@@ -88,38 +88,45 @@
 		<div class="boardTitle"><h1>자유게시판</h1><hr></div>
 		<div class="board_zone">
 			<div class="board_list_table" style="width: 55%;">
+				<form action="fbUpdateForm" method="post">
 				<table class="table">
 					<thead>
 						<tr>
-							<th style="background-color: rgba(223, 223, 223, 0.719); font-size: 17px;">글제목은 이렇습니다</th>
+							<th style="background-color: rgba(223, 223, 223, 0.719); font-size: 17px;">${bbs.subject }</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td>
-								<span style="margin-right: 10px; font-weight: 800;">ID : dkgibmsk</span>
-								<span style="font-size: 13px;">작성일 : 2020-08-20</span>
-								<span style="float: right; font-weight: 700;">조회수 : 50</span>
+								<input type="hidden" name ="b_idx" value="${bbs.b_idx }"/>
+								<span style="margin-right: 10px; font-weight: 800;" name="id">${bbs.id}</span>
+								<span style="font-size: 13px;" name="reg_date">${bbs.reg_date}</span>
+								<span style="float: right; font-weight: 700;" name="bHit">${bbs.bHit}</span>
 							</td>
 						</tr>
 						<tr>
 							<td style="text-align: center; padding-top: 30px;">
-								<span>
-									안녕하세요. 항상 십분을 사랑해주시는 고객님들께 감사드립니다.<br><br>
-									아래의 일시에 서비스 품질 향상 작업을 위해 서버 점검 작업이 예정되어 있습니다.<br><br>
-									작업 시간 중에는 서비스 이용이 중단되거나 접속이 원활하지 않을 수 있으니 양해해주시기 바랍니다.<br><br>
-									▶일시 : 2020년 3월 19일(목) AM 02:00~08:00<br><br>
-									십분은 고객님들께 더 나은 서비스를 제공할 수 있도록 항상 최선을 다하겠습니다.<br><br>
-									감사합니다.
-								</span>
+								<span>${bbs.content }<br/><br/></span>
+								<img src="${path }" alt="이미지 없음" width="200px" />
 							</td>
 						</tr>
+						 <tr>
+	            			<td>
+	            				첨부파일 : <input type ="text" placeholder="없음" value="${bbs.oriFileName}" readonly />
+	            			</td>
+            			</tr>
 					</tbody>
 				</table>
 				<br>
-				<a class="btn btn-default pull-right" onclick="location.href='#.jsp'">목록</a>
-				<a class="btn btn-default" onclick="location.href='#.jsp'" style="margin-right: 10px;">수정</a>
-				<a class="btn btn-default" onclick="location.href='#.jsp'" style="margin-right: 10px;">삭제</a>
+				<a class="btn btn-default pull-right" onclick="location.href='fbList'">목록</a>
+				<input type="submit" class="btn btn-default" style="margin-right: 10px;" value="수정"/>
+				<a class="btn btn-default" onclick="location.href='fbDelete?b_idx=${bbs.b_idx}'" style="margin-right: 10px;">삭제</a>
+				<a class="btn btn-default" onclick="location.href='#'" style="margin-right: 10px;">추천</a>
+				<input type ="text" name="like" value="추천 수 " />
+				<a class="btn btn-default" onclick="location.href='#'" style="margin-right: 10px;">싫어요</a>
+				<input type ="text" name="dislike" value="싫어요 수 " />
+				<a class="btn btn-default pull-right" onclick="location.href='#'" style="margin-right: 10px;">신고</a>
+				</form>
 			</div>
 		</div>
 	</body>
