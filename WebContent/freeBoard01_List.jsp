@@ -100,83 +100,25 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="##" var="##">
+						<c:forEach items="${list }" var="bbs">
 							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
-							</tr>
-							<tr>
-								<td style="text-align: center;">122</td>
-								<td>첫번째 글 테스트입니다..... 제목을 적어주세요</td>
-								<td style="text-align: center;">OOO</td>
-								<td style="text-align: center;">2020-08-04</td>
-								<td style="text-align: center;">12</td>
+								<td style="text-align: center;">${bbs.b_idx }</td>
+								<td style="text-align: center;"><a href="fbdetail?b_idx=${bbs.b_idx }">${bbs.subject }</a></td>
+								<td style="text-align: center;">${bbs.id }</td>
+								<td style="text-align: center;">${bbs.reg_date }</td>
+								<td style="text-align: center;">${bbs.bHit }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
 				<br>
-				<a class="btn btn-default pull-right" onclick="location.href='freeBoardWriteForm.jsp'">글쓰기</a>
+				<a class="btn btn-default pull-right" onclick="location.href='freeBoard03_WriteForm.jsp'">글쓰기</a>
 				<br><br>
+				<div class="pageArea">
+					<a href="./fbList?page=${currPage -1 }"><span id="spanPage">이전 페이지</span></a>
+					<span><b>${currPage }</b></span>
+					<a href="./fbList?page=${currPage+1 }"><span>다음 페이지</span></a>
+				</div>
 				<div class="text-center">
 					<ul class="pagination">
 						<li class="page-item">
@@ -207,6 +149,12 @@
 		</div>
 	</body>
 	<script>
-		
+	var currPage = ${currPage};
+	console.log(currPage);
+	
+	if(currPage<1){
+		alert("이전 페이지가 없습니다.");
+		location.href="fbList";
+	}		
 	</script>
 </html>

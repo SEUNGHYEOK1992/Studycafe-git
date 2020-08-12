@@ -196,14 +196,9 @@
          <ul id="top_navi">
             <li><a href="#">스터디룸 소개</a></li>
             <li><a href="#">예약하기</a></li>
-<<<<<<< HEAD
-            <li><a href="./rvlist">자유게시판</a></li>
-            <li><a href="./ask">후기게시판</a></li>
-=======
             <li><a href="#">자유게시판</a></li>
             <li><a href="./rvlist">후기게시판</a></li>
->>>>>>> 80e9384ff013c2e4e9bf0c7b9d466cbb5d85eb94
-            <li><a href="./reportlist">고객센터</a></li>
+            <li><a href="./ask">고객센터</a></li>
          </ul>
          </div>
          <div id="log"><a href="admin00_Main.jsp"><%if(session.getAttribute("id") != null){%>
