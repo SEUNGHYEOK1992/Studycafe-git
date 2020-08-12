@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+	String id = (String)session.getAttribute("id"); 
+%>   
 <!DOCTYPE html>
 <html>
 	<head>
@@ -85,6 +88,8 @@
 			<div id="log"><a href="#">로그인/회원가입</a></div>  
 		</div>
 		<!----------------------------------------------------->
+		<c:choose>
+		<c:when test="${id== bbs.id}">
 		<div class="boardTitle"><h1>자유게시판</h1><hr></div>
 		<div class="board_zone">
 			<div class="board_list_table" style="width: 55%;">
@@ -129,6 +134,52 @@
 				</form>
 			</div>
 		</div>
+		</c:when>
+		<c:otherwise>
+		<div class="boardTitle"><h1>자유게시판</h1><hr></div>
+		<div class="board_zone">
+			<div class="board_list_table" style="width: 55%;">
+				<form action="fbUpdateForm" method="post">
+				<table class="table">
+					<thead>
+						<tr>
+							<th style="background-color: rgba(223, 223, 223, 0.719); font-size: 17px;">${bbs.subject }</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<input type="hidden" name ="b_idx" value="${bbs.b_idx }"/>
+								<span style="margin-right: 10px; font-weight: 800;" name="id">${bbs.id}</span>
+								<span style="font-size: 13px;" name="reg_date">${bbs.reg_date}</span>
+								<span style="float: right; font-weight: 700;" name="bHit">${bbs.bHit}</span>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align: center; padding-top: 30px;">
+								<span>${bbs.content }<br/><br/></span>
+								<img src="${path }" alt="이미지 없음" width="200px" />
+							</td>
+						</tr>
+						 <tr>
+	            			<td>
+	            				첨부파일 : <input type ="text" placeholder="없음" value="${bbs.oriFileName}" readonly />
+	            			</td>
+            			</tr>
+					</tbody>
+				</table>
+				<br>
+				<a class="btn btn-default pull-right" onclick="location.href='fbList'">목록</a>
+				<a class="btn btn-default" onclick="location.href='#'" style="margin-right: 10px;">추천</a>
+				<input type ="text" name="like" value="추천 수 " />
+				<a class="btn btn-default" onclick="location.href='#'" style="margin-right: 10px;">싫어요</a>
+				<input type ="text" name="dislike" value="싫어요 수 " />
+				<a class="btn btn-default pull-right" onclick="location.href='#'" style="margin-right: 10px;">신고</a>
+				</form>
+			</div>
+		</div>
+		</c:otherwise>
+		</c:choose>
 	</body>
 	<script>
 		
