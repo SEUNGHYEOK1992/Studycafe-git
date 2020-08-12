@@ -39,30 +39,27 @@ public class AskService {
 		System.out.println(id+"/"+subject+"/"+content);	
 		String page = "askBoard04_WriteForm.jsp";
 		//성공했을경우 ask로 보내고 아니면 writeform으로 보낸다.
-		
+
+		if(dao.askwrite(id,subject,content)) {
+			page ="./ask";
+		}
+		resp.sendRedirect(page);
+	}
+
+	public void askdetail() throws ServletException, IOException {
+		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
+		String id = (String) req.getSession().getAttribute("id");
+		System.out.println("에스크디테일 값은?"+b_idx);
+		AskDAO dao = new AskDAO();
+		req.setAttribute("bbs", dao.askdetail(b_idx));
 		if(id==null) {
 			String msg = "로그인여부를 확인해주세요.";
 			req.setAttribute("msg", msg);
 			RequestDispatcher dis = req.getRequestDispatcher("member01_login.jsp");
 			dis.forward(req, resp);
-		}else {
-			page ="./ask";
 		}
-		
-//		if(dao.askwrite(id,subject,content)) {
-
-		resp.sendRedirect(page);
-		}
-//	}
-
-	public void askdetail() throws ServletException, IOException {
-		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
-		System.out.println("에스크디테일 값은?"+b_idx);
-		AskDAO dao = new AskDAO();
-		req.setAttribute("bbs", dao.askdetail(b_idx));
 		RequestDispatcher dis = req.getRequestDispatcher("askBoard02_Detail.jsp");
 		dis.forward(req, resp);
-		
 	}
 
 	public void askupdateform() throws ServletException, IOException {

@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<% String id = (String)session.getAttribute("id"); %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -115,7 +117,7 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<a class="btn btn-default pull-right" href="askBoard04_WriteForm.jsp">문의하기</a>
+				<a class="btn btn-default pull-right" onclick="login1()">문의하기</a>
 				<br><br>
 				<div class="text-center">
 					<ul class="pagination">
@@ -151,17 +153,17 @@
 	if(msg !=""){
 		alert(msg);
 	}	
-<%-- 	
-	var session = '<%(String)session.getAttribute("id")%>';
-	console.log(session);
-	
-	function loginchk(){
-		if(session==null){
-		alert("로그인 여부를 확인해주세요.");
-		location.href=''member01_login.jsp"
-	}else{
-		location.href=''askBoard04_WriteForm.jsp";
+ 	
+	function login1(){
+		
+		<% id = (String)session.getAttribute("id"); %>
+		<% if(id==null){ %>
+			 alert("로그인이 필요한 서비스 입니다."); 
+			location.href ="member01_login.jsp";
+		<% }else{ %>
+			location.href="askBoard04_WriteForm.jsp";
+	<% } %>
+		
 	}
-	}; --%>
 </script>
 </html>

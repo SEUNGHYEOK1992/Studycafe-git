@@ -112,7 +112,7 @@ public class AskDAO {
 
 	public boolean askupdate(int b_idx, String subject, String content) {
 		boolean result = false;
-		String sql = "UPDATE bbs SET subject=?,content=? WHERE b_idx=?";
+		String sql = "UPDATE bbs SET subject=?,content=?,reg_date=sysdate WHERE b_idx=?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, subject);
