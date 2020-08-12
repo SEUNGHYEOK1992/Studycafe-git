@@ -96,33 +96,37 @@
 		<!----------------------------------------------------->
 		<div class="boardTitle"><h1>자유게시판</h1><hr></div>
 		<div class="board_zone">
-            <form action="update" method="post">
 			<div class="board_list_table" style="width: 55%;">
-				<table class="table">
-					<thead>
-						<tr>
-							<th><input type="text" style="border:none; background-color: rgb(238, 238, 238); width: 1040px; height: 30px;" placeholder="제목을 입력해주세요."></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td style="text-align: center;">
-								<span>
-									<textarea name="" id="" cols="30" rows="10" style="margin: 0px; width: 1000px; height: 300px; resize: none; margin-top: 20px; margin-bottom: 20px;"></textarea>
-								</span>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<span style="margin-right: 10px; font-weight: 800;"><input type="file"></span>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<a class="btn btn-default pull-right" onclick="location.href='#.jsp'" style="margin-right: 30px;">취소</a>
-				<a class="btn btn-default pull-right" onclick="location.href='#.jsp'" style="margin-right: 10px;">수정</a>
+				<form action="fbUpdate?b_idx=${bbsUp.b_idx }" method="post" enctype="multipart/form-data">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>
+									<input type="text" name="subject" style="border:none; background-color: rgb(238, 238, 238); width: 1040px; height: 30px;" value="${bbsUp.subject }"/>
+									<input type="hidden" name="b_idx" value="${bbsUp.b_idx }"/>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td style="text-align: center;">
+									<span>
+										<textarea name="content" id="" cols="30" rows="10" style="margin: 0px; width: 1000px; height: 300px; resize: none; margin-top: 20px; margin-bottom: 20px;">${bbsUp.content }</textarea>
+									</span>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									첨부파일 : <input type ="text" placeholder="없음" value="${bbsUp.oriFileName}" />
+									<span style="margin-right: 10px; font-weight: 800;"><input type="file" name="photo" ></span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<a class="btn btn-default pull-right" onclick="location.href='fbdetail?b_idx=${bbsUp.b_idx}'" style="margin-right: 30px;">취소</a>
+					<input type="submit" class="btn btn-default pull-right" style="margin-right: 10px;" value="저장" />
+           		</form>
             </div>
-            </form>
 		</div>
 	</body>
 	<script>
