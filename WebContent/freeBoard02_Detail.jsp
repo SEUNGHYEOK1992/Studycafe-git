@@ -172,11 +172,11 @@
 				</table>
 				<br>
 				<a class="btn btn-default pull-right" onclick="location.href='fbList'">목록</a>
-				<a class="btn btn-default" onclick="location.href='#'" style="margin-right: 10px;">추천</a>
-				<input type ="text" name="like" value="추천 수 " />
-				<a class="btn btn-default" onclick="location.href='#'" style="margin-right: 10px;">싫어요</a>
-				<input type ="text" name="dislike" value="싫어요 수 " />
-				<a class="btn btn-default pull-right" onclick="location.href='#'" style="margin-right: 10px;">신고</a>
+				<a class="btn btn-default" onclick="like()" style="margin-right: 10px;">추천</a>
+				<input type ="text" id="likeCount" name="like" value="" />
+				<a class="btn btn-default" onclick="disLike()" style="margin-right: 10px;">싫어요</a>
+				<input type ="text" id="dislikeCount" name="dislike" value="" />
+				<a class="btn btn-default pull-right" onclick="singo()" style="margin-right: 10px;">신고</a>
 				</form>
 			</div>
 		</div>

@@ -362,5 +362,29 @@ public class FreeBoardDAO {
 		}
 		return success;
 	}
+
+	public ArrayList<FreeBoardDTO> popList() {
+		String sql = "select rnum, b_idx, id, subject, bHit from(select ROW_NUMBER() OVER(ORDER BY bHit DESC) AS rnum, "
+					+ "b_idx, id, subject, bHit FROM bbs) WHERE rnum BETWEEN 1 AND 5";
+		ArrayList<FreeBoardDTO> poplist = new ArrayList<FreeBoardDTO>();
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				FreeBoardDTO dto = new FreeBoardDTO();
+				dto.setId(rs.getString("id"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setbHit(rs.getInt("bHit"));
+				dto.setB_idx(rs.getInt("b_idx"));
+				poplist.add(dto);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+	  return poplist;
+
+	}
 	
 }

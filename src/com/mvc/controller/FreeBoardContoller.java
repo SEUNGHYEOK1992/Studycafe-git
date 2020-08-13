@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.mvc.dto.FreeBoardDTO;
 import com.mvc.service.FreeBoardService;
-@WebServlet({"/fbList","/fbdetail","/fbwrite","/fbUpdateForm","/fbUpdate","/fbDelete","/fbLike","/fblikeCall","/fbDisLike","/fbdisLikeCall","/reportChk","/complain"})
+@WebServlet({"/fbList","/fbdetail","/fbwrite","/fbUpdateForm","/fbUpdate","/fbDelete","/fbLike","/fblikeCall",
+	"/fbDisLike","/fbdisLikeCall","/reportChk","/complain","/popList"})
 public class FreeBoardContoller extends HttpServlet {
 
 	@Override
@@ -152,6 +153,18 @@ public class FreeBoardContoller extends HttpServlet {
 				req.setAttribute("msg", msg);
 				dis = req.getRequestDispatcher(pageMove);
 				dis.forward(req, resp);
+			break;
+			
+			case "/popList":
+				//System.out.println("인기차트");
+				list = new ArrayList<FreeBoardDTO>();
+				list = service.popList();
+				map = new HashMap<String, Object>();
+				map.put("popList",list);
+				gson = new Gson();
+				obj = gson.toJson(map);
+				resp.setContentType("text/html;charset=UTF-8");
+				resp.getWriter().println(obj);
 			break;
 			
 		}

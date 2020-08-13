@@ -52,13 +52,13 @@ public class AskService {
 		System.out.println("에스크디테일 값은?"+b_idx);
 		AskDAO dao = new AskDAO();
 		req.setAttribute("bbs", dao.askdetail(b_idx));
+		String pageMove = "askBoard02_Detail.jsp";
 		if(id==null) {
 			String msg = "로그인여부를 확인해주세요.";
 			req.setAttribute("msg", msg);
-			RequestDispatcher dis = req.getRequestDispatcher("member01_login.jsp");
-			dis.forward(req, resp);
+			pageMove = "member01_login.jsp";
 		}
-		RequestDispatcher dis = req.getRequestDispatcher("askBoard02_Detail.jsp");
+		RequestDispatcher dis = req.getRequestDispatcher(pageMove);
 		dis.forward(req, resp);
 	}
 

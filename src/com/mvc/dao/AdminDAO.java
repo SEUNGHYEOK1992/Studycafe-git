@@ -156,9 +156,9 @@ public class AdminDAO {
 		int end = page * pagePerCnt;
 		int start = (end-pagePerCnt)+1;
 		ArrayList<BlackDTO> list = new ArrayList<BlackDTO>();
-		String sql = "select rnum, idx, id, repo_content FROM(select row_number() over(order by m.idx asc) as rnum, "
-				+ "m.idx, m.id, r.repo_content FROM memberlist m, report r WHERE m.id=r.id(+) AND m.blacklist='T') "
-				+ "WHERE rnum BETWEEN ? AND ?";
+		String sql = "SELECT rnum, idx, id, repo_content FROM " 
+				+ "(select row_number() OVER (PARTITION BY m.id ORDER BY m.idx ASC) AS rnum, m.idx, m.id, r.repo_content "
+				+ "FROM memberList m, report r WHERE m.id=r.b_id(+) AND m.blacklist='T') WHERE rnum=1 AND rnum BETWEEN ? AND ?";
 		try {
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, start);

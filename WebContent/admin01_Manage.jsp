@@ -301,5 +301,10 @@
 	if(msg != ""){
 		alert(msg);
 	}
+	var currPage = ${currPage};
+	if(currPage<1){
+		alert("이전 페이지가 없습니다.");
+		location.href="memberList";
+	}	
 </script>
 </html>

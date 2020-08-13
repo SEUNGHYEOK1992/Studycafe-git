@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <title>메인</title>
    <style>
 		@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
@@ -104,6 +105,17 @@
          height: 700px;
          outline: 1px solid rgb(58, 218, 9);
       }
+      
+      #popularchart{
+         position: fixed;
+         width: 250px;
+         height: 400px;
+         font-color : black;
+         border : 1px solid black;
+         left : 1630px;
+         top : 400px;
+      }
+      
       /*중앙이미지 끝*/
 
       /*text_img*/
@@ -227,6 +239,16 @@
         </div>
     </div>
    <!--중앙이미지 시작-->
+   <div id="popularchart">         
+         <table>          
+               <tr>
+               		<th>제목</th>
+               		<th>아이디</th>
+               		<th>조회수</th>
+               </tr>
+         </table>
+   </div>
+    
    <div class="main_img">
       <img src=""/>
    </div>
@@ -272,6 +294,38 @@
 	var msg = "${msg}";
 	if(msg != ""){
 		alert(msg)	
+	}
+	
+	function popList(){
+		$.ajax({
+			type:"post",
+			url:"popList",
+			data:{},
+			dataType:"JSON",
+			success:function(data){
+				//console.log(data.popList);
+				drawTable(data.popList);
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});
+	}
+	popList();
+	
+	function drawTable(list){
+		//for(var i=0; i<list.length;i++){}
+		var content="";
+		//$("tbody").empty();	
+		list.forEach(function(item,num){
+			console.log(num,item);
+			content = "<tr>"
+			+"<td>"+item.id+"</td>"
+			+"<td><a href='fbdetail?b_idx="+item.b_idx+"'>"+item.subject+"</a></td>"
+			+"<td>"+item.bHit+"</td>"
+			+"</tr>";
+			$("tbody").append(content);
+		});	
 	}
 </script>
 </html>

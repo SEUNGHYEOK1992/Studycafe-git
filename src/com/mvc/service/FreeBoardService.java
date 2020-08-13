@@ -38,13 +38,13 @@ public class FreeBoardService {
 		//System.out.println(dto.getB_idx());
 		req.setAttribute("path", uploadPath);
 		req.setAttribute("bbs",dto);
+		String pageMove ="freeBoard02_Detail.jsp";
 		if(id==null) {
 			String msg = "로그인여부를 확인해주세요.";
 			req.setAttribute("msg", msg);
-			RequestDispatcher dis = req.getRequestDispatcher("member01_login.jsp");
-			dis.forward(req, resp);
+			pageMove ="member01_login.jsp";
 		}
-		RequestDispatcher dis = req.getRequestDispatcher("freeBoard02_Detail.jsp");
+		dis = req.getRequestDispatcher(pageMove);
 		dis.forward(req, resp);
 		
 	}
@@ -181,5 +181,11 @@ public class FreeBoardService {
 		//System.out.println(comp + "/ " + b_idx +" / " + b_id + " / " + repo_id);
 		FreeBoardDAO dao = new FreeBoardDAO();
 		return dao.complain(b_idx,b_id,repo_id,comp);
+	}
+
+	public ArrayList<FreeBoardDTO> popList() {
+		//System.out.println("인기 차트 서비스");
+		FreeBoardDAO dao = new FreeBoardDAO();
+		return dao.popList();
 	}
 }

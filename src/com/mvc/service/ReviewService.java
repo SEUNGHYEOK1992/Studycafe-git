@@ -50,14 +50,13 @@ public class ReviewService {
 		System.out.println(content);
 		dao.write(content,id);
 		String page = "rvlist";
-		
 		if(id==null) {
 			String msg = "로그인여부를 확인해주세요.";
 			req.setAttribute("msg", msg);
-			RequestDispatcher dis = req.getRequestDispatcher("member01_login.jsp");
-			dis.forward(req, resp);
+			page = "member01_login.jsp";
 		}
-		resp.sendRedirect(page);
+		RequestDispatcher dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
 	}
 
 	public void del() throws ServletException, IOException {
@@ -115,7 +114,6 @@ public class ReviewService {
 	
 	
 
-//====================================================
 	
 
 

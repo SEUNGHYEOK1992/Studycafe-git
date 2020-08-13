@@ -97,6 +97,15 @@
         /* ---------- header 끝 ---------- */
 
         /* ---------- main ---------- */
+        #popularchart{
+	         position: fixed;
+	         width: 250px;
+	         height: 400px;
+	         font-color : black;
+	         border : 1px solid black;
+	         left : 1630px;
+	         top : 400px;
+      	}
 
         #main {
             min-height: 100%;
@@ -175,7 +184,15 @@
     <!-- 헤더 끝 -->
 
 <!------------------------------------------------------------------------------------------------------->
-
+ 	<div id="popularchart">         
+      	<table>          
+            <tr>
+           		<th>제목</th>
+           		<th>아이디</th>
+           		<th>조회수</th>
+            </tr>
+      	</table>
+	</div>
     <!-- 메인 시작 -->
     <div id="main">
         
@@ -209,6 +226,38 @@
 	var msg = "${msg}";
 	if(msg != ""){
 		alert(msg);
+	}
+	
+	function popList(){
+		$.ajax({
+			type:"post",
+			url:"popList",
+			data:{},
+			dataType:"JSON",
+			success:function(data){
+				//console.log(data.popList);
+				drawTable(data.popList);
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});
+	}
+	popList();
+	
+	function drawTable(list){
+		//for(var i=0; i<list.length;i++){}
+		var content="";
+		//$("tbody").empty();	
+		list.forEach(function(item,num){
+			console.log(num,item);
+			content = "<tr>"
+			+"<td>"+item.id+"</td>"
+			+"<td><a href='fbdetail?b_idx="+item.b_idx+"'>"+item.subject+"</a></td>"
+			+"<td>"+item.bHit+"</td>"
+			+"</tr>";
+			$("tbody").append(content);
+		});	
 	}
 </script>
 </html>

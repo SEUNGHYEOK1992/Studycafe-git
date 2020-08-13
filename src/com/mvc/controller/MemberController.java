@@ -134,6 +134,7 @@ public class MemberController extends HttpServlet {
 				//System.out.println("삭제 요청 발생");
 				service.delProfile();
 				break;
+				
 		}
 		
 		
