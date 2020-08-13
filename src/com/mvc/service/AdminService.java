@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.mvc.dao.AdminDAO;
 import com.mvc.dto.AdminDTO;
 import com.mvc.dto.BlackDTO;
+import com.mvc.dto.ComplainDTO;
 import com.mvc.dto.KickDTO;
-import com.mvc.dto.ReportDTO;
 
 public class AdminService {
 	HttpServletRequest req = null;
@@ -48,8 +48,8 @@ public class AdminService {
 		
 	}
 
-	public ArrayList<ReportDTO> report(int page) {
-		ArrayList<ReportDTO> list = null;
+	public ArrayList<ComplainDTO> report(int page) {
+		ArrayList<ComplainDTO> list = null;
 		AdminDAO dao = new AdminDAO();
 		list = dao.report(page);
 		return list;

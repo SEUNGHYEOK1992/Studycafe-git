@@ -113,6 +113,66 @@ public class FreeBoardService {
 		}
 		resp.sendRedirect("fbList");
 	}
+
+	public boolean fbLike() {
+		boolean success = false;
+		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
+		//System.out.println("서비스에서 확인 값 : " + b_idx);
+		String id = (String)req.getSession().getAttribute("id");
+		FreeBoardDAO dao = new FreeBoardDAO();
+		//System.out.println(dto.getId());
+		//System.out.println(id);
+		if(!dao.fbLike(b_idx,id)) {
+			dao = new FreeBoardDAO();
+			success = dao.fbLikeInUp(b_idx,id);
+		}
+		return success;
+	}
+
+	public FreeBoardDTO fblikeCall() {
+		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
+		String id = req.getParameter("id");
+		//System.out.println(b_idx + "/ " + id);
+		FreeBoardDAO dao = new FreeBoardDAO();
+		return dao.fblikeCall(b_idx,id);
+	}
+
+	public boolean fbDisLike() {
+		boolean success = false;
+		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
+		String id = (String)req.getSession().getAttribute("id");
+		//System.out.println(b_idx +"/"+id);
+		FreeBoardDAO dao = new FreeBoardDAO();
+		if(!dao.fbDisLike(b_idx,id)) {
+			dao = new FreeBoardDAO();
+			success = dao.fbDisLikeInUp(b_idx,id);
+		}
+		return success;
+	}
+
+	public FreeBoardDTO fbdisLikeCall() {
+		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
+		String id = req.getParameter("id");
+		//System.out.println(b_idx + " / " + id);
+		FreeBoardDAO dao = new FreeBoardDAO();
+		return dao.fbdisLikeCall(b_idx,id);
+	}
+
+	public boolean reportChk() {
+		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
+		String repo_id = (String)req.getSession().getAttribute("id");
+		//System.out.println(b_idx + " / " + id );
+		FreeBoardDAO dao = new FreeBoardDAO();
+		return dao.reportChk(b_idx,repo_id);
+	}
 	
-	
+	public boolean complain() {
+		String comp = req.getParameter("report");
+		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
+		String b_id = req.getParameter("b_id");
+		String repo_id = req.getParameter("repo_id");
+		//System.out.println(comp + "/ " + b_idx +" / " + b_id + " / " + repo_id);
+		FreeBoardDAO dao = new FreeBoardDAO();
+		return dao.complain(b_idx,b_id,repo_id,comp);
+	}
 }

@@ -107,7 +107,9 @@
 						<tr>
 							<td style="text-align: center; padding-top: 30px;">
 								<span>${bbs.content }<br/><br/></span>
-								<img src="${path }" alt="이미지 없음" width="200px" />
+								<c:if test="${path ne '/photo/null' }">
+									<img src="${path }" alt="에러" width="200px" />
+								</c:if>
 							</td>
 						</tr>
 						 <tr>
@@ -121,16 +123,150 @@
 				<a class="btn btn-default pull-right" onclick="location.href='fbList'">목록</a>
 				<input type="submit" class="btn btn-default" style="margin-right: 10px;" value="수정"/>
 				<a class="btn btn-default" onclick="location.href='fbDelete?b_idx=${bbs.b_idx}'" style="margin-right: 10px;">삭제</a>
-				<a class="btn btn-default" onclick="location.href='#'" style="margin-right: 10px;">추천</a>
-				<input type ="text" name="like" value="추천 수 " />
-				<a class="btn btn-default" onclick="location.href='#'" style="margin-right: 10px;">싫어요</a>
-				<input type ="text" name="dislike" value="싫어요 수 " />
-				<a class="btn btn-default pull-right" onclick="location.href='#'" style="margin-right: 10px;">신고</a>
+				<a class="btn btn-default" onclick="like()" style="margin-right: 10px;">추천</a>
+				<input type ="text" id="likeCount" name="like" value="" />
+				<a class="btn btn-default" onclick="disLike()" style="margin-right: 10px;">싫어요</a>
+				<input type ="text" id="dislikeCount" name="dislike" value="" />
+				<a class="btn btn-default pull-right" onclick="singo()" style="margin-right: 10px;">신고</a>
 				</form>
 			</div>
 		</div>
 	</body>
 	<script>
-		
+	
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg)	
+	}
+	
+	function likeCall(){
+		var b_idx = "${bbs.b_idx}";
+		var id ="${bbs.id}";
+		$.ajax({
+			type:"get",
+			url:"fblikeCall",
+			data:{
+				"b_idx":b_idx,
+				"id":id
+			},
+			dataType:"JSON",
+			success:function(data){
+				//console.log(data.call);
+				$("#likeCount").val(data.call);
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});
+	}
+	
+	function disLikeCall(){
+		var b_idx = "${bbs.b_idx}";
+		var id ="${bbs.id}";
+		$.ajax({
+			type:"get",
+			url:"fbdisLikeCall",
+			data:{
+				"b_idx":b_idx,
+				"id":id
+			},
+			dataType:"JSON",
+			success:function(data){
+				//console.log(data.discall);
+				$("#dislikeCount").val(data.discall);
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});
+	}
+	
+	likeCall();
+	disLikeCall();
+	
+	function like(){
+        if(confirm("추천을 누르시겠습니까?")==true){
+            var b_idx = $("input[name='b_idx']").val();
+            var id = "${bbs.id}";
+            $.ajax({
+            	type:"get",
+            	url:"fbLike",
+            	data:{
+            		"b_idx":b_idx
+            	},
+            	dataType:"JSON",
+            	success:function(data){
+            		//console.log(data);
+            		if(data.like){
+            			alert("추천 하였습니다.");
+            		}else{
+            			alert("이미 추천 혹은 싫어요를 누르셨습니다.");
+            		}
+            		likeCall();
+            	},
+            	error:function(e){
+            		console.log(e);
+            	}
+            });
+        }else{
+        	alert('취소되었습니다.');
+            return false;
+        }
+	}	
+	
+	function disLike(){
+        if(confirm("싫어요를 누르시겠습니까?")==true){
+            var b_idx = $("input[name='b_idx']").val();
+            $.ajax({
+            	type:"get",
+            	url:"fbDisLike",
+            	data:{
+            		"b_idx":b_idx
+            	},
+            	dataType:"JSON",
+            	success:function(data){
+            		//console.log(data);
+            		if(data.disLike){
+            			alert("싫어요를 누르셨습니다.");
+            		}else{
+            			alert("이미 추천 혹은 싫어요를 누르셨습니다.");
+            		}
+            		disLikeCall();
+            	},
+            	error:function(e){
+            		console.log(e);
+            	}
+            });
+        }else{
+        	alert('취소되었습니다.');
+            return false;
+        }
+	}
+	
+	function singo(){
+		if(confirm("해당 글을 신고 하시겠습니까?")==true){
+			var b_idx = "${bbs.b_idx}";
+			$.ajax({
+				type:"get",
+				url:"reportChk",
+				data:{"b_idx":b_idx},
+				dataType:"JSON",
+				success:function(data){
+					//console.log(data.reportChk);
+					if(!data.reportChk){
+						location.href="Complain01.jsp?b_idx=${bbs.b_idx}&&b_id=${bbs.id }";
+					}else{
+						alert("이미 해당 글을 신고 하신 적이 있습니다.");
+					}
+				},
+				error:function(e){
+					console.log(e);
+				}
+			});		
+        }else{
+        	alert('취소되었습니다.');
+            return false;
+        }
+	}
 	</script>
 </html>
