@@ -30,6 +30,7 @@ public class FreeBoardService {
 	public void fbdetail() throws ServletException, IOException {
 		//System.out.println("서비스 들어왔음");
 		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
+		String id = (String) req.getSession().getAttribute("id");
 		//System.out.println(b_idx);
 		FreeBoardDAO dao = new FreeBoardDAO();
 		FreeBoardDTO dto =dao.fbdetail(b_idx);
@@ -37,6 +38,12 @@ public class FreeBoardService {
 		//System.out.println(dto.getB_idx());
 		req.setAttribute("path", uploadPath);
 		req.setAttribute("bbs",dto);
+		if(id==null) {
+			String msg = "로그인여부를 확인해주세요.";
+			req.setAttribute("msg", msg);
+			RequestDispatcher dis = req.getRequestDispatcher("member01_login.jsp");
+			dis.forward(req, resp);
+		}
 		RequestDispatcher dis = req.getRequestDispatcher("freeBoard02_Detail.jsp");
 		dis.forward(req, resp);
 		
