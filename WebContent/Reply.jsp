@@ -15,6 +15,7 @@
 		        <div class="replyBox" style="top: 30%; left: 50%; position: absolute; transform: translate(-50%,-50%);">
 		            <div>
 		            	<textarea id="comment" name = "comment" placeholder="내용을 입력해주세요." style="width: 800px; height: 100px; outline: 1px solid #666; resize: none;" ></textarea>
+		            	<input type="hidden" name ="b_idx" value="${bbs.b_idx }"/>
 		            </div>
 		            <div id="sendBox" style="width: 800px; height: 20;">
 		                <input type="submit" id="sendbtn" value="저장" style="float: right; margin-top: 5px;">
@@ -32,10 +33,7 @@
                                         <button style="float: right; margin-right: 30px;" onclick="location.href='rpdel?idx=${rply.rple_idx}'">삭제</button> 
                                 </div>      	
                                 <div id="comment" style="border:1px solid #666;  border-bottom:none; resize: none width: 800px; height: 80px;">${rply.repl_comment}</div>
-                                <div>
-                                	<button id="upBtn" style="float: right;" onclick="#'">추천</button>
-                                	<button id="downBtn" style="float: right;" onclick="#'">반대</button>
-                                </div>
+
                 </c:forEach>
                 </div>                            
 </body>
