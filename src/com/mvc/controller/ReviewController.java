@@ -37,28 +37,28 @@ public class ReviewController extends HttpServlet {
 		switch(reqAddr) {
 		
 		case"/rvlist":
-			System.out.println("글 리스트 보기 요청");			
+			//System.out.println("글 리스트 보기 요청");			
 			revservice.list();
 			break;
 						
 		case"/rvwrite":
-			System.out.println("글쓰기요청");
+			//System.out.println("글쓰기요청");
 			revservice.write();
 			break;
 			
 		case"/rvdel":
-			System.out.println("삭제요청");
+			//System.out.println("삭제요청");
 			revservice.del();
 			break;
 		
 			
 		case"/rvupdateForm":
-			System.out.println("수정 폼 이동 요청");
+			//System.out.println("수정 폼 이동 요청");
 			revservice.updateForm();
 			break;
 			
 		case"/rvupdate":
-			System.out.println("수정 요청");
+			//System.out.println("수정 요청");
 			revservice.update();
 			break;
 		}

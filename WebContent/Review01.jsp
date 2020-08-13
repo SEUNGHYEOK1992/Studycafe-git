@@ -175,17 +175,20 @@
 		    <div class="aa" style="width: 800px; height: 600px; position: absolute; top:50%; left:29%;">
                 <c:forEach items="${list}" var="bbs">
                     <c:choose>
-                        <c:when test="${id==bbs.id}">		        
+                        <c:when test="${id==bbs.id}">
+                        	<form method="post" action="rvupdate">		        
                                 <div style="border:1px solid #666; border-bottom:none; height:30px;">
                                         ${bbs.id}
                                         <input type="hidden" name="b_idx" value="${bbs.b_idx}"/>
                                         &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <button id="updateBtn" style="float: right;" onclick="location.href='rvupdateForm?idx=${bbs.b_idx}'">수정</button>
+                                        <input type="submit" id="updateBtn" style="float: right;" value="수정"/>
                                         &nbsp; &nbsp; &nbsp; &nbsp;
-                                        <button style="float: right; margin-right: 30px;" onclick="location.href='rvdel?idx=${bbs.b_idx}'">삭제</button> 
+                                        <input type="button" style="float: right; margin-right: 30px;" onclick="location.href='rvdel?idx=${bbs.b_idx}'" value="삭제"/>
                                 </div>      	
-                                <div style="border:1px solid #666;  border-bottom:none; resize: none width: 800px; height: 80px;">${bbs.content}</div>
-                                                        
+                                <div style="border:1px solid #666;  border-bottom:none; resize: none width: 800px; height: 80px;">
+                                	<textarea name="rvcontent" style="width: 750px; height: 60px; resize:none; margin: 5px">${bbs.content }</textarea>
+                                </div>
+                             </form>
                         </c:when>
                             
                         <c:when test="${id != bbs.id}">                		

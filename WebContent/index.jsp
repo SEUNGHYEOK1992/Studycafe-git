@@ -109,7 +109,7 @@
       #popularchart{
          position: fixed;
          width: 250px;
-         height: 400px;
+         height: 200px;
          font-color : black;
          border : 1px solid black;
          left : 1630px;
@@ -242,8 +242,8 @@
    <div id="popularchart">         
          <table>          
                <tr>
-               		<th>제목</th>
                		<th>아이디</th>
+               		<th>제목</th>
                		<th>조회수</th>
                </tr>
          </table>
