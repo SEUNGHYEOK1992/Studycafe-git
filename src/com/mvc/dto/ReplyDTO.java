@@ -2,15 +2,15 @@ package com.mvc.dto;
 
 public class ReplyDTO {
 
-	private String b_idx;
+	private int b_idx;
 	private String repl_idx;
 	private String id;
 	private String repl_comment;
 	
-	public String getB_idx() {
+	public int getB_idx() {
 		return b_idx;
 	}
-	public void setB_idx(String b_idx) {
+	public void setB_idx(int b_idx) {
 		this.b_idx = b_idx;
 	}
 	public String getRepl_idx() {

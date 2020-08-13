@@ -1,15 +1,21 @@
 package com.mvc.service;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.mvc.dao.FreeBoardDAO;
+import com.mvc.dao.ReplyDAO;
 import com.mvc.dto.FreeBoardDTO;
+import com.mvc.dto.ReplyDTO;
 
 public class FreeBoardService {
 
@@ -30,11 +36,18 @@ public class FreeBoardService {
 	public void fbdetail() throws ServletException, IOException {
 		//System.out.println("서비스 들어왔음");
 		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
-		//System.out.println(b_idx);
+		//System.out.println("널인지 아닌지 알아보자" + b_idx);
 		FreeBoardDAO dao = new FreeBoardDAO();
 		FreeBoardDTO dto =dao.fbdetail(b_idx);
 		String uploadPath = "/photo/"+dto.getNewFileName();
 		//System.out.println(dto.getB_idx());
+		
+		//여기서부터 댓글 넣어볼게//
+		ReplyDAO dao2 = new ReplyDAO();
+		ArrayList<ReplyDTO> list = dao2.list(b_idx);
+		req.setAttribute("list", list);
+		//여기까지 댓글 리스트//
+		
 		req.setAttribute("path", uploadPath);
 		req.setAttribute("bbs",dto);
 		RequestDispatcher dis = req.getRequestDispatcher("freeBoard02_Detail.jsp");
@@ -114,5 +127,7 @@ public class FreeBoardService {
 		resp.sendRedirect("fbList");
 	}
 	
+	
+
 	
 }

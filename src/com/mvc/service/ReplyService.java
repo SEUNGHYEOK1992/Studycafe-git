@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.mvc.dao.FreeBoardDAO;
 import com.mvc.dao.ReplyDAO;
 import com.mvc.dto.ReplyDTO;
 
@@ -24,28 +25,38 @@ public class ReplyService  {
 		this.resp = resp;
 	}
 
-	public void list() throws ServletException, IOException {
+	public void rpdel() throws IOException, ServletException {
 		ReplyDAO dao = new ReplyDAO();
+		String repl_idx = req.getParameter("repl_idx");
+//		System.out.println("repl_idx : "+repl_idx);
 		String b_idx = req.getParameter("b_idx");
-		ArrayList<ReplyDTO> list = dao.list(b_idx);
-		req.setAttribute("list", list);
-		RequestDispatcher dis = req.getRequestDispatcher("Reply.jsp");
-		dis.forward(req, resp);
-		
-	}
+//		System.out.println(req.getParameter("b_idx"));
+		//ReplyDAO dao = new ReplyDAO();
+		String page = "fbdetail";
 
-	public void write() throws IOException, ServletException {
+		if(dao.rpdel(repl_idx)) {
+			String msg = "삭제 성공하였습니다.";
+			req.setAttribute("msg", msg);			
+		}
+		RequestDispatcher dis = req.getRequestDispatcher(page+"?b_idx="+b_idx);
+		dis.forward(req, resp);
+
+	}
+	
+	//여기 댓글 작성	
+	public void rpwrite() throws IOException, ServletException {
 		ReplyDAO dao = new ReplyDAO();
+		//ReplyDAO dao2 = new ReplyDAO();
 		req.setCharacterEncoding("UTF-8");
 		String id = (String)req.getSession().getAttribute("id");
 		System.out.println(id);
-		String comment = req.getParameter("repl_comment");
+		String comment = req.getParameter("comment");
 		System.out.println(comment);
-		String b_idx = req.getParameter("b_idx");
-		System.out.println(b_idx);
+		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
+		System.out.println("여기야 여기~~~~~~~~ : " +b_idx);
 		
-		dao.write(id,comment,b_idx);
-		String page = "rplist";
+		dao.write(id, comment, b_idx);
+		//String page = "/fbdetail";
 		
 		if(id==null) {
 			String msg = "로그인여부를 확인해주세요.";
@@ -53,56 +64,19 @@ public class ReplyService  {
 			RequestDispatcher dis = req.getRequestDispatcher("member01_login.jsp");
 			dis.forward(req, resp);
 		}
-		resp.sendRedirect(page);
-	}
-
-	public void del() throws ServletException, IOException {
-		String idx = req.getParameter("repl_idx");
-		System.out.println("repl_idx : "+idx);
-		ReplyDAO dao = new ReplyDAO();
-		String id = (String) req.getSession().getAttribute("id");
-		String page = "/fbdetail";
-		boolean success = dao.del(idx);
-		String msg = "삭제 성공하였습니다.";
-		req.setAttribute("msg", msg);
 		
-		RequestDispatcher dis = req.getRequestDispatcher(page);
-		dis.forward(req, resp);
-		
-		
-	}
-
-	public void rpupdateForm() throws IOException {	
-		ReplyDAO dao = new ReplyDAO();
-		String repl_idx = (String)req.getSession().getAttribute("repl_idx");
-		System.out.println("수정 idx : "+repl_idx);
-		ReplyDTO dto = null;
-		
-		dto = dao.updateForm(repl_idx);
-		dao.resClose();
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		if(dto!=null) {
-			map.put("success",true);
-			map.put("info", dto);
-		}else {
-			map.put("success", false);
-		}
-		Gson gson = new Gson();
-		String obj = gson.toJson(map);
-		resp.setContentType("text/html; charset=UTF-8");
-		resp.getWriter().println(obj);
-		
-		
-//		req.setAttribute("rply",dao.updateForm(repl_idx) );
-//		dao = new ReplyDAO();
-//		ReplyDTO dto =  dao.updateForm(repl_idx);
-//		System.out.println("찍힙니까 낙낙");
-//		req.setAttribute("rply2", dto);
-//		RequestDispatcher dis = req.getRequestDispatcher("그 히든으로 줄 div를 못넣나");
-		
-
+		resp.sendRedirect("fbdetail?b_idx="+b_idx);
 	}
 	
+	public boolean rpupdateForm() throws IOException {	
+		ReplyDAO dao = new ReplyDAO();
+		int repl_idx = Integer.parseInt(req.getParameter("repl_idx"));
+		String comm = req.getParameter("repl_comment");
+		//System.out.println("수정 idx : "+repl_idx);
+		//System.out.println("수정 내용 : " +comm);
+		ReplyDTO dto = null;
+		return dao.rpupdateForm(repl_idx,comm);
+	}
 	
 	
 }

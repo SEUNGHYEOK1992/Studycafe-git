@@ -45,9 +45,9 @@ public class ReviewService {
 		ReviewDAO dao = new ReviewDAO();
 		req.setCharacterEncoding("UTF-8");
 		String id = (String) req.getSession().getAttribute("id");
-		System.out.println(id);
+		//System.out.println(id);
 		String content = req.getParameter("content");
-		System.out.println(content);
+		//System.out.println(content);
 		dao.write(content,id);
 		String page = "rvlist";
 		
@@ -61,7 +61,7 @@ public class ReviewService {
 	}
 
 	public void del() throws ServletException, IOException {
-		String idx = req.getParameter("idx");
+		String idx = req.getParameter("repl_idx");
 		System.out.println("b_idx : "+idx);
 		ReviewDAO dao = new ReviewDAO();
 		String id = (String) req.getSession().getAttribute("id");

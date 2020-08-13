@@ -8,9 +8,11 @@ import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.RequestDispatcher;
 import javax.sql.DataSource;
 
 import com.mvc.dto.FreeBoardDTO;
+import com.mvc.dto.ReplyDTO;
 
 public class FreeBoardDAO {
 
@@ -182,7 +184,40 @@ public class FreeBoardDAO {
 		}
 		return success;
 	}
-	
+		
+
+	public ArrayList<ReplyDTO> list(int b_idx) {
+		String sql;
+		ArrayList<ReplyDTO> list = new ArrayList<ReplyDTO>();		
+		
+		try {
+			sql = "SELECT * FROM REPLY WHERE b_idx=? ORDER BY repl_idx DESC ";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, b_idx);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ReplyDTO dto = new ReplyDTO();
+				dto.setB_idx(rs.getInt("b_idx"));
+				//System.out.println(dto.getB_idx());
+				dto.setId(rs.getString("id"));
+				//System.out.println(dto.getId());
+				dto.setRepl_idx(rs.getString("repl_idx"));
+				//System.out.println(dto.getRepl_idx());
+				dto.setRepl_comment(rs.getString("repl_comment"));
+				//System.out.println(dto.getRepl_comment());
+				list.add(dto);
+			}
+			//System.out.println("dto받앗니");
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return list;
+	}
 	
 	
 }
+	

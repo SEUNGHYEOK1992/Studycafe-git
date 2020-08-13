@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+	String id = (String)session.getAttribute("id"); 
+	System.out.println(id);
+%>   
 <!DOCTYPE html>
 <html>
 	<head>
@@ -129,8 +133,78 @@
 				</form>
 			</div>
 		</div>
+		<!-- 댓글 시작 -->
+		<div id="comment" style="margin-left:300px; margin-top:400px; margin-bottom:200px;">
+	    	<table border="1" bordercolor="lightgray">
+	            <tr>
+			        <form action="rpwrite?b_idx=${bbs.b_idx }" method="post">
+			        	<input type="hidden" value="${bbs.id }"/>
+			            <!-- 아이디-->
+			            <td width="150">
+			                <div>
+			                    ${id}
+			                </div>
+			            </td>
+			            <!-- 본문 작성-->
+			            <td width="550">
+			                <div>
+			                    <textarea name="comment" rows="4" cols="70" ></textarea>
+			                </div>
+			            </td>
+			            <!-- 댓글 등록 버튼 -->
+			            <td width="100">
+			                <div id="btn" style="text-align:center;">
+			                    <input type="submit" value="저장"/>    
+			                </div>
+			            </td>
+			        </form>
+	        	</tr>
+	<!-- 댓글 목록 -->    
+		
+	   <c:forEach var="Reply" items="${list}">
+	   		<form method="post" action="rpupdateForm?b_idx=${bbs.b_idx }">
+		        <tr>
+		            <!-- 아이디 -->
+		            <td width="150">
+		                <div>              
+		                   ${Reply.id}<br>
+		                   <input type="hidden" name="repl_idx" value="${Reply.repl_idx }" />
+		                </div>
+		            </td>
+		            <!-- 본문내용 -->
+		           <c:choose>
+						<c:when test="${id== Reply.id}">
+		            		<td width="550">
+		                		<div class="text_wrapper" id="repl_comment">
+		                    		<input type="text" name="repl_comment" value="${Reply.repl_comment}" />
+		                		</div>
+		           		 	</td>
+		            <!-- 버튼 -->
+		            		<td width="100">   
+		                    	<input type="submit" value="수정"/>   
+		                    	<input type="button" onclick= "location.href='rpdel?repl_idx=${Reply.repl_idx}&&b_idx=${bbs.b_idx }'" value="삭제"/>                
+		            		</td>
+		          		</c:when>
+						<c:otherwise>
+							<td colspan = "2" width="550">
+		                		<div class="text_wrapper" id="repl_comment">
+		                    		${Reply.repl_comment}
+		                		</div>
+		            		</td>
+		            		
+						</c:otherwise>
+					</c:choose>
+		        </tr>
+	        </form>	        
+	     </c:forEach>
+	    </table>
+	</div>
+		<!-- 댓글 끝 -->	
 	</body>
 	<script>
-		
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg)	
+	}	
 	</script>
 </html>

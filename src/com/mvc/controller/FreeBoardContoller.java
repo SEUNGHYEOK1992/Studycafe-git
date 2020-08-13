@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mvc.dto.FreeBoardDTO;
 import com.mvc.service.FreeBoardService;
-@WebServlet({"/fbList","/fbdetail","/fbwrite","/fbUpdateForm","/fbUpdate","/fbDelete"})
+import com.mvc.service.ReplyService;
+@WebServlet({"/fbList","/fbdetail","/fbwrite","/fbUpdateForm","/fbUpdate","/fbDelete","/rpwrite","/rpdel","/rpupdateForm"})
 public class FreeBoardContoller extends HttpServlet {
 
 	@Override
@@ -32,6 +33,7 @@ public class FreeBoardContoller extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		
 		RequestDispatcher dis = null;
+		ReplyService rpservice = new ReplyService(req, resp);
 		FreeBoardService service = new FreeBoardService(req,resp);
 		switch(reqAddr) {
 			case "/fbList":
@@ -79,6 +81,37 @@ public class FreeBoardContoller extends HttpServlet {
 				//System.out.println("삭제 요청");
 				service.fbDelete();
 			break;
+			
+			//여기서 댓글 작성 줘볼게
+			case"/rpwrite":
+				System.out.println();
+				//System.out.println("여기야 여기~~~~~~~~~~ : " +req.getParameter("b_idx"));
+				rpservice.rpwrite();
+			break;
+			
+			//이건 댓글 삭제
+			case"/rpdel":
+				//System.out.println("댓글 삭제");
+				rpservice.rpdel();
+			break;
+			
+			case"/rpupdateForm":
+				System.out.println("댓글 수정 폼");
+				//System.out.println(req.getParameter("repl_idx"));
+				//System.out.println(req.getParameter("repl_comment"));
+				//System.out.println(req.getParameter("b_idx"));
+				String b_idx = req.getParameter("b_idx");
+				boolean success = false;
+				success = rpservice.rpupdateForm();
+				String msg = "댓글 수정 실패";
+				if(success) {
+					msg = "수정 성공";
+				}
+				req.setAttribute("msg", msg);
+				dis = req.getRequestDispatcher("fbdetail?b_idx="+b_idx);
+				dis.forward(req, resp);
+				break;
+			
 		}
 	}
 	
