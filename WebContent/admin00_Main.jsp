@@ -8,6 +8,7 @@
 	<title>Insert title here</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a814f74484.js" crossorigin="anonymous"></script>
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
         @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
@@ -80,7 +81,7 @@
         #loginBox{
             position: relative;
             top: 10px;
-            left: 1600px;
+            left: 300px;
             font-size: 18px;
             padding: 20px;
             width: 210px;
@@ -93,18 +94,108 @@
         	font-weight: 700;
         	padding: 15px;
         }
+        
+        /* ----- accountBox ----- */
+        	
+        	#accountBox {
+                position: relative;
+                top: -10px;
+                left: 1250px;
+                background-color: #1f4e5f;
+                width: 260px;
+                height: 130px;
+                border-radius: 15px;
+                border: 2px solid rgb(88, 88, 88);
+            }
+
+            #idBox{
+                position: relative;
+                top: -5px;
+                left: 19%;
+                transform: translate(0% 50%);
+                width: 160px;
+                height: 25px;
+                font-size: 17px;
+                font-weight: 600;
+                text-align: center;
+            }
+            
+            #idBox span{
+            	position: relative;
+            	top: -18px;
+            }
+            
+            #buttonBox{
+            	position: relative;
+            	top: -23px;
+            }
+
+            #hrBar{
+                width: 220px;
+                border: 1px solid #c6a49a;
+                position: relative;
+                top: -15px;
+            }
+
+            #profile, #message, #logout{
+                background-color: rgb(216, 216, 216);
+                border: 0px;
+                margin-right: 5px;
+                position: relative;
+                left: 9px;
+                top: 7px;
+            }
+
+            #profile:hover, #message:hover, #logout:hover{
+                background-color: white;
+            }
+
+            #profile, #message{
+                height: 40px;
+                width: 60px;
+            }
+            
+            #message{
+                margin-right: 5px;
+            }
+
+            #logout{
+                height: 40px;
+                width: 100px;
+            }
+
+            #logout span{
+                font-size: 18px;
+                font-weight: 600;
+            }
+            
+            #createBox {
+			    position: relative;
+			    left: 1350px;
+			}
+            
+            /* ----- accountBox 끝 ----- */
 
         /* ---------- header 끝 ---------- */
 
         /* ---------- main ---------- */
+        
         #popularchart{
-	         position: fixed;
-	         width: 250px;
-	         height: 200px;
-	         font-color : black;
-	         border : 1px solid black;
-	         left : 1630px;
-	         top : 400px;
+	        position: fixed;
+		    width: 250px;
+		    height: 200px;
+		    font-color: black;
+		    border: 1px solid black;
+		    left: 1630px;
+		    top: 400px;
+		    border-radius: 10px;
+		    padding: 15px;
+		    text-align: center;
+      	}
+      	
+      	#popularchar table, th, td{
+      		text-align: center;
+      		vertical-align: middle;
       	}
 
         #main {
@@ -174,10 +265,28 @@
             </ul>
         </div>
         <div id="loginBox">
-            <a href="admin00_Main.jsp"><%if(session.getAttribute("id") != null){%>
-                ${id}님</a>
+            <%if(session.getAttribute("id") != null){%>
+				<div id="accountBox">
+					<div id="firstBox">
+						<div id="imgBox">
+							<img src="" alt="">
+	                </div>
+				<div id="idBox">
+                    <span style="color: rgb(255, 255, 255);">${id}님</span>
+                </div>
+				</div>
+				<hr id="hrBar" >
+				<div id="buttonBox">
+	                <button id="profile" class="btn btn-default" type="submit" formmethod="post" onclick="location.href='profileDetail?id=${id}'"><i class="fas fa-user-cog fa-lg"></i></button>
+	                <!-- <a id="message" class="btn btn-default" href="messageList"><i class="far fa-envelope fa-2x"></i></i></i></a> -->
+	                <button id="message" class="btn btn-default" onclick="location.href='messageList'"><i class="far fa-envelope-open fa-lg"></i></button>
+	                <button id="logout" class="btn btn-default" onclick="location.href='logout'"><span>로그아웃</span></button>
+				</div>
+		</div>    
             <%}else{%>
-                <a href="member01_login.jsp">로그인 / 회원가입</a> 
+                <div id="createBox">
+                	<a href="member01_login.jsp">로그인 / 회원가입</a>
+                </div> 
             <%}%>
         </div>
     </div>
