@@ -11,8 +11,8 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import com.mvc.dto.AdminDTO;
 import com.mvc.dto.BlackDTO;
+import com.mvc.dto.ComplainDTO;
 import com.mvc.dto.KickDTO;
-import com.mvc.dto.ReportDTO;
 
 public class AdminDAO {
 
@@ -119,27 +119,28 @@ public class AdminDAO {
 		return success;
 	}
 
-	public ArrayList<ReportDTO> report(int page) {
+	public ArrayList<ComplainDTO> report(int page) {
 		int pagePerCnt = 10; // 페이지 당 보여줄 게시물의 수
 		int end = page * pagePerCnt;
 		int start = (end-pagePerCnt)+1;
 		
-		ArrayList<ReportDTO> list = new ArrayList<ReportDTO>();
-		String sql = "SELECT rnum, repo_idx, b_idx, id, repo_content, repo_reg_date "
+		ArrayList<ComplainDTO> list = new ArrayList<ComplainDTO>();
+		String sql = "SELECT rnum, repo_idx, b_idx, b_id, repo_content, repo_reg_date, repo_id "
 				+ "FROM (SELECT ROW_NUMBER() OVER(ORDER BY repo_idx DESC) AS rnum,"
-				+ " repo_idx, b_idx, id, repo_content, repo_reg_date FROM report) WHERE rnum BETWEEN ? AND ?";
+				+ " repo_idx, b_idx, b_id, repo_content, repo_reg_date, repo_id FROM report) WHERE rnum BETWEEN ? AND ?";
 		try {
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, start);
 			ps.setInt(2, end);
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				ReportDTO dto = new ReportDTO();
+				ComplainDTO dto = new ComplainDTO();
 				dto.setRepo_idx(rs.getInt("repo_idx"));
 				dto.setB_idx(rs.getInt("b_idx"));
-				dto.setId(rs.getString("id"));
+				dto.setB_id(rs.getString("b_id"));
 				dto.setRepo_content(rs.getString("repo_content"));
 				dto.setRepo_reg_date(rs.getDate("repo_reg_date"));
+				dto.setRepo_id(rs.getString("repo_id"));
 				list.add(dto);
 			}
 		} catch (SQLException e) {
@@ -155,9 +156,9 @@ public class AdminDAO {
 		int end = page * pagePerCnt;
 		int start = (end-pagePerCnt)+1;
 		ArrayList<BlackDTO> list = new ArrayList<BlackDTO>();
-		String sql = "select rnum, idx, id, repo_content FROM(select row_number() over(order by m.idx asc) as rnum, "
-				+ "m.idx, m.id, r.repo_content FROM memberlist m, report r WHERE m.id=r.id(+) AND m.blacklist='T') "
-				+ "WHERE rnum BETWEEN ? AND ?";
+		String sql = "SELECT rnum, idx, id, repo_content FROM " 
+				+ "(select row_number() OVER (PARTITION BY m.id ORDER BY m.idx ASC) AS rnum, m.idx, m.id, r.repo_content "
+				+ "FROM memberList m, report r WHERE m.id=r.b_id(+) AND m.blacklist='T') WHERE rnum=1 AND rnum BETWEEN ? AND ?";
 		try {
 			ps=conn.prepareStatement(sql);
 			ps.setInt(1, start);

@@ -117,6 +117,5 @@ public class MemberService {
 		}
 		resp.sendRedirect("profileDetail?id="+id);
 	}
-	
 
 }

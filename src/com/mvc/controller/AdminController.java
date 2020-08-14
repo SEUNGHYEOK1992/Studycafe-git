@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mvc.dto.AdminDTO;
 import com.mvc.dto.BlackDTO;
+import com.mvc.dto.ComplainDTO;
 import com.mvc.dto.KickDTO;
-import com.mvc.dto.ReportDTO;
 import com.mvc.service.AdminService;
 
 @WebServlet({"/memberList","/detail","/update","/report","/blackList","/kick","/delete","/kickAdd"})
@@ -82,7 +82,7 @@ public class AdminController extends HttpServlet {
 				if(pageParam != null) {
 					page = Integer.parseInt(pageParam);
 				}
-				ArrayList<ReportDTO> r_list = service.report(page);
+				ArrayList<ComplainDTO> r_list = service.report(page);
 				req.setAttribute("r_list", r_list);
 				req.setAttribute("currPage", page);
 				dis = req.getRequestDispatcher("admin03_Report.jsp");

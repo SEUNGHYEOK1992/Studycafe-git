@@ -16,6 +16,10 @@ public class FreeBoardDTO {
 	private String newFileName;
 	private int file_category;
 	
+	// 추천, 싫어요
+	private int like_count;
+	private int dis_count;
+	
 	public int getB_idx() {
 		return b_idx;
 	}
@@ -81,6 +85,18 @@ public class FreeBoardDTO {
 	}
 	public void setFile_category(int file_category) {
 		this.file_category = file_category;
+	}
+	public int getLike_count() {
+		return like_count;
+	}
+	public void setLike_count(int like_count) {
+		this.like_count = like_count;
+	}
+	public int getDis_count() {
+		return dis_count;
+	}
+	public void setDis_count(int dis_count) {
+		this.dis_count = dis_count;
 	}
 	
 }

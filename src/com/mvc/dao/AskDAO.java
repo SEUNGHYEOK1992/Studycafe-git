@@ -24,10 +24,8 @@ public class AskDAO {
 			DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/Oracle");
 			conn = ds.getConnection();
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
-		
 	}
 
 	public ArrayList<AskDTO> list() {
@@ -44,14 +42,14 @@ public class AskDAO {
 				dto.setReg_date(rs.getDate("reg_date"));
 				dto.setbHit(rs.getInt("bHit"));
 				list.add(dto);
-			}System.out.println("받아옴");
+			}
+			//System.out.println("받아옴");
 		} catch (Exception e) {
 			
 			e.printStackTrace();
 		}finally {
 			resClose();
 		}
-		
 		return list;
 	}
 
@@ -77,7 +75,8 @@ public class AskDAO {
 			/* ps.executeUpdate(); */
 			if(ps.executeUpdate()>0) {
 				success = true;
-			}System.out.println("받아옴2");
+			}
+			//System.out.println("받아옴2");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -112,7 +111,7 @@ public class AskDAO {
 
 	public boolean askupdate(int b_idx, String subject, String content) {
 		boolean result = false;
-		String sql = "UPDATE bbs SET subject=?,content=? WHERE b_idx=?";
+		String sql = "UPDATE bbs SET subject=?,content=?,reg_date=sysdate WHERE b_idx=?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, subject);
@@ -120,7 +119,8 @@ public class AskDAO {
 			ps.setInt(3, b_idx);
 			if(ps.executeUpdate()>0) {
 				result = true;
-			}System.out.println("askupdte dao입니다");
+			}
+			//System.out.println("askupdte dao입니다");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

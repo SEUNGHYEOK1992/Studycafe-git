@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.servlet.RequestDispatcher;
 import javax.sql.DataSource;
 
+import com.mvc.dto.ComplainDTO;
 import com.mvc.dto.FreeBoardDTO;
 import com.mvc.dto.ReplyDTO;
 
@@ -184,40 +185,251 @@ public class FreeBoardDAO {
 		}
 		return success;
 	}
+
 		
 
-	public ArrayList<ReplyDTO> list(int b_idx) {
-		String sql;
-		ArrayList<ReplyDTO> list = new ArrayList<ReplyDTO>();		
+public ArrayList<ReplyDTO> list(int b_idx) {
+	String sql;
+	ArrayList<ReplyDTO> list = new ArrayList<ReplyDTO>();		
+	
+	try {
+		sql = "SELECT * FROM REPLY WHERE b_idx=? ORDER BY repl_idx DESC ";
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, b_idx);
+		rs = ps.executeQuery();
 		
+		while(rs.next()) {
+			ReplyDTO dto = new ReplyDTO();
+			dto.setB_idx(rs.getInt("b_idx"));
+			//System.out.println(dto.getB_idx());
+			dto.setId(rs.getString("id"));
+			//System.out.println(dto.getId());
+			dto.setRepl_idx(rs.getString("repl_idx"));
+			//System.out.println(dto.getRepl_idx());
+			dto.setRepl_comment(rs.getString("repl_comment"));
+			//System.out.println(dto.getRepl_comment());
+			list.add(dto);
+		}
+		//System.out.println("dto받앗니");
+					
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}finally {
+		resClose();
+	}
+	return list;
+}
+						
+
+	/*충돌*/
+	public boolean fbLike(int b_idx, String id) {
+		String sql ="SELECT id FROM recommend WHERE b_idx=? AND id=?";
+		boolean success =false;
+		FreeBoardDTO dto = new FreeBoardDTO();
 		try {
-			sql = "SELECT * FROM REPLY WHERE b_idx=? ORDER BY repl_idx DESC ";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, b_idx);
+			ps.setString(2, id);
 			rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				ReplyDTO dto = new ReplyDTO();
-				dto.setB_idx(rs.getInt("b_idx"));
-				//System.out.println(dto.getB_idx());
+			if(rs.next()) {
 				dto.setId(rs.getString("id"));
-				//System.out.println(dto.getId());
-				dto.setRepl_idx(rs.getString("repl_idx"));
-				//System.out.println(dto.getRepl_idx());
-				dto.setRepl_comment(rs.getString("repl_comment"));
-				//System.out.println(dto.getRepl_comment());
-				list.add(dto);
+				success = true;
 			}
-			//System.out.println("dto받앗니");
-						
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			resClose();
 		}
-		return list;
+
+		//return list;
+
+		return success;
 	}
 	
+	public boolean fbLikeInUp(int b_idx, String id) {
+		String sql="INSERT INTO recommend(b_idx, id) VALUES(?, ?)";
+		boolean success =false;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, b_idx);
+			ps.setString(2, id);
+			if(ps.executeUpdate()>0) {
+				success = true;
+				upLike(b_idx);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+	
+	private void upLike(int b_idx) {
+		String sql = "UPDATE recommend SET like_count = 1 WHERE b_idx=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, b_idx);
+			ps.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	public FreeBoardDTO fblikeCall(int b_idx, String id) {
+		String sql="select count(like_count) FROM recommend WHERE b_idx = ?";
+		FreeBoardDTO dto = new FreeBoardDTO();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, b_idx);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				dto.setLike_count(rs.getInt("count(like_count)"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return dto;
+	}
+
+	public boolean fbDisLike(int b_idx, String id) {
+		String sql = "SELECT id FROM recommend WHERE b_idx=? AND id=?";
+		boolean success =false;
+		FreeBoardDTO dto = new FreeBoardDTO();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, b_idx);
+			ps.setString(2, id);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				dto.setId(rs.getString("id"));
+				success = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+
+	/*충돌*/
+	public boolean fbDisLikeInUp(int b_idx, String id) {
+		String sql="INSERT INTO recommend(b_idx, id) VALUES(?, ?)";
+		boolean success =false;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, b_idx);
+			ps.setString(2, id);
+			if(ps.executeUpdate()>0) {
+				success = true;
+				disupLike(b_idx);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+
+	}
+	
+	private void disupLike(int b_idx) {
+		String sql = "UPDATE recommend SET dis_count = 1 WHERE b_idx=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, b_idx);
+			ps.executeUpdate();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+
+	public FreeBoardDTO fbdisLikeCall(int b_idx, String id) {
+		String sql="select count(dis_count) FROM recommend WHERE b_idx = ?";
+		FreeBoardDTO dto = new FreeBoardDTO();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, b_idx);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				dto.setDis_count(rs.getInt("count(dis_count)"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return dto;
+	}
+
+	public boolean reportChk(int b_idx, String repo_id) {
+		String sql = "SELECT repo_idx FROM report WHERE b_idx=? AND repo_id=?";
+		boolean success =false;
+		ComplainDTO dto = new ComplainDTO();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, b_idx);
+			ps.setString(2, repo_id);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				dto.setRepo_idx(rs.getInt("repo_idx"));
+				success = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+
+	public boolean complain(int b_idx, String b_id, String repo_id, String comp) {
+		String sql="INSERT INTO report(repo_idx,b_idx,b_id,repo_id,repo_content) VALUES(report_seq.NEXTVAL,?,?,?,?)";
+		boolean success =false;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, b_idx);
+			ps.setString(2, b_id);
+			ps.setString(3, repo_id);
+			ps.setString(4, comp);
+			if(ps.executeUpdate()>0) {
+				success = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+
+	public ArrayList<FreeBoardDTO> popList() {
+		String sql = "select rnum, b_idx, id, subject, bHit from(select ROW_NUMBER() OVER(ORDER BY bHit DESC) AS rnum, "
+					+ "b_idx, id, subject, bHit FROM bbs) WHERE rnum BETWEEN 1 AND 5";
+		ArrayList<FreeBoardDTO> poplist = new ArrayList<FreeBoardDTO>();
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				FreeBoardDTO dto = new FreeBoardDTO();
+				dto.setId(rs.getString("id"));
+				dto.setSubject(rs.getString("subject"));
+				dto.setbHit(rs.getInt("bHit"));
+				dto.setB_idx(rs.getInt("b_idx"));
+				poplist.add(dto);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+	  return poplist;
+
+	}
 	
 }
 	

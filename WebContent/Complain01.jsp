@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%
+	int b_idx = Integer.parseInt(request.getParameter("b_idx"));
+	String b_id = request.getParameter("b_id");
+	String repo_id = (String)request.getSession().getAttribute("id");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,21 +26,33 @@
             <br/>
             <h3>신고하기</h3>
             <hr/>
-            <input type="checkbox" name="report" value="욕설/비난"> 욕설/비난<br/>
-            <br/>
-            <input type="checkbox" name="report" value="광고"> 광고<br/>
-            <br/>
-            <input type="checkbox" name="report" value="도배"> 도배<br/>
-            <br/>
-            <input type="checkbox" name="report" value="기타"> 기타<br/>
-            <br/>
-            <!-- <input type="text"  style="width: 400; height: 200;" placeholder="상세사유를 입력해주세요."/><br/>
-            <br/> -->
-            <input type="submit" value="보내기"/>
+            <form method="post" action="complain?repo_id=<%=repo_id%>">
+	            <table>
+	            	<tr><td><input type="radio" name="report" value="욕설/비난"/> 욕설/비난</td></tr>
+		            <tr><td><input type="radio" name="report" value="광고"/> 광고</td></tr>
+		            <tr><td><input type="radio" name="report" value="도배"/> 도배</td></tr>
+		            <tr><td><input type="radio" name="report" value="기타"/> 기타</td></tr>
+		            <tr>
+		            	<td>
+		            		<input type="hidden" name="b_idx" value="<%=b_idx %>" />
+		            		<input type="hidden" name="b_id" value="<%=b_id %>" />
+		            	</td>
+	            	</tr>
+		            <tr>
+		            	<td>
+		            		<input type="submit" value="보내기"/>
+		            		<input type="button" onclick="location.href='fbdetail?b_idx=<%=b_idx %>'" value="취소"/>
+		            	</td>
+		            </tr>
+	            </table>
+            </form>
 
         </div>
     </body>
     <script>
-        
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg)	
+	}
     </script>
 </html>

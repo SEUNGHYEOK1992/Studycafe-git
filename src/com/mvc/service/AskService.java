@@ -25,7 +25,7 @@ public class AskService {
 	public void list() throws ServletException, IOException {
 		AskDAO dao = new AskDAO(); // DB 필요로 인한 DAO 객체화
 		ArrayList<AskDTO> list = dao.list();
-		System.out.println("리턴");
+		//System.out.println("리턴");
 		req.setAttribute("list", list);
 		RequestDispatcher dis = req.getRequestDispatcher("askBoard01_List.jsp");
 		dis.forward(req, resp);
@@ -36,54 +36,51 @@ public class AskService {
 		req.setCharacterEncoding("UTF-8");
 		String subject = req.getParameter("askingTypes");
 		String content = req.getParameter("content");
-		System.out.println(id+"/"+subject+"/"+content);	
+		//System.out.println(id+"/"+subject+"/"+content);	
 		String page = "askBoard04_WriteForm.jsp";
 		//성공했을경우 ask로 보내고 아니면 writeform으로 보낸다.
-		
-		if(id==null) {
-			String msg = "로그인여부를 확인해주세요.";
-			req.setAttribute("msg", msg);
-			RequestDispatcher dis = req.getRequestDispatcher("member01_login.jsp");
-			dis.forward(req, resp);
-		}else {
+
+		if(dao.askwrite(id,subject,content)) {
 			page ="./ask";
 		}
-		
-//		if(dao.askwrite(id,subject,content)) {
-
 		resp.sendRedirect(page);
-		}
-//	}
+	}
 
 	public void askdetail() throws ServletException, IOException {
 		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
-		System.out.println("에스크디테일 값은?"+b_idx);
+		String id = (String) req.getSession().getAttribute("id");
+		//System.out.println("에스크디테일 값은?"+b_idx);
 		AskDAO dao = new AskDAO();
 		req.setAttribute("bbs", dao.askdetail(b_idx));
-		RequestDispatcher dis = req.getRequestDispatcher("askBoard02_Detail.jsp");
+		String pageMove = "askBoard02_Detail.jsp";
+		if(id==null) {
+			String msg = "로그인여부를 확인해주세요.";
+			req.setAttribute("msg", msg);
+			pageMove = "member01_login.jsp";
+		}
+		RequestDispatcher dis = req.getRequestDispatcher(pageMove);
 		dis.forward(req, resp);
-		
 	}
 
 	public void askupdateform() throws ServletException, IOException {
 		AskDAO dao = new AskDAO();
 		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
-		System.out.println("수정을 할 b_idx : "+b_idx);
+		//System.out.println("수정을 할 b_idx : "+b_idx);
 		AskDTO dto = dao.askdetail(b_idx);
 		req.setAttribute("bbs", dto);
-		System.out.println("넘어갔을까?");
+		//System.out.println("넘어갔을까?");
 		RequestDispatcher dis = req.getRequestDispatcher("askBoard03_UpdateForm.jsp");
 		dis.forward(req, resp);
 		
 	}
 
 	public void askupdate() throws ServletException, IOException {
-		System.out.println("넘어왔나?");
+		//System.out.println("넘어왔나?");
 		req.setCharacterEncoding("UTF-8");
 		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
 		String subject = req.getParameter("askingTypes");
 		String content = req.getParameter("content");
-		System.out.println(b_idx+" / "+subject+" / "+content);
+		//System.out.println(b_idx+" / "+subject+" / "+content);
 		AskDAO dao = new AskDAO();
 		String page = "askdetail?b_idx="+b_idx;
 		String msg = "수정에 실패했습니다.";
@@ -98,7 +95,7 @@ public class AskService {
 
 	public void askdel() throws ServletException, IOException {
 		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
-		System.out.println("삭제 b_idx는?"+b_idx);
+		//System.out.println("삭제 b_idx는?"+b_idx);
 		AskDAO dao = new AskDAO();
 		String page = "askdetail";
 		if(dao.askdel(b_idx)) {

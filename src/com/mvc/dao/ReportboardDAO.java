@@ -24,7 +24,6 @@ public class ReportboardDAO {
 			DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/Oracle");
 			conn = ds.getConnection();
 		} catch (Exception e) {
-			
 			e.printStackTrace();
 		}
 		
@@ -44,7 +43,8 @@ public class ReportboardDAO {
 				dto.setReg_date(rs.getDate("reg_date"));
 				dto.setbHit(rs.getInt("bHit"));
 				list.add(dto);
-			}System.out.println("reportboard dto 받아왓나?");
+			}
+			//System.out.println("reportboard dto 받아왓나?");
 		} catch (Exception e) {
 			
 			e.printStackTrace();

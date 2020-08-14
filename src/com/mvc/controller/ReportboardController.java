@@ -33,12 +33,12 @@ public class ReportboardController extends HttpServlet {
 		
 		switch(reqAddr) {
 		case "/reportlist":
-			System.out.println("공지사항 리스트 요청하기");
+			//System.out.println("공지사항 리스트 요청하기");
 			service.list();
 			break;
 			
 		case "/reportdetail":
-			System.out.println("디테일 리스트 요청하기");
+			//System.out.println("디테일 리스트 요청하기");
 			service.reportdetail();
 			break;
 			

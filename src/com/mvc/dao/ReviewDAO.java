@@ -27,7 +27,6 @@ public class ReviewDAO {
 			Context ctx = new InitialContext();
 			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/Oracle");
 			conn = ds.getConnection();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -59,11 +58,8 @@ public class ReviewDAO {
 		}finally {
 			resClose();
 		}
-		
 		return list;
-		
 	}
-	
 	
 	public boolean write(String content, String id) {
 		String sql = "INSERT INTO bbs (b_idx,id,content,category) VALUES(bbs_seq.NEXTVAL,?,?,2)";
@@ -75,7 +71,6 @@ public class ReviewDAO {
 			if(ps.executeUpdate()>0){
 				success = true;
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -84,9 +79,6 @@ public class ReviewDAO {
 		return success;
 	}
 
-	
-
-	
 	public void resClose() {
 		try {
 			if(rs!=null) {rs.close();}
@@ -113,9 +105,7 @@ public class ReviewDAO {
 		}finally {
 			resClose();
 		}
-		
 		return result;
-		
 	}
 
 	public ReviewDTO updateForm(String b_idx) {
@@ -129,11 +119,11 @@ public class ReviewDAO {
 			if(rs.next()) {
 				dto = new ReviewDTO();
 				dto.setB_idx(rs.getString("b_idx"));
-				System.out.println(dto.getB_idx());
+				//System.out.println(dto.getB_idx());
 				dto.setId(rs.getString("id"));
-				System.out.println(dto.getId());
+				//System.out.println(dto.getId());
 				dto.setContent(rs.getString("content"));
-				System.out.println(dto.getContent());
+				//System.out.println(dto.getContent());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -143,13 +133,13 @@ public class ReviewDAO {
 		return dto;
 	}
 
-	public boolean update(String idx, String content) {
+	public boolean update(int b_idx, String content) {
 		boolean result = false;
 		String sql = "UPDATE bbs SET content=? WHERE b_idx=?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, content);
-			ps.setString(2, idx);
+			ps.setInt(2, b_idx);
 			
 			if(ps.executeUpdate()>0) {
 				result = true;

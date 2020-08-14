@@ -50,19 +50,19 @@ public class ReviewService {
 		//System.out.println(content);
 		dao.write(content,id);
 		String page = "rvlist";
-		
 		if(id==null) {
 			String msg = "로그인여부를 확인해주세요.";
 			req.setAttribute("msg", msg);
-			RequestDispatcher dis = req.getRequestDispatcher("member01_login.jsp");
-			dis.forward(req, resp);
+			page = "member01_login.jsp";
 		}
-		resp.sendRedirect(page);
+		RequestDispatcher dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
 	}
 
+	/*충돌*/
 	public void del() throws ServletException, IOException {
 		String idx = req.getParameter("repl_idx");
-		System.out.println("b_idx : "+idx);
+		//System.out.println("b_idx : "+idx);
 		ReviewDAO dao = new ReviewDAO();
 		String id = (String) req.getSession().getAttribute("id");
 		String page = "/rvlist";
@@ -96,26 +96,27 @@ public class ReviewService {
 
 	public void update() throws IOException, ServletException {
 		req.setCharacterEncoding("UTF-8");
-		System.out.println("서비스 들어옴");
-		String idx = req.getParameter("idx");
-		String content = req.getParameter("content");
-		System.out.println(idx+"/"+content);
+		//System.out.println("서비스 들어옴");
+		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
+		String content = req.getParameter("rvcontent");
+		//System.out.println(b_idx+"/"+content);
 		ReviewDAO dao = new ReviewDAO();
-		String page = "rvlist?idx="+idx;
+
+		String page = "rvlist?idx="+b_idx;
 		String msg = "수정실패";
-		if(dao.update(idx,content)) {
+		if(dao.update(b_idx,content)) {
 			msg = "수정 성공";
 		}
 		req.setAttribute("msg", msg);
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
+		
 	}
 
 
 	
 	
 
-//====================================================
 	
 
 

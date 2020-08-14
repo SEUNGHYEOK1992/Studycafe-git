@@ -25,7 +25,7 @@ public class ReportboardService {
 	public void list() throws ServletException, IOException {
 		ReportboardDAO dao = new ReportboardDAO();
 		ArrayList<ReportboardDTO> list = dao.list();
-		System.out.println("공지사항 리턴");
+		//System.out.println("공지사항 리턴");
 		req.setAttribute("list", list);
 		RequestDispatcher dis = req.getRequestDispatcher("reportBoard01_List.jsp");
 		dis.forward(req, resp);
@@ -33,7 +33,7 @@ public class ReportboardService {
 
 	public void reportdetail() throws ServletException, IOException {
 		int b_idx = Integer.parseInt(req.getParameter("b_idx"));
-		System.out.println("리포트 디테일 값 받아오기"+b_idx);
+		//System.out.println("리포트 디테일 값 받아오기"+b_idx);
 		ReportboardDAO dao = new ReportboardDAO();
 		req.setAttribute("bbs", dao.reportdetail(b_idx));
 		RequestDispatcher dis = req.getRequestDispatcher("askBoard02_Detail.jsp");

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%
+	String id = (String)session.getAttribute("id"); 
+%>   
 <!DOCTYPE html>
 <html>
 	<head>
@@ -112,7 +115,7 @@
 					</tbody>
 				</table>
 				<br>
-				<a class="btn btn-default pull-right" onclick="location.href='freeBoard03_WriteForm.jsp'">글쓰기</a>
+				<a class="btn btn-default pull-right" onclick="login2()">글쓰기</a>
 				<br><br>
 				<div class="pageArea">
 					<a href="./fbList?page=${currPage -1 }"><span id="spanPage">이전 페이지</span></a>
@@ -156,5 +159,17 @@
 		alert("이전 페이지가 없습니다.");
 		location.href="fbList";
 	}		
+	
+	function login2(){
+		
+		<% id = (String)session.getAttribute("id"); %>
+		<% if(id==null){ %>
+			 alert("로그인이 필요한 서비스 입니다."); 
+			location.href ="member01_login.jsp";
+		<% }else{ %>
+			location.href="freeBoard03_WriteForm.jsp";
+	<% } %>
+		
+	}
 	</script>
 </html>

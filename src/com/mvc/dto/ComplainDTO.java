@@ -1,11 +1,12 @@
 package com.mvc.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
-public class ReportDTO {
+public class ComplainDTO {
 	private int repo_idx;
 	private int b_idx;
-	private String id;
+	private String b_id;
+	private String repo_id;
 	private String repo_content;
 	private Date repo_reg_date;
 	public int getRepo_idx() {
@@ -20,11 +21,17 @@ public class ReportDTO {
 	public void setB_idx(int b_idx) {
 		this.b_idx = b_idx;
 	}
-	public String getId() {
-		return id;
+	public String getB_id() {
+		return b_id;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setB_id(String b_id) {
+		this.b_id = b_id;
+	}
+	public String getRepo_id() {
+		return repo_id;
+	}
+	public void setRepo_id(String repo_id) {
+		this.repo_id = repo_id;
 	}
 	public String getRepo_content() {
 		return repo_content;

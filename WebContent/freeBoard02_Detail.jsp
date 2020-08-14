@@ -3,8 +3,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
 	String id = (String)session.getAttribute("id"); 
-	System.out.println(id);
-%>   
+	//System.out.println(id);
+%>     
 <!DOCTYPE html>
 <html>
 	<head>
@@ -89,50 +89,193 @@
 			<div id="log"><a href="#">로그인/회원가입</a></div>  
 		</div>
 		<!----------------------------------------------------->
+			<c:choose>
+
+		<c:when test="${id== bbs.id}">
+
 		<div class="boardTitle"><h1>자유게시판</h1><hr></div>
+
 		<div class="board_zone">
+
 			<div class="board_list_table" style="width: 55%;">
+
 				<form action="fbUpdateForm" method="post">
+
 				<table class="table">
+
 					<thead>
+
 						<tr>
+
 							<th style="background-color: rgba(223, 223, 223, 0.719); font-size: 17px;">${bbs.subject }</th>
+
 						</tr>
+
 					</thead>
+
 					<tbody>
+
 						<tr>
+
 							<td>
+
 								<input type="hidden" name ="b_idx" value="${bbs.b_idx }"/>
+
 								<span style="margin-right: 10px; font-weight: 800;" name="id">${bbs.id}</span>
+
 								<span style="font-size: 13px;" name="reg_date">${bbs.reg_date}</span>
+
 								<span style="float: right; font-weight: 700;" name="bHit">${bbs.bHit}</span>
+
 							</td>
+
 						</tr>
+
 						<tr>
+
 							<td style="text-align: center; padding-top: 30px;">
+
 								<span>${bbs.content }<br/><br/></span>
-								<img src="${path }" alt="이미지 없음" width="200px" />
+
+								<c:if test="${path ne '/photo/null' }">
+
+									<img src="${path }" alt="에러" width="200px" />
+
+								</c:if>
+
 							</td>
+
 						</tr>
+
 						 <tr>
+
 	            			<td>
+
 	            				첨부파일 : <input type ="text" placeholder="없음" value="${bbs.oriFileName}" readonly />
+
 	            			</td>
+
             			</tr>
+
 					</tbody>
+
 				</table>
+
 				<br>
+
 				<a class="btn btn-default pull-right" onclick="location.href='fbList'">목록</a>
+
 				<input type="submit" class="btn btn-default" style="margin-right: 10px;" value="수정"/>
+
 				<a class="btn btn-default" onclick="location.href='fbDelete?b_idx=${bbs.b_idx}'" style="margin-right: 10px;">삭제</a>
-				<a class="btn btn-default" onclick="location.href='#'" style="margin-right: 10px;">추천</a>
-				<input type ="text" name="like" value="추천 수 " />
-				<a class="btn btn-default" onclick="location.href='#'" style="margin-right: 10px;">싫어요</a>
-				<input type ="text" name="dislike" value="싫어요 수 " />
-				<a class="btn btn-default pull-right" onclick="location.href='#'" style="margin-right: 10px;">신고</a>
+
+				<a class="btn btn-default" onclick="like()" style="margin-right: 10px;">추천</a>
+
+				<input type ="text" id="likeCount" name="like" value="" />
+
+				<a class="btn btn-default" onclick="disLike()" style="margin-right: 10px;">싫어요</a>
+
+				<input type ="text" id="dislikeCount" name="dislike" value="" />
+
+				<a class="btn btn-default pull-right" onclick="singo()" style="margin-right: 10px;">신고</a>
+
 				</form>
+
 			</div>
+
 		</div>
+
+		</c:when>
+
+		<c:otherwise>
+
+		<div class="boardTitle"><h1>자유게시판</h1><hr></div>
+
+		<div class="board_zone">
+
+			<div class="board_list_table" style="width: 55%;">
+
+				<form action="fbUpdateForm" method="post">
+
+				<table class="table">
+
+					<thead>
+
+						<tr>
+
+							<th style="background-color: rgba(223, 223, 223, 0.719); font-size: 17px;">${bbs.subject }</th>
+
+						</tr>
+
+					</thead>
+
+					<tbody>
+
+						<tr>
+
+							<td>
+
+								<input type="hidden" name ="b_idx" value="${bbs.b_idx }"/>
+
+								<span style="margin-right: 10px; font-weight: 800;" name="id">${bbs.id}</span>
+
+								<span style="font-size: 13px;" name="reg_date">${bbs.reg_date}</span>
+
+								<span style="float: right; font-weight: 700;" name="bHit">${bbs.bHit}</span>
+
+							</td>
+
+						</tr>
+
+						<tr>
+
+							<td style="text-align: center; padding-top: 30px;">
+
+								<span>${bbs.content }<br/><br/></span>
+
+								<img src="${path }" alt="이미지 없음" width="200px" />
+
+							</td>
+
+						</tr>
+
+						 <tr>
+
+	            			<td>
+
+	            				첨부파일 : <input type ="text" placeholder="없음" value="${bbs.oriFileName}" readonly />
+
+	            			</td>
+
+            			</tr>
+
+					</tbody>
+
+				</table>
+
+				<br>
+
+				<a class="btn btn-default pull-right" onclick="location.href='fbList'">목록</a>
+
+				<a class="btn btn-default" onclick="like()" style="margin-right: 10px;">추천</a>
+
+				<input type ="text" id="likeCount" name="like" value="" />
+
+				<a class="btn btn-default" onclick="disLike()" style="margin-right: 10px;">싫어요</a>
+
+				<input type ="text" id="dislikeCount" name="dislike" value="" />
+
+				<a class="btn btn-default pull-right" onclick="singo()" style="margin-right: 10px;">신고</a>
+
+				</form>
+
+			</div>
+
+		</div>
+
+		</c:otherwise>
+
+		</c:choose>
 		<!-- 댓글 시작 -->
 		<div id="comment" style="margin-left:300px; margin-top:400px; margin-bottom:200px;">
 	    	<table border="1" bordercolor="lightgray">
@@ -206,5 +349,136 @@
 	if(msg != ""){
 		alert(msg)	
 	}	
+	
+	function likeCall(){
+		var b_idx = "${bbs.b_idx}";
+		var id ="${bbs.id}";
+		$.ajax({
+			type:"get",
+			url:"fblikeCall",
+			data:{
+				"b_idx":b_idx,
+				"id":id
+			},
+			dataType:"JSON",
+			success:function(data){
+				//console.log(data.call);
+				$("#likeCount").val(data.call);
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});
+	}
+	
+	function disLikeCall(){
+		var b_idx = "${bbs.b_idx}";
+		var id ="${bbs.id}";
+		$.ajax({
+			type:"get",
+			url:"fbdisLikeCall",
+			data:{
+				"b_idx":b_idx,
+				"id":id
+			},
+			dataType:"JSON",
+			success:function(data){
+				//console.log(data.discall);
+				$("#dislikeCount").val(data.discall);
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});
+	}
+	
+	likeCall();
+	disLikeCall();
+	
+	function like(){
+        if(confirm("추천을 누르시겠습니까?")==true){
+            var b_idx = $("input[name='b_idx']").val();
+            var id = "${bbs.id}";
+            $.ajax({
+            	type:"get",
+            	url:"fbLike",
+            	data:{
+            		"b_idx":b_idx
+            	},
+            	dataType:"JSON",
+            	success:function(data){
+            		//console.log(data);
+            		if(data.like){
+            			alert("추천 하였습니다.");
+            		}else{
+            			alert("이미 추천 혹은 싫어요를 누르셨습니다.");
+            		}
+            		likeCall();
+            	},
+            	error:function(e){
+            		console.log(e);
+            	}
+            });
+        }else{
+        	alert('취소되었습니다.');
+            return false;
+        }
+	}	
+	
+	function disLike(){
+        if(confirm("싫어요를 누르시겠습니까?")==true){
+            var b_idx = $("input[name='b_idx']").val();
+            $.ajax({
+            	type:"get",
+            	url:"fbDisLike",
+            	data:{
+            		"b_idx":b_idx
+            	},
+            	dataType:"JSON",
+            	success:function(data){
+            		//console.log(data);
+            		if(data.disLike){
+            			alert("싫어요를 누르셨습니다.");
+            		}else{
+            			alert("이미 추천 혹은 싫어요를 누르셨습니다.");
+            		}
+            		disLikeCall();
+            	},
+            	error:function(e){
+            		console.log(e);
+            	}
+            });
+        }else{
+        	alert('취소되었습니다.');
+            return false;
+        }
+	}
+	
+	function singo(){
+		if(confirm("해당 글을 신고 하시겠습니까?")==true){
+			var b_idx = "${bbs.b_idx}";
+			$.ajax({
+				type:"get",
+				url:"reportChk",
+				data:{"b_idx":b_idx},
+				dataType:"JSON",
+				success:function(data){
+					//console.log(data.reportChk);
+					if(!data.reportChk){
+						location.href="Complain01.jsp?b_idx=${bbs.b_idx}&&b_id=${bbs.id }";
+					}else{
+						alert("이미 해당 글을 신고 하신 적이 있습니다.");
+					}
+				},
+				error:function(e){
+					console.log(e);
+				}
+			});		
+        }else{
+        	alert('취소되었습니다.');
+            return false;
+        }
+	}
+
 	</script>
 </html>
