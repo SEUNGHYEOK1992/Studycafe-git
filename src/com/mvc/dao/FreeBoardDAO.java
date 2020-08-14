@@ -256,7 +256,7 @@ public ArrayList<ReplyDTO> list(int b_idx) {
 			ps.setString(2, id);
 			if(ps.executeUpdate()>0) {
 				success = true;
-				upLike(b_idx);
+				upLike(b_idx,id);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -266,11 +266,12 @@ public ArrayList<ReplyDTO> list(int b_idx) {
 		return success;
 	}
 	
-	private void upLike(int b_idx) {
-		String sql = "UPDATE recommend SET like_count = 1 WHERE b_idx=?";
+	private void upLike(int b_idx, String id) {
+		String sql = "UPDATE recommend SET like_count = 1 WHERE b_idx=? AND id=?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, b_idx);
+			ps.setString(2, id);
 			ps.executeUpdate();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -326,7 +327,7 @@ public ArrayList<ReplyDTO> list(int b_idx) {
 			ps.setString(2, id);
 			if(ps.executeUpdate()>0) {
 				success = true;
-				disupLike(b_idx);
+				disupLike(b_idx,id);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -337,11 +338,12 @@ public ArrayList<ReplyDTO> list(int b_idx) {
 
 	}
 	
-	private void disupLike(int b_idx) {
-		String sql = "UPDATE recommend SET dis_count = 1 WHERE b_idx=?";
+	private void disupLike(int b_idx, String id) {
+		String sql = "UPDATE recommend SET dis_count = 1 WHERE b_idx=? AND id=?";
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, b_idx);
+			ps.setString(2, id);
 			ps.executeUpdate();
 		}catch(Exception e){
 			e.printStackTrace();

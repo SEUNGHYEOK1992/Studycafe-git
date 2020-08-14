@@ -210,11 +210,11 @@
             </div>
             <div>
             <ul id="top_navi">
-               <li><a href="#">스터디룸 소개</a></li>
-               <li><a href="#">예약하기</a></li>
-               <li><a href="#">자유게시판</a></li>
-               <li><a href="./rvlist">후기게시판</a></li>
-               <li><a href="./ask">고객센터</a></li>
+                <li><a href="#">스터디룸 소개</a></li>
+                <li><a href="#">예약하기</a></li>
+                <li><a href="./fbList">자유게시판</a></li>
+                <li><a href="./rvlist">후기게시판</a></li>
+                <li><a href="./ask">고객센터</a></li>
             </ul>
             </div>
             <div id="log"><a href="#">로그인/회원가입</a></div>  
