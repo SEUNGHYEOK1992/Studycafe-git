@@ -1,9 +1,16 @@
 package com.mvc.service;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import com.mvc.dao.AdminDAO;
 import com.mvc.dto.AdminDTO;
@@ -81,6 +88,26 @@ public class AdminService {
 		//System.out.println("서비스 등장");
 		AdminDAO dao = new AdminDAO();
 		return dao.kickAdd(id,cause);
+	}
+
+	public int pcMember() {
+		AdminDAO dao = new AdminDAO();
+		return dao.pcMember();
+	}
+
+	public int pcReport() {
+		AdminDAO dao = new AdminDAO();
+		return dao.pcReport();
+	}
+
+	public int pcBlack() {
+		AdminDAO dao = new AdminDAO();
+		return dao.pcBlack();
+	}
+
+	public int pcKick() {
+		AdminDAO dao = new AdminDAO();
+		return dao.pcKick();
 	}
 	
 	

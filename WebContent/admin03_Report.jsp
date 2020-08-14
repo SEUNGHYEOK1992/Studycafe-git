@@ -255,6 +255,7 @@
 		    	<div class="text-center">
 		    		<ul class="pagination">
 		    			<li class="page-item">
+		    				<a class="page-link" href="./report?page=1"><span>처음</span></a>
 		    				<a class="page-link" href="./report?page=${currPage-1}" aria-label="Previous">
 		    					<span aria-hidden="true">&laquo;</span>
 	                    		<span class="sr-only">Previous</span>
@@ -268,6 +269,7 @@
 		    					<span aria-hidden="true">&raquo;</span>
 	                    		<span class="sr-only">Next</span>
 		    				</a>
+		    				<a class="page-link" href="./report?page=${endPage }"><span>끝</span></a>
 		    			</li>
 		    		</ul>
 		    	</div>
@@ -301,6 +303,19 @@
 	var msg = "${msg}";
 	if(msg != ""){
 		alert(msg);
+	}
+	
+	var currPage = ${currPage};
+	var endPage = ${endPage};
+	
+	if(currPage<1){
+		alert("이전 페이지가 없습니다.");
+		location.href="report";
+	}	
+	
+	if(currPage > endPage){
+		alert('다음 페이지가 없습니다.');
+		location.href="report";
 	}
 </script>
 </html>

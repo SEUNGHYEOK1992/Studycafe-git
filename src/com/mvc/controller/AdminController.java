@@ -45,11 +45,21 @@ public class AdminController extends HttpServlet {
 				if(pageParam != null) {
 					page = Integer.parseInt(pageParam);
 				}
+				
+				int totCount = service.pcMember();
+				int listCount =10;
+				int totPage = totCount/listCount;
+				if(totCount % listCount > 0 ) {
+					totPage ++;
+				}
+				//System.out.println(totCount);
+				//System.out.println(totPage);
 				ArrayList<AdminDTO> list = null;
 				//System.out.println("요청");
 				list = service.memberList(page);
 				req.setAttribute("list", list);
 				req.setAttribute("currPage", page);
+				req.setAttribute("endPage", totPage);
 				dis = req.getRequestDispatcher("admin01_Manage.jsp");
 				dis.forward(req, resp);
 			break;
@@ -82,9 +92,17 @@ public class AdminController extends HttpServlet {
 				if(pageParam != null) {
 					page = Integer.parseInt(pageParam);
 				}
+				totCount = service.pcReport();
+				listCount =10;
+				totPage = totCount/listCount;
+				if(totCount % listCount > 0 ) {
+					totPage ++;
+				}
+				
 				ArrayList<ComplainDTO> r_list = service.report(page);
 				req.setAttribute("r_list", r_list);
 				req.setAttribute("currPage", page);
+				req.setAttribute("endPage", totPage);
 				dis = req.getRequestDispatcher("admin03_Report.jsp");
 				dis.forward(req, resp);
 			break;
@@ -96,10 +114,17 @@ public class AdminController extends HttpServlet {
 				if(pageParam != null) {
 					page = Integer.parseInt(pageParam);
 				}
+				totCount = service.pcBlack();
+				listCount =10;
+				totPage = totCount/listCount;
+				if(totCount % listCount > 0 ) {
+					totPage ++;
+				}
 				ArrayList<BlackDTO> b_list = null;
 				b_list = service.blackList(page);
 				req.setAttribute("b_list", b_list);
 				req.setAttribute("currPage", page);
+				req.setAttribute("endPage", totPage);
 				dis=req.getRequestDispatcher("admin04_Black.jsp");
 				dis.forward(req, resp);
 			break;
@@ -111,10 +136,17 @@ public class AdminController extends HttpServlet {
 				if(pageParam != null) {
 					page = Integer.parseInt(pageParam);
 				}
+				totCount = service.pcKick();
+				listCount =10;
+				totPage = totCount/listCount;
+				if(totCount % listCount > 0 ) {
+					totPage ++;
+				}
 				ArrayList<KickDTO> k_list = null;
 				k_list = service.kick(page);
 				req.setAttribute("k_list", k_list);
 				req.setAttribute("currPage", page);
+				req.setAttribute("endPage", totPage);
 				dis=req.getRequestDispatcher("admin05_Kick.jsp");
 				dis.forward(req, resp);
 			break;
