@@ -156,9 +156,11 @@
           </c:forEach>
       </table>
             <div class="pageArea">
+            	<a href="./sendList?page=1"><span>처음</span></a>
 				<a href="./sendList?page=${currPage -1 }"><span id="spanPage">이전 페이지</span></a>
 				<span><b>${currPage }</b></span>
 				<a href="./sendList?page=${currPage+1 }"><span>다음 페이지</span></a>
+				<a href="./sendList?page=${endPage }"><span>끝</span></a>
 		</div>
    </div>
    <!--중앙이미지 끝-->
@@ -171,8 +173,16 @@
 	var currPage = ${currPage};
 	//console.log(currPage);
 	
+	var currPage = ${currPage};
+	var endPage = ${endPage};
+	
 	if(currPage<1){
 		alert("이전 페이지가 없습니다.");
+		location.href="sendList";
+	}	
+	
+	if(currPage > endPage){
+		alert('다음 페이지가 없습니다.');
 		location.href="sendList";
 	}
 	

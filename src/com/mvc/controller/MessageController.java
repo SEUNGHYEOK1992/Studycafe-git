@@ -48,10 +48,17 @@ public class MessageController extends HttpServlet {
 				if(pageParam != null) {
 					page = Integer.parseInt(pageParam);
 				}
+				int totCount = service.pcMessageList();
+				int listCount =10;
+				int totPage = totCount/listCount;
+				if(totCount % listCount > 0 ) {
+					totPage ++;
+				}
 				ArrayList<MessageDTO> list = null;
 				list = service.messageList(page);
 				req.setAttribute("m_list", list);
 				req.setAttribute("currPage", page);
+				req.setAttribute("endPage", totPage);
 				dis = req.getRequestDispatcher("message01_list.jsp");
 				dis.forward(req, resp);
 			break;
@@ -71,9 +78,16 @@ public class MessageController extends HttpServlet {
 				if(pageParam != null) {
 					page = Integer.parseInt(pageParam);
 				}
+				totCount = service.pcFalseMsg();
+				listCount =10;
+				totPage = totCount/listCount;
+				if(totCount % listCount > 0 ) {
+					totPage ++;
+				}
 				list = service.falseMsg(page);
 				req.setAttribute("mchk_list", list);
 				req.setAttribute("currPage", page);
+				req.setAttribute("endPage", totPage);
 				dis = req.getRequestDispatcher("message04_FalseChk.jsp");
 				dis.forward(req, resp);
 			break;
@@ -109,9 +123,16 @@ public class MessageController extends HttpServlet {
 				if(pageParam != null) {
 					page = Integer.parseInt(pageParam);
 				}
+				totCount = service.pcSendList();
+				listCount =10;
+				totPage = totCount/listCount;
+				if(totCount % listCount > 0 ) {
+					totPage ++;
+				}
 				list = service.sendList(page);
 				req.setAttribute("send_List", list);
 				req.setAttribute("currPage", page);
+				req.setAttribute("endPage", totPage);
 				dis = req.getRequestDispatcher("message05_SendList.jsp");
 				dis.forward(req, resp);
 			break;

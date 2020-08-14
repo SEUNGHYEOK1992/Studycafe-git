@@ -253,6 +253,60 @@ public class MessageDAO {
 		return delCount;
 	}
 
+	public int pcMessageList(String id) {
+		String sql ="select count(*) as totalCount from message WHERE recv_id=?";
+		int count = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("totalCount");
+			}
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}	
+		return count;
+	}
+
+	public int pcFalseMsg(String id) {
+		String sql ="select count(*) as totalCount from message where recv_id =? AND mess_chk='F'";
+		int count = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("totalCount");
+			}
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}	
+		return count;
+	}
+
+	public int pcSendList(String id) {
+		String sql ="select count(*) as totalCount from message where send_id=?";
+		int count = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("totalCount");
+			}
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}	
+		return count;
+	}
+
 	
 	
 }

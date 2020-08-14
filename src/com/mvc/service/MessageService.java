@@ -79,5 +79,23 @@ public class MessageService {
 		return success;
 	}
 
+	public int pcMessageList() {
+		MessageDAO dao = new MessageDAO();
+		String id = (String) req.getSession().getAttribute("id");
+		return dao.pcMessageList(id);
+	}
+
+	public int pcFalseMsg() {
+		MessageDAO dao = new MessageDAO();
+		String id = (String) req.getSession().getAttribute("id");
+		return dao.pcFalseMsg(id);
+	}
+
+	public int pcSendList() {
+		MessageDAO dao = new MessageDAO();
+		String id = (String) req.getSession().getAttribute("id");
+		return dao.pcSendList(id);
+	}
+
 
 }
