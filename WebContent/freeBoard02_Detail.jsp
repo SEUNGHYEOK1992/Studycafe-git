@@ -74,275 +74,545 @@
 	<body>
 		<!----------------------------------------------------->
 		<div id="header">
+
 			<div id="top_logo">
+
 			   <img src=""/>
+
 			</div>
+
 			<div>
+
 			<ul id="top_navi">
+
                 <li><a href="#">스터디룸 소개</a></li>
+
                 <li><a href="#">예약하기</a></li>
+
                 <li><a href="./fbList">자유게시판</a></li>
+
                 <li><a href="./rvlist">후기게시판</a></li>
+
                 <li><a href="./ask">고객센터</a></li>
+
 			</ul>
+
 			</div>
+
 			<div id="log"><a href="#">로그인/회원가입</a></div>  
+
 		</div>
+
 		<!----------------------------------------------------->
+
 			<c:choose>
+
+ 
 
 		<c:when test="${id== bbs.id}">
 
+ 
+
 		<div class="boardTitle"><h1>자유게시판</h1><hr></div>
+
+ 
 
 		<div class="board_zone">
 
+ 
+
 			<div class="board_list_table" style="width: 55%;">
+
+ 
 
 				<form action="fbUpdateForm" method="post">
 
+ 
+
 				<table class="table">
+
+ 
 
 					<thead>
 
+ 
+
 						<tr>
+
+ 
 
 							<th style="background-color: rgba(223, 223, 223, 0.719); font-size: 17px;">${bbs.subject }</th>
 
+ 
+
 						</tr>
+
+ 
 
 					</thead>
 
+ 
+
 					<tbody>
 
+ 
+
 						<tr>
+
+ 
 
 							<td>
 
+ 
+
 								<input type="hidden" name ="b_idx" value="${bbs.b_idx }"/>
+
+ 
 
 								<span style="margin-right: 10px; font-weight: 800;" name="id">${bbs.id}</span>
 
+ 
+
 								<span style="font-size: 13px;" name="reg_date">${bbs.reg_date}</span>
+
+ 
 
 								<span style="float: right; font-weight: 700;" name="bHit">${bbs.bHit}</span>
 
+ 
+
 							</td>
 
+ 
+
 						</tr>
+
+ 
 
 						<tr>
 
+ 
+
 							<td style="text-align: center; padding-top: 30px;">
+
+ 
 
 								<span>${bbs.content }<br/><br/></span>
 
+ 
+
 								<c:if test="${path ne '/photo/null' }">
+
+ 
 
 									<img src="${path }" alt="에러" width="200px" />
 
+ 
+
 								</c:if>
+
+ 
 
 							</td>
 
+ 
+
 						</tr>
+
+ 
 
 						 <tr>
 
+ 
+
 	            			<td>
+
+ 
 
 	            				첨부파일 : <input type ="text" placeholder="없음" value="${bbs.oriFileName}" readonly />
 
+ 
+
 	            			</td>
+
+ 
 
             			</tr>
 
+ 
+
 					</tbody>
+
+ 
 
 				</table>
 
+ 
+
 				<br>
 
+ 
+
 				<a class="btn btn-default pull-right" onclick="location.href='fbList'">목록</a>
+
+ 
 
 				<input type="submit" class="btn btn-default" style="margin-right: 10px;" value="수정"/>
 
+ 
+
 				<a class="btn btn-default" onclick="location.href='fbDelete?b_idx=${bbs.b_idx}'" style="margin-right: 10px;">삭제</a>
+
+ 
 
 				<a class="btn btn-default" onclick="like()" style="margin-right: 10px;">추천</a>
 
+ 
+
 				<input type ="text" id="likeCount" name="like" value="" />
+
+ 
 
 				<a class="btn btn-default" onclick="disLike()" style="margin-right: 10px;">싫어요</a>
 
+ 
+
 				<input type ="text" id="dislikeCount" name="dislike" value="" />
+
+ 
 
 				<a class="btn btn-default pull-right" onclick="singo()" style="margin-right: 10px;">신고</a>
 
+ 
+
 				</form>
+
+ 
 
 			</div>
 
+ 
+
 		</div>
+
+ 
 
 		</c:when>
 
+ 
+
 		<c:otherwise>
+
+ 
 
 		<div class="boardTitle"><h1>자유게시판</h1><hr></div>
 
+ 
+
 		<div class="board_zone">
+
+ 
 
 			<div class="board_list_table" style="width: 55%;">
 
+ 
+
 				<form action="fbUpdateForm" method="post">
+
+ 
 
 				<table class="table">
 
+ 
+
 					<thead>
 
+ 
+
 						<tr>
+
+ 
 
 							<th style="background-color: rgba(223, 223, 223, 0.719); font-size: 17px;">${bbs.subject }</th>
 
+ 
+
 						</tr>
+
+ 
 
 					</thead>
 
+ 
+
 					<tbody>
 
+ 
+
 						<tr>
+
+ 
 
 							<td>
 
+ 
+
 								<input type="hidden" name ="b_idx" value="${bbs.b_idx }"/>
+
+ 
 
 								<span style="margin-right: 10px; font-weight: 800;" name="id">${bbs.id}</span>
 
+ 
+
 								<span style="font-size: 13px;" name="reg_date">${bbs.reg_date}</span>
+
+ 
 
 								<span style="float: right; font-weight: 700;" name="bHit">${bbs.bHit}</span>
 
+ 
+
 							</td>
 
+ 
+
 						</tr>
+
+ 
 
 						<tr>
 
+ 
+
 							<td style="text-align: center; padding-top: 30px;">
+
+ 
 
 								<span>${bbs.content }<br/><br/></span>
 
+ 
+
 								<c:if test="${path ne '/photo/null' }">
+
 									<img src="${path }" alt="에러" width="200px" />
+
 								</c:if>
+
+ 
 
 							</td>
 
+ 
+
 						</tr>
+
+ 
 
 						 <tr>
 
+ 
+
 	            			<td>
+
+ 
 
 	            				첨부파일 : <input type ="text" placeholder="없음" value="${bbs.oriFileName}" readonly />
 
+ 
+
 	            			</td>
+
+ 
 
             			</tr>
 
+ 
+
 					</tbody>
+
+ 
 
 				</table>
 
+ 
+
 				<br>
+
+ 
 
 				<a class="btn btn-default pull-right" onclick="location.href='fbList'">목록</a>
 
+ 
+
 				<a class="btn btn-default" onclick="like()" style="margin-right: 10px;">추천</a>
+
+ 
 
 				<input type ="text" id="likeCount" name="like" value="" />
 
+ 
+
 				<a class="btn btn-default" onclick="disLike()" style="margin-right: 10px;">싫어요</a>
+
+ 
 
 				<input type ="text" id="dislikeCount" name="dislike" value="" />
 
+ 
+
 				<a class="btn btn-default pull-right" onclick="singo()" style="margin-right: 10px;">신고</a>
+
+ 
 
 				</form>
 
+ 
+
 			</div>
+
+ 
 
 		</div>
 
+ 
+
 		</c:otherwise>
 
+ 
+
 		</c:choose>
+
 		<!-- 댓글 시작 -->
+
 		<div id="comment" style="margin-left:300px; margin-top:400px; margin-bottom:200px;">
+
 	    	<table border="1" bordercolor="lightgray">
+
 	            <tr>
+
 			        <form action="rpwrite?b_idx=${bbs.b_idx }" method="post">
+
 			        	<input type="hidden" value="${bbs.id }"/>
+
 			            <!-- 아이디-->
+
 			            <td width="150">
+
 			                <div>
+
 			                    ${id}
+
 			                </div>
+
 			            </td>
+
 			            <!-- 본문 작성-->
+
 			            <td width="550">
+
 			                <div>
+
 			                    <textarea name="comment" rows="4" cols="70" ></textarea>
+
 			                </div>
+
 			            </td>
+
 			            <!-- 댓글 등록 버튼 -->
+
 			            <td width="100">
+
 			                <div id="btn" style="text-align:center;">
+
 			                    <input type="submit" value="저장"/>    
+
 			                </div>
+
 			            </td>
+
 			        </form>
+
 	        	</tr>
+
 	<!-- 댓글 목록 -->    
+
 		
+
 	   <c:forEach var="Reply" items="${list}">
+
 	   		<form method="post" action="rpupdateForm?b_idx=${bbs.b_idx }">
+
 		        <tr>
+
 		            <!-- 아이디 -->
+
 		            <td width="150">
+
 		                <div>              
+
 		                   ${Reply.id}<br>
+
 		                   <input type="hidden" name="repl_idx" value="${Reply.repl_idx }" />
+
 		                </div>
+
 		            </td>
+
 		            <!-- 본문내용 -->
+
 		           <c:choose>
+
 						<c:when test="${id== Reply.id}">
+
 		            		<td width="550">
+
 		                		<div class="text_wrapper" id="repl_comment">
+
 		                    		<input type="text" name="repl_comment" value="${Reply.repl_comment}" />
+
 		                		</div>
+
 		           		 	</td>
+
 		            <!-- 버튼 -->
+
 		            		<td width="100">   
+
 		                    	<input type="submit" value="수정"/>   
+
 		                    	<input type="button" onclick= "location.href='rpdel?repl_idx=${Reply.repl_idx}&&b_idx=${bbs.b_idx }'" value="삭제"/>                
+
 		            		</td>
+
 		          		</c:when>
+
 						<c:otherwise>
+
 							<td colspan = "2" width="550">
+
 		                		<div class="text_wrapper" id="repl_comment">
+
 		                    		${Reply.repl_comment}
+
 		                		</div>
+
 		            		</td>
+
 		            		
+
 						</c:otherwise>
+
 					</c:choose>
+
 		        </tr>
+
 	        </form>	        
+
 	     </c:forEach>
+
 	    </table>
+
 	</div>
 		<!-- 댓글 끝 -->	
 	</body>
