@@ -1,172 +1,283 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <title>02 Query Selector</title>
-        <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="https://kit.fontawesome.com/a814f74484.js" crossorigin="anonymous"></script>
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+        @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
+        
+        html, body{
+        	margin: 0;
+        	padding: 0;
+        	height: 100%;
+        }
+        
         body{
             font-family: 'Noto Sans KR', sans-serif;
-            margin: 0px;
+            background-color: white;
         }
+
+        /* ---------- header ---------- */
 
         #header{
-            width: 100%;   
-            height: 150px;
-            background-color: #333;
+            position: relative;
+            background-color: #ABD0CE;
+            top: -10px;
+            width: 100%;
+            height: 175px;
+            z-index: 100;
         }
 
-        #top_navi {   
-            list-style-type: none;
+        #logo{
             position: absolute;
-            top: 70px;
-            left: 550px;
+            left: 100px;
         }
 
-        #top_navi li{
+        #menu{
+            position: relative;
+            top: 90px;
+            left: 600px;
+            width: 900px;            
+        }
+        
+        #menu ul{
+            list-style: none;
+        }
+
+        #menu ul li{
             float: left;
-            margin-right: 50px;
+            margin-right: 60px;
         }
 
-        #top_navi li a {
+        #menu ul li a{
+            text-decoration: none;
+            color: #7C7877;
+            padding: 15px;
+            font-size: 23px;
+            font-weight: bold;
+            font-family: 'NanumSquare', sans-serif;
+            display: inline-block;
+        }
+
+        #menu ul li a:after{
             display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 25px;
+            content: '';
+            border-bottom: solid 3px#ff7473;  
+            transform: scaleX(0);  
+            transition: transform 250ms ease-in-out;
         }
 
-        #top_navi li a:hover {
-            color: rgb(248, 248, 90);
+        #menu ul li a:hover:after{
+            transform: scaleX(1);
         }
 
-        #log{
-            float: right;
-            font-size: 20px;
-            margin-top: 80px;
-            margin-right: 30px;
+        #loginBox{
+            position: relative;
+            top: 10px;
+            left: 300px;
+            font-size: 18px;
+            padding: 20px;
+            width: 210px;
         }
+        
+        #loginBox a{
+	        display: inline-block;
+        	text-decoration: none;
+        	color: #7C7877;
+        	font-weight: 700;
+        	padding: 15px;
+        }
+        
+        /* ----- accountBox ----- */
+        	
+        	#accountBox {
+                position: relative;
+                top: -10px;
+                left: 1250px;
+                background-color: #1f4e5f;
+                width: 260px;
+                height: 130px;
+                border-radius: 15px;
+                border: 2px solid rgb(88, 88, 88);
+            }
+
+            #idBox{
+                position: relative;
+                top: -5px;
+                left: 19%;
+                transform: translate(0% 50%);
+                width: 160px;
+                height: 25px;
+                font-size: 17px;
+                font-weight: 600;
+                text-align: center;
+            }
             
-        #log a{
-            color: white;   
-            text-decoration: none;
+            #idBox span{
+            	position: relative;
+            	top: -18px;
+            }
+            
+            #buttonBox{
+            	position: relative;
+            	top: -23px;
+            }
+
+            #hrBar{
+                width: 220px;
+                border: 1px solid #c6a49a;
+                position: relative;
+                top: -15px;
+            }
+
+            #profile, #message, #logout{
+                background-color: rgb(216, 216, 216);
+                border: 0px;
+                margin-right: 5px;
+                position: relative;
+                left: 9px;
+                top: 7px;
+            }
+
+            #profile:hover, #message:hover, #logout:hover{
+                background-color: white;
+            }
+
+            #profile, #message{
+                height: 40px;
+                width: 60px;
+            }
+            
+            #message{
+                margin-right: 5px;
+            }
+
+            #logout{
+                height: 40px;
+                width: 100px;
+            }
+
+            #logout span{
+                font-size: 18px;
+                font-weight: 600;
+            }
+            
+            #createBox {
+			    position: relative;
+			    left: 1350px;
+			}
+            
+            /* ----- accountBox 끝 ----- */
+
+        /* ---------- header 끝 ---------- */
+
+        /* ---------- main ---------- */
+        
+        #main {
+            min-height: 100%;
         }
 
-      #profile{
-          position: absolute;
-          top: 33%;
-          left: 44%;
-      }
+        /* ---------- main 끝 ---------- */
 
-      #profilepic{
-        position: absolute;
-          top: 33%;
-          left: 27%;
-          width: 200;
-          height: 200;
-      }
-      #name{
-          position: absolute;
-          top: 40%;
-          left: 40%;
+        /* ---------- footer ---------- */
 
-      }
+        #footer{
+            bottom:0;
+            width:100%;
+            height:130px;   
+            background-color: #ABD0CE;
+        }
+        
+        #footer li{
+            float: left;
+            list-style: none;
+        }
+        
+        #footer li a{
+            display: inline-block;
+            content: "｜";
+            clear: both;
+            margin:0 10px;
+            text-decoration: none;
+            color: black;
+        }
+        
+        #footer nav{
+            left: 50%;
+            transform: translate(-50%, 100%);
+            position: absolute;
+        }
+        
+        address{
+            position: relative;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: black;
+        }
 
-      #sname{
-        position: absolute;
-        top: 40%;
-        left: 43%;
-      }
+        /* ---------- footer 끝 ---------- */
 
-
-      #birth{
-        position: absolute;
-        top: 43%;
-        left: 40%;
-      }
-
-      #sbirth{
-        position: absolute;
-        top: 43%;
-        left: 44%;
-      }
-
-      #email{
-        position: absolute;
-        top: 46%;
-        left: 40%;
-      }
-
-      #semail{
-        position: absolute;
-        top: 46%;
-        left: 43%;
-      }
-
-      #live{
-        position: absolute;
-        top: 49%;
-        left: 40%;
-      }
-
-      #slive{
-        position: absolute;
-        top: 49%;
-        left: 43%;
-      }
-
-      #smartphone{
-        position: absolute;
-        top: 52%;
-        left: 40%;
-      }
-
-      #ssmartphone{
-        position: absolute;
-        top: 52%;
-        left: 43%;
-      }
-
-    #modified{
-        position: absolute;
-        top: 55%;
-        left: 42%;
-    }
-
-    #delete{
-        position: absolute;
-        top: 55%;
-        left: 45%;
-    }
-          
-    </style>
-    </head>
-    <body>
-        <div id="header">
-            <div id="top_logo">
-               <img src=""/>
-            </div>
-            <div>
-            <ul id="top_navi">
+	</style>
+</head>
+<body>
+    
+    <!-- 헤더 -->
+    <div id="header">
+        <div id="logo">
+            <a href="#">
+                <img src="./logo.png">
+            </a>
+        </div>
+        <div id="menu">
+            <ul>
 	                <li><a href="#">스터디룸</a></li>
 	                <li><a href="#">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
 	                <li><a href="./ask">고객센터</a></li>
             </ul>
-            </div>
-            <div id="log">
-                <%if(session.getAttribute("id") != null){%>
-         							${id} 님
-         						<%}else{ %>
-         							<a href="member01_login.jsp">로그인/회원가입</a> 
-         						<%} %>
-            </div>  
         </div>
+        <div id="loginBox">
+            <%if(session.getAttribute("id") != null){%>
+				<div id="accountBox">
+					<div id="firstBox">
+						<div id="imgBox">
+							<img src="" alt="">
+	                </div>
+				<div id="idBox">
+                    <span style="color: rgb(255, 255, 255);">${id}님</span>
+                </div>
+				</div>
+				<hr id="hrBar" >
+				<div id="buttonBox">
+	                <button id="profile" class="btn btn-default" type="submit" formmethod="post" onclick="location.href='profileDetail?id=${id}'"><i class="fas fa-user-cog fa-lg"></i></button>
+	                <!-- <a id="message" class="btn btn-default" href="messageList"><i class="far fa-envelope fa-2x"></i></i></i></a> -->
+	                <button id="message" class="btn btn-default" onclick="location.href='messageList'"><i class="far fa-envelope-open fa-lg"></i></button>
+	                <button id="logout" class="btn btn-default" onclick="location.href='logout'"><span>로그아웃</span></button>
+				</div>
+		</div>    
+            <%}else{%>
+                <div id="createBox">
+                	<a href="member01_login.jsp">로그인 / 회원가입</a>
+                </div> 
+            <%}%>
+        </div>
+    </div>
+    <!-- 헤더 끝 -->
+
+<!------------------------------------------------------------------------------------------------------->
+ 	
+    <!-- 메인 시작 -->
+    <div id="main">
         <img src="${path }" width="200px" />       
         <form action="profileUpdateForm" method="post">        
 	        <table>
@@ -220,22 +331,45 @@
            		</tr>
         	</table>
         </form>
-    <script  type="text/javascript">
-     
-        $(document).on('click', ':not(form)[data-confirm]', function(e){
-            if(!confirm($(this).data('confirm'))){
-                e.stopImmediatePropagation();
-                e.preventDefault();
-            }
-        });
+    </div>
+    <!-- 메인 끝 -->
 
-        $(document).on('submit', 'form[data-confirm]', function(e){
-            if(!confirm($(this).data('confirm'))){
-                e.stopImmediatePropagation();
-                e.preventDefault();
-            }
-        });
+<!------------------------------------------------------------------------------------------------------->
 
-      
-    </script>
+    <!-- footer 시작 -->
+    <footer id="footer">
+        <nav>
+            <ul id="info_menu">
+                <li><a href="#">이용약관</a></li>
+                <li><a href="#">개인정보처리방침</a></li>
+                <li><a href="#">이메일</a></li>
+                <li><a href="#">무단수집거부</a></li>
+                <li><a href="#">법적고지</a></li>
+                <li><a href="#">사이트맵</a></li>
+            </ul>
+        </nav>
+        <address>
+            <br>
+            서울특별시 금천구 가산디지털2로 115, 509호, 811호 (가산동, 대륭테크노타운 3차) FAX.02-6740-4949<br>
+            COPYRIGHT ⓒ 2020 Goodee. ALL RIGHT RESERVED.
+        </address>
+    </footer>
+    <!-- footer 끝-->
+
+</body>
+<script>
+    $(document).on('click', ':not(form)[data-confirm]', function(e){
+        if(!confirm($(this).data('confirm'))){
+            e.stopImmediatePropagation();
+            e.preventDefault();
+        }
+    });
+
+    $(document).on('submit', 'form[data-confirm]', function(e){
+        if(!confirm($(this).data('confirm'))){
+            e.stopImmediatePropagation();
+            e.preventDefault();
+        }
+    });
+</script>
 </html>
