@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<% String id = (String)session.getAttribute("id"); 
-	//System.out.println(id);
-%>
+<% String id = (String)session.getAttribute("id");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +10,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/a814f74484.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
         @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
@@ -184,18 +184,72 @@
         /* ---------- main ---------- */
         
         #main {
-            min-height: 100%;
+            height: 1900px;
         }
 
-        #popularchart{
-            position: fixed;
-            width: 250px;
-            height: 200px;
-            font-color : black;
-            border : 1px solid black;
-            left : 1630px;
-            top : 400px;
+        #chartBox{
+	        position: absolute;
+		    width: 250px;
+		    height: 200px;
+		    left: 1600px;
+		    top: 400px;
+      	}
+      	
+      	#chart{
+      		border: 1px solid black;
+      		padding: 20px;
+      		border-radius: 10px;
+      	}
+      	
+      	
+      	#chart table, th, td{
+      		vertical-align: middle;
+      		padding-right: 20px;
+      	}
+        
+        #mainSlide{
+        	position: relative;
+        	width: 60%;
+        	left: 385px;
+        	top: 50px;
         }
+        	
+        #subSlide{
+        	width: 950px;
+        	height: 1000px;
+        }
+        
+        #img1, #img2, #img3, #img4{
+        	object-fit: cover;
+			width: 60%;
+			height: auto;
+			margin: 50px;
+        }
+        
+        #box1{
+        	position: relative;
+        	top: 80px;
+        	left: 300px;
+        }
+        
+        #box2{
+        	position: relative;
+        	top: -400px;
+        	left: 940px;
+        }
+        
+        #box3{
+        	position: relative;
+        	top: -410px;
+        	left: 300px;
+        }
+        
+        #box4{
+        	position: relative;
+        	top: -890px;
+        	left: 940px;
+        }
+        
 
         /* ---------- main 끝 ---------- */
 
@@ -273,7 +327,6 @@
 				<hr id="hrBar" >
 				<div id="buttonBox">
 	                <button id="profile" class="btn btn-default" type="submit" formmethod="post" onclick="location.href='profileDetail?id=${id}'"><i class="fas fa-user-cog fa-lg"></i></button>
-	                <!-- <a id="message" class="btn btn-default" href="messageList"><i class="far fa-envelope fa-2x"></i></i></i></a> -->
 	                <button id="message" class="btn btn-default" onclick="location.href='messageList'"><i class="far fa-envelope-open fa-lg"></i></button>
 	                <button id="logout" class="btn btn-default" onclick="location.href='logout'"><span>로그아웃</span></button>
 				</div>
@@ -291,16 +344,43 @@
  	
     <!-- 메인 시작 -->
     <div id="main">
-        <div id="popularchart">         
-            <table>          
-                  <tr>
-                          <th>아이디</th>
-                          <th>제목</th>
-                          <th>조회수</th>
-                  </tr>
-            </table>
-      </div>
-    </div>
+    	<div id="chartBox">
+    		<span><h3>게시물 베스트</h3></span>    
+	    	<div id="chart">
+	        	<table>
+	            	<tr>
+	                </tr>
+	            </table>
+	        </div>
+        </div>
+      	<div id="mainSlide">
+			<div class="slider">
+				<div><img src="./1.jpg"></img></div>
+				<div><img src="./2.jpg"></img></div>
+				<div><img src="./3.jpg"></img></div>
+				<div><img src="./4.jpg"></img></div>
+				<div><img src="./5.jpg"></img></div>
+				<div><img src="./6.jpg"></img></div>
+				<div><img src="./7.jpg"></img></div>
+				<div><img src="./8.jpg"></img></div>
+				<div><img src="./9.jpg"></img></div>
+			</div>
+		</div>
+		<div id="subSlide">
+			<div id="box1">
+				<img src="./11.jpg" id="img1">
+			</div>
+			<div id="box2">
+				<img src="./12.jpg" id="img2">
+			</div>
+			<div id="box3">
+				<img src="./14.jpg" id="img3">
+			</div>
+			<div id="box4">
+				<img src="./16.jpg" id="img4">
+			</div>
+		</div>
+	</div>
     <!-- 메인 끝 -->
 
 <!------------------------------------------------------------------------------------------------------->
@@ -346,22 +426,26 @@
 				console.log(e);
 			}
 		});
-	}
+	};
 	popList();
 	
 	function drawTable(list){
-		//for(var i=0; i<list.length;i++){}
+		var i = 1;
 		var content="";
-		//$("tbody").empty();	
 		list.forEach(function(item,num){
 			console.log(num,item);
 			content = "<tr>"
-			+"<td>"+item.id+"</td>"
+			+"<td>"+i+++"</td>"
 			+"<td><a href='fbdetail?b_idx="+item.b_idx+"'>"+item.subject+"</a></td>"
-			+"<td>"+item.bHit+"</td>"
 			+"</tr>";
 			$("tbody").append(content);
 		});	
-	}
+	};
+	$(document).ready(function(){
+	      $('.slider').bxSlider();
+	      auto: true
+	      slideWidth: 60
+	      slideMargin: 10
+	    });
 </script>
 </html>
