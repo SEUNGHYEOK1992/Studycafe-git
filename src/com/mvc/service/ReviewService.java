@@ -78,7 +78,7 @@ public class ReviewService {
 
 	/*충돌*/
 	public void del() throws ServletException, IOException {
-		String idx = req.getParameter("repl_idx");
+		String idx = req.getParameter("idx");
 		//System.out.println("b_idx : "+idx);
 		ReviewDAO dao = new ReviewDAO();
 		String id = (String) req.getSession().getAttribute("id");
