@@ -206,6 +206,14 @@
       		vertical-align: middle;
       		padding-right: 20px;
       	}
+      	
+      	.txt_line {
+            width:130px;
+            padding:0 5px;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+        }
         
         #mainSlide{
         	position: relative;
@@ -436,7 +444,7 @@
 			console.log(num,item);
 			content = "<tr>"
 			+"<td>"+i+++"</td>"
-			+"<td><a href='fbdetail?b_idx="+item.b_idx+"'>"+item.subject+"</a></td>"
+			+"<td><div class=txt_line><a href='fbdetail?b_idx="+item.b_idx+"'>"+item.subject+"</div></a></td>"
 			+"</tr>";
 			$("tbody").append(content);
 		});	

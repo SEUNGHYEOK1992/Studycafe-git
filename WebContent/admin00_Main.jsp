@@ -201,6 +201,7 @@
         #main {
             min-height: 100%;
         }
+        /* ---------인기 차트 ... 으로 만들기 */
         .txt_line {
             width:130px;
             padding:0 5px;
@@ -208,7 +209,8 @@
             text-overflow:ellipsis;
             white-space:nowrap;
         }
-
+		/* ---------인기 차트 ... 으로 만들기 끝*/
+		
         /* ---------- main 끝 ---------- */
 
         /* ---------- footer ---------- */
