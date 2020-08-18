@@ -118,4 +118,13 @@ public class MemberService {
 		resp.sendRedirect("profileDetail?id="+id);
 	}
 
+	public boolean kickChk() {
+		String id = req.getParameter("id");
+		boolean success = false; // 아이디가 제명 목록에 포함 되어 있으면 true -> 가입할 수 없음.
+		//System.out.println("id : " + id);
+		MemberDAO dao = new MemberDAO();
+		success = dao.kickChk(id);
+		return success;
+	}
+
 }

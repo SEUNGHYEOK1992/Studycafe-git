@@ -13,7 +13,7 @@ import com.google.gson.Gson;
 import com.mvc.dto.AdminDTO;
 import com.mvc.service.MemberService;
 
-@WebServlet({"/login","/logout","/join","/overlay", "/profileDetail", "/profileUpdate", "/profileUpdateForm", "/delProfile"})
+@WebServlet({"/login","/logout","/join","/overlay", "/profileDetail", "/profileUpdate", "/profileUpdateForm", "/delProfile", "/kickChk"})
 public class MemberController extends HttpServlet {
 	
 	@Override
@@ -135,6 +135,16 @@ public class MemberController extends HttpServlet {
 				service.delProfile();
 				break;
 				
+			case "/kickChk":
+				//System.out.println("제명 확인 요청");
+				success = service.kickChk();
+				map = new HashMap<String, Object>();
+				map.put("kickChk", success);
+				gson = new Gson();
+				obj = gson.toJson(map);
+				//System.out.println("result : "+obj);
+				resp.getWriter().println(obj);	
+			break;
 		}
 		
 		

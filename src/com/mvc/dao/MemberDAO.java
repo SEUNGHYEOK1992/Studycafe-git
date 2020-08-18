@@ -163,6 +163,23 @@ public class MemberDAO {
 		return success;
 	}
 
+	public boolean kickChk(String id) {
+		boolean success =false;
+		String sql="SELECT id FROM kick WHERE id=?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			success = rs.next();
+			//System.out.println("success : " + success); // 4차 확인
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return success;
+	}
+
 
 
 

@@ -295,6 +295,7 @@
                     <td>
                         <input type="text" name="id" id="id" size="20px">
                         <input type="button" id="overlay" value="중복확인">
+                        <input type="button" id="kickChk" value="제명확인">
                     </td>
                 </tr>
                 <tr>
@@ -404,17 +405,18 @@
 </body>
 <script>
 	var overChk = false;
-
+	var kickChk = false;
+	
     $("#overlay").click(function(){
         var id = $("input[name='id']").val();
-        console.log("id : " +id);
+        //console.log("id : " +id);
         $.ajax({
             type:"get",
             url:"overlay",
             data:{"id":id},
             dataType:"JSON",
             success:function(data){
-                console.log(data);
+                //console.log(data);
                 if(data.overlay){
                     alert("이미 사용중인 아이디 입니다.");
                     $("input[name='id']").val("");
@@ -429,71 +431,101 @@
             }
         });
     });
+    
+    $("#kickChk").click(function(){
+    	var id = $("input[name='id']").val();
+    	console.log("id : " + id);
+    	$.ajax({
+    		type:"get",
+    		url:"kickChk",
+    		data:{"id":id},
+    		dataType:"JSON",
+    		success:function(data){
+    			//console.log(data.kickChk);
+    			if(data.kickChk){
+    				alert("사용할 수 없는 아이디 입니다.");
+    				$("input[name='id']").val("");
+    				kickChk=false;
+    			}else{
+    				alert("사용 가능한 아이디 입니다.");
+    				kickChk=true;
+    			}
+    		},
+    		error:function(e){
+    			console.log(e);
+    		}
+    	});
+    });
 
 
     //console.log($id);
     $("#join").click(function(){
         if(overChk){
-            var $id = $("input[name='id']");
-            var $pw = $("input[name='pw']");
-            var $name = $("input[name='name']");
-            var $addr = $("input[name='addr']");
-            var $email = $("input[name='email']");
-            var $email2 = $("select[name='email2']");
-            var $phone = $("select[name='phone']");
-            var $phone1 = $("input[name='phone1']");
-            var $phone2 = $("input[name='phone2']");
-            var $birth1 = $("select[name='birth1']");
-            var $birth2 = $("select[name='birth2']");
-            var $birth3 = $("select[name='birth3']");
-            
-            if($id.val() == ""){
-                alert("아이디를 확인해주세요");
-            }else if($pw.val() == ""){
-                alert("비밀번호를 확인해주세요.");
-            }else if($name.val() == ""){
-                alert("이름 확인해주세요.");
-            }else if($addr.val() == ""){
-                alert("주소를 확인해주세요.");
-            }else if($email.val() == "" || $email2.val() ==""){
-                alert("이메일을 확인해주세요.");
-            }else if($phone.val() == "" || $phone1.val() == "" || $phone2.val() == ""){
-                alert("전화번호를 확인해주세요.");
-            }else if($birth1.val() == "" || $birth2.val() == "" || $birth3.val() == ""){
-                alert("생년월일 확인해주세요.");
-            }else{ // 모든 항목을 입력 했을 경우
-                console.log('서버로 전송');
-                var param ={};
-                param.id = $id.val();
-                param.pw = $pw.val();
-                param.name = $name.val();
-                param.addr = $addr.val();
-                param.email = $email.val();
-                param.email2 = $email2.val();
-                param.phone = $phone.val() + $phone1.val() + $phone2.val();
-                param.birth = $birth1.val() + $birth2.val() + $birth3.val();
-                console.log("param : ",param); // 콘솔에 + 찍으면 문자열로 바뀜
+        	if(kickChk){
+        		var $id = $("input[name='id']");
+                var $pw = $("input[name='pw']");
+                var $name = $("input[name='name']");
+                var $addr = $("input[name='addr']");
+                var $email = $("input[name='email']");
+                var $email2 = $("select[name='email2']");
+                var $phone = $("select[name='phone']");
+                var $phone1 = $("input[name='phone1']");
+                var $phone2 = $("input[name='phone2']");
+                var $birth1 = $("select[name='birth1']");
+                var $birth2 = $("select[name='birth2']");
+                var $birth3 = $("select[name='birth3']");
                 
-                $.ajax({
-                    type:"post",
-                    url:"join",
-                    data:param,
-                    dataType:"JSON",
-                    success:function(data){
-                        console.log(data);
-                        if(data.join){
-                            alert("가입 성공");
-                            location.href="member01_login.jsp";
-                        }else{
-                            alert("실패");
-                            location.href="member02_join.jsp";
+                if($id.val() == ""){
+                    alert("아이디를 확인해주세요");
+                }else if($pw.val() == ""){
+                    alert("비밀번호를 확인해주세요.");
+                }else if($name.val() == ""){
+                    alert("이름 확인해주세요.");
+                }else if($addr.val() == ""){
+                    alert("주소를 확인해주세요.");
+                }else if($email.val() == "" || $email2.val() ==""){
+                    alert("이메일을 확인해주세요.");
+                }else if($phone.val() == "" || $phone1.val() == "" || $phone2.val() == ""){
+                    alert("전화번호를 확인해주세요.");
+                }else if($birth1.val() == "" || $birth2.val() == "" || $birth3.val() == ""){
+                    alert("생년월일 확인해주세요.");
+                }else{ // 모든 항목을 입력 했을 경우
+                    console.log('서버로 전송');
+                    var param ={};
+                    param.id = $id.val();
+                    param.pw = $pw.val();
+                    param.name = $name.val();
+                    param.addr = $addr.val();
+                    param.email = $email.val();
+                    param.email2 = $email2.val();
+                    param.phone = $phone.val() + $phone1.val() + $phone2.val();
+                    param.birth = $birth1.val() + $birth2.val() + $birth3.val();
+                    console.log("param : ",param); // 콘솔에 + 찍으면 문자열로 바뀜
+                    
+                    $.ajax({
+                        type:"post",
+                        url:"join",
+                        data:param,
+                        dataType:"JSON",
+                        success:function(data){
+                            console.log(data);
+                            if(data.join){
+                                alert("가입 성공");
+                                location.href="member01_login.jsp";
+                            }else{
+                                alert("실패");
+                                location.href="member02_join.jsp";
+                            }
+                        },
+                        error:function(e){
+                            console.log(e);
                         }
-                    },
-                    error:function(e){
-                        console.log(e);
-                    }
-                });
-            }
+                    });
+                }
+        	}else{
+        		alert("제명 확인을 확인 해 주세요.");
+        		$("input[name='id']").focus();
+        	}
         }else{
             alert("중복 체크를 확인 해 주세요.");
             $("input[name='id']").focus();

@@ -201,6 +201,13 @@
         #main {
             min-height: 100%;
         }
+        .txt_line {
+            width:130px;
+            padding:0 5px;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+        }
 
         /* ---------- main 끝 ---------- */
 
@@ -359,10 +366,10 @@
 		var content="";
 		//$("tbody").empty();	
 		list.forEach(function(item,num){
-			console.log(num,item);
+			//console.log(num,item);
 			content = "<tr>"
 			+"<td>"+item.id+"</td>"
-			+"<td><a href='fbdetail?b_idx="+item.b_idx+"'>"+item.subject+"</a></td>"
+			+"<td><div class=txt_line><a href='fbdetail?b_idx="+item.b_idx+"'>"+item.subject+"</div></a></td>"
 			+"<td>"+item.bHit+"</td>"
 			+"</tr>";
 			$("tbody").append(content);
