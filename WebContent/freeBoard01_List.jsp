@@ -186,6 +186,13 @@
         #main {
             min-height: 100%;
         }
+        .txt_line {
+            width:130px;
+            padding:0 5px;
+            overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+        }
 
         /* ---------- main 끝 ---------- */
 
@@ -298,7 +305,7 @@
 						<c:forEach items="${list }" var="bbs">
 							<tr>
 								<td style="text-align: center;">${bbs.b_idx }</td>
-								<td style="text-align: center;"><a href="fbdetail?b_idx=${bbs.b_idx }">${bbs.subject }</a></td>
+								<td style="text-align: center;"><div class="txt_line"><a href="fbdetail?b_idx=${bbs.b_idx }">${bbs.subject }</a></div></td>
 								<td style="text-align: center;">${bbs.id }</td>
 								<td style="text-align: center;">${bbs.reg_date }</td>
 								<td style="text-align: center;">${bbs.bHit }</td>
@@ -309,37 +316,27 @@
 				<br>
 				<a class="btn btn-default pull-right" onclick="login2()">글쓰기</a>
 				<br><br>
-				<div class="pageArea">
-					<a href="./fbList?page=${currPage -1 }"><span id="spanPage">이전 페이지</span></a>
-					<span><b>${currPage }</b></span>
-					<a href="./fbList?page=${currPage+1 }"><span>다음 페이지</span></a>
-				</div>
 				<div class="text-center">
-					<ul class="pagination">
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Previous">
-							  <span aria-hidden="true">&laquo;</span>
-							  <span class="sr-only">Previous</span>
-							</a>
-						 </li>
-						<li><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="#">6</a></li>
-						<li><a href="#">7</a></li>
-						<li><a href="#">8</a></li>
-						<li><a href="#">9</a></li>
-						<li><a href="#">10</a></li>
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Next">
-							  <span aria-hidden="true">&raquo;</span>
-							  <span class="sr-only">Next</span>
-							</a>
-						</li>
-					</ul>
-				</div>
+		    		<ul class="pagination">
+		    			<li class="page-item">
+		    				<a class="page-link" href="./fbList?page=1"><span>처음</span></a>
+		    				<a id="prevPage" class="page-link" href="./fbList?page=${currPage-1}" aria-label="Previous">
+		    					<span aria-hidden="true">&laquo;</span>
+	                    		<span class="sr-only">Previous</span>
+		    				</a>
+		    			</li>
+		    			<li>
+		    				<a>${currPage}</a>
+		    			</li>
+		    			<li class="page-item">
+		    				<a id="nextPage" class="page-link" href="./fbList?page=${currPage+1}" aria-label="Next">
+		    					<span aria-hidden="true">&raquo;</span>
+	                    		<span class="sr-only">Next</span>
+		    				</a>
+		    				<a class="page-link" href="./fbList?page=${endPage }"><span>끝</span></a>
+		    			</li>
+		    		</ul>
+		    	</div>
 			</div>
 		</div>
     </div>
@@ -374,12 +371,19 @@
 		alert(msg);
 	}
 
-    var currPage = ${currPage};
-	console.log(currPage);
+	var currPage = ${currPage};
+	var endPage = ${endPage};
 	
-	if(currPage<1){
-		alert("이전 페이지가 없습니다.");
-		location.href="fbList";
+	if(currPage==1){
+		document.getElementById("prevPage").style.display="none";
+	}
+	if(currPage >1 && currPage < endPage){
+		document.getElementById("prevPage").style.display="inline";
+		document.getElementById("nextPage").style.display="inline";
+	}
+	
+	if(currPage == endPage){
+		document.getElementById("nextPage").style.display="none";
 	}		
 	
 	function login2(){

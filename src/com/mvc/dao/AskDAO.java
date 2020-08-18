@@ -28,11 +28,19 @@ public class AskDAO {
 		}
 	}
 
-	public ArrayList<AskDTO> list() {
-		String sql = "SELECT b_idx, id, subject, content, reg_date, bhit, category FROM bbs WHERE category=1 ORDER BY b_idx DESC";
+	public ArrayList<AskDTO> list(int page) {
+		
+		int pagePerCnt = 10; // 페이지 당 보여줄 게시물의 수
+		int end = page * pagePerCnt;
+		int start = (end-pagePerCnt)+1;
+		
+		String sql = "SELECT rnum, b_idx, id, subject, content, reg_date, bhit, category FROM (SELECT ROW_NUMBER() OVER(ORDER BY b_idx DESC) AS rnum, "
+				+ "b_idx, id, subject, content, reg_date, bhit, category FROM bbs WHERE category=1) WHERE rnum BETWEEN ? AND ?";
 		ArrayList<AskDTO> list = new ArrayList<AskDTO>();
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				AskDTO dto = new AskDTO();
@@ -144,6 +152,23 @@ public class AskDAO {
 			resClose();
 		}
 		return result;
+	}
+
+	public int pcAsk() {
+		String sql ="select count(*) as totalCount from bbs where category=1";
+		int count = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("totalCount");
+			}
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}	
+		return count;
 	}
 	
 }

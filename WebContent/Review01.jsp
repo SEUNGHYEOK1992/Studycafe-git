@@ -295,8 +295,8 @@
             <c:forEach items="${list}" var="bbs">
                 <c:choose>
                     <c:when test="${id==bbs.id}">
-                        <form method="post" action="rvupdate">		        
-                            <div style="border:1px solid #666; border-bottom:none; height:30px;">
+                        <form method="post" action="rvupdate"> 		        
+                            <div style="border:1px solid #666; border-bottom:; height:30px;">
                                     ${bbs.id}
                                     <input type="hidden" name="b_idx" value="${bbs.b_idx}"/>
                                     &nbsp; &nbsp; &nbsp; &nbsp;
@@ -304,22 +304,44 @@
                                     &nbsp; &nbsp; &nbsp; &nbsp;
                                     <input type="button" style="float: right; margin-right: 30px;" onclick="location.href='rvdel?idx=${bbs.b_idx}'" value="삭제"/>
                             </div>      	
-                            <div style="border:1px solid #666;  border-bottom:none; resize: none width: 800px; height: 80px;">
+                            <div style="border:1px solid #666;  border-bottom:; resize: none width: 800px; height: 80px;">
                                 <textarea name="rvcontent" style="width: 750px; height: 60px; resize:none; margin: 5px">${bbs.content }</textarea>
                             </div>
+
                          </form>
                     </c:when>
-                        
-                    <c:when test="${id != bbs.id}">                		
-                            <div style="border:1px solid #666; border-bottom:none;" >
+                    <c:when test="${id != bbs.id}">              		
+                            <div style="border:1px solid #666; border-bottom:;" >
                                 ${bbs.id}
                                 <input type="hidden" name="b_idx" value="${bbs.b_idx}"/>
                             </div>	         	
-                        <div style="resize: none width: 800px; height: 80px; border:1px solid #666;  border-bottom:none;">${bbs.content}</div>
-                        
+                        <div style="resize: none width: 800px; height: 80px; border:1px solid #666;  border-bottom:;">${bbs.content}</div>
                     </c:when>
-                </c:choose>	
+                </c:choose>
             </c:forEach>
+             
+            <div class="text-center">
+	    		<ul class="pagination">
+	    			<li class="page-item">
+	    				<a class="page-link" href="./rvlist?page=1"><span>처음</span></a>
+	    				<a id="prevPage" class="page-link" href="./rvlist?page=${currPage-1}" aria-label="Previous">
+	    					<span aria-hidden="true">&laquo;</span>
+                    		<span class="sr-only">Previous</span>
+	    				</a>
+	    			</li>
+	    			<li>
+	    				<a>${currPage}</a>
+	    			</li>
+	    			<li class="page-item">
+	    				<a id="nextPage" class="page-link" href="./rvlist?page=${currPage+1}" aria-label="Next">
+	    					<span aria-hidden="true">&raquo;</span>
+                    		<span class="sr-only">Next</span>
+	    				</a>
+	    				<a class="page-link" href="./rvlist?page=${endPage }"><span>끝</span></a>
+	    			</li>
+	    		</ul>
+   			</div>
+   			 
         </div>
     </div>
     <!-- 메인 끝 -->
@@ -353,6 +375,20 @@
 		alert(msg);
 	}
 
+	var currPage = ${currPage};
+	var endPage = ${endPage};
+	
+	if(currPage==1){
+		document.getElementById("prevPage").style.display="none";
+	}
+	if(currPage >1 && currPage < endPage){
+		document.getElementById("prevPage").style.display="inline";
+		document.getElementById("nextPage").style.display="inline";
+	}
+	
+	if(currPage == endPage){
+		document.getElementById("nextPage").style.display="none";
+	}
     
 </script>
 </html>

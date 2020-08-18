@@ -250,16 +250,16 @@
 		    		<ul class="pagination">
 		    			<li class="page-item">
 		    				<a class="page-link" href="./blackList?page=1"><span>처음</span></a>
-		    				<a class="page-link" href="./blackList?page=${currPage-1}" aria-label="Previous">
+		    				<a id="prevPage" class="page-link" href="./blackList?page=${currPage-1}" aria-label="Previous">
 		    					<span aria-hidden="true">&laquo;</span>
 	                    		<span class="sr-only">Previous</span>
 		    				</a>
 		    			</li>
 		    			<li>
-		    				<a href="#">${currPage}</a>
+		    				<a>${currPage}</a>
 		    			</li>
 		    			<li class="page-item">
-		    				<a class="page-link" href="./blackList?page=${currPage+1}" aria-label="Next">
+		    				<a id="nextPage" class="page-link" href="./blackList?page=${currPage+1}" aria-label="Next">
 		    					<span aria-hidden="true">&raquo;</span>
 	                    		<span class="sr-only">Next</span>
 		    				</a>
@@ -302,14 +302,16 @@
 	var currPage = ${currPage};
 	var endPage = ${endPage};
 	
-	if(currPage<1){
-		alert("이전 페이지가 없습니다.");
-		location.href="blackList";
-	}	
+	if(currPage==1){
+		document.getElementById("prevPage").style.display="none";
+	}
+	if(currPage >1 && currPage < endPage){
+		document.getElementById("prevPage").style.display="inline";
+		document.getElementById("nextPage").style.display="inline";
+	}
 	
-	if(currPage > endPage){
-		alert('다음 페이지가 없습니다.');
-		location.href="blackList";
+	if(currPage == endPage){
+		document.getElementById("nextPage").style.display="none";
 	}
 </script>
 </html>

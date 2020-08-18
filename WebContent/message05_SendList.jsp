@@ -346,13 +346,27 @@
                 </tr>
                 </c:forEach>
             </table>
-                <div class="pageArea">
-                    <a href="./sendList?page=1"><span>처음</span></a>
-                    <a href="./sendList?page=${currPage -1 }"><span id="spanPage">이전 페이지</span></a>
-                    <span><b>${currPage }</b></span>
-                    <a href="./sendList?page=${currPage+1 }"><span>다음 페이지</span></a>
-                    <a href="./sendList?page=${endPage }"><span>끝</span></a>
-            </div>
+                <div class="text-center">
+		    		<ul class="pagination">
+		    			<li class="page-item">
+		    				<a class="page-link" href="./sendList?page=1"><span>처음</span></a>
+		    				<a id="prevPage" class="page-link" href="./sendList?page=${currPage-1}" aria-label="Previous">
+		    					<span aria-hidden="true">&laquo;</span>
+	                    		<span class="sr-only">Previous</span>
+		    				</a>
+		    			</li>
+		    			<li>
+		    				<a>${currPage}</a>
+		    			</li>
+		    			<li class="page-item">
+		    				<a id="nextPage" class="page-link" href="./sendList?page=${currPage+1}" aria-label="Next">
+		    					<span aria-hidden="true">&raquo;</span>
+	                    		<span class="sr-only">Next</span>
+		    				</a>
+		    				<a class="page-link" href="./sendList?page=${endPage }"><span>끝</span></a>
+		    			</li>
+		    		</ul>
+		    	</div>
         </div>
     </div>
     <!-- 메인 끝 -->
@@ -387,14 +401,16 @@
 	var currPage = ${currPage};
 	var endPage = ${endPage};
 	
-	if(currPage<1){
-		alert("이전 페이지가 없습니다.");
-		location.href="sendList";
-	}	
+	if(currPage==1){
+		document.getElementById("prevPage").style.display="none";
+	}
+	if(currPage >1 && currPage < endPage){
+		document.getElementById("prevPage").style.display="inline";
+		document.getElementById("nextPage").style.display="inline";
+	}
 	
-	if(currPage > endPage){
-		alert('다음 페이지가 없습니다.');
-		location.href="sendList";
+	if(currPage == endPage){
+		document.getElementById("nextPage").style.display="none";
 	}
 	
 	function del(){

@@ -207,4 +207,9 @@ public class FreeBoardService {
 		return dao.popList();
 	}
 
+	public int pcfbList() {
+		FreeBoardDAO dao = new FreeBoardDAO();
+		return dao.pcfbList();
+	}
+
 }

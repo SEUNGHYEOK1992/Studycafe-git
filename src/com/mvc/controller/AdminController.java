@@ -39,7 +39,6 @@ public class AdminController extends HttpServlet {
 		
 		switch(reqAddr) {
 			case "/memberList":
-				
 				String pageParam = req.getParameter("page");
 				int page = 1;
 				if(pageParam != null) {
@@ -51,6 +50,9 @@ public class AdminController extends HttpServlet {
 				int totPage = totCount/listCount;
 				if(totCount % listCount > 0 ) {
 					totPage ++;
+				}
+				if(totPage ==0) {
+					totPage=1;
 				}
 				//System.out.println(totCount);
 				//System.out.println(totPage);

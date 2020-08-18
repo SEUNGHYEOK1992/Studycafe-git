@@ -184,7 +184,7 @@
 	        position: fixed;
 		    width: 250px;
 		    height: 200px;
-		    font-color: black;
+		    color: black;
 		    border: 1px solid black;
 		    left: 1630px;
 		    top: 400px;

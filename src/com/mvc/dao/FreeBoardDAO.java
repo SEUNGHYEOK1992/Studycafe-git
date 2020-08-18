@@ -432,6 +432,23 @@ public ArrayList<ReplyDTO> list(int b_idx) {
 	  return poplist;
 
 	}
+
+	public int pcfbList() {
+		String sql="select count(*) as totalCount from bbs where category=0";
+		int count = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("totalCount");
+			}
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}	
+		return count;
+	}
 	
 }
 	

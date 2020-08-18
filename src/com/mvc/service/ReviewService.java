@@ -34,8 +34,25 @@ public class ReviewService {
 
 	public void list() throws ServletException, IOException {
 		ReviewDAO dao = new ReviewDAO();
-		ArrayList<ReviewDTO> list = dao.list();
+		String pageParam = req.getParameter("page");
+		int page = 1;
+		if(pageParam != null) {
+			page = Integer.parseInt(pageParam);
+		}
+		int totCount = dao.pcrvlist();
+		int listCount =10;
+		int totPage = totCount/listCount;
+		if(totCount % listCount > 0 ) {
+			totPage ++;
+		}
+		if(totPage ==0) {
+			totPage=1;
+		}
+		dao = new ReviewDAO();
+		ArrayList<ReviewDTO> list = dao.list(page);
 		req.setAttribute("list", list);
+		req.setAttribute("currPage", page);
+		req.setAttribute("endPage", totPage);
 		RequestDispatcher dis = req.getRequestDispatcher("Review01.jsp");
 		dis.forward(req, resp);
 	

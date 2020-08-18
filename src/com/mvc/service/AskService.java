@@ -23,10 +23,29 @@ public class AskService {
 	}
 
 	public void list() throws ServletException, IOException {
+		
+		String pageParam = req.getParameter("page");
+		int page = 1;
+		if(pageParam != null) {
+			page = Integer.parseInt(pageParam);
+		}
 		AskDAO dao = new AskDAO(); // DB 필요로 인한 DAO 객체화
-		ArrayList<AskDTO> list = dao.list();
+		int totCount = dao.pcAsk();
+		int listCount =10;
+		int totPage = totCount/listCount;
+		if(totCount % listCount > 0 ) {
+			totPage ++;
+		}
+		if(totPage ==0) {
+			totPage=1;
+		}
+		
+		dao = new AskDAO(); // DB 필요로 인한 DAO 객체화
+		ArrayList<AskDTO> list = dao.list(page);
 		//System.out.println("리턴");
 		req.setAttribute("list", list);
+		req.setAttribute("currPage", page);
+		req.setAttribute("endPage", totPage);
 		RequestDispatcher dis = req.getRequestDispatcher("askBoard01_List.jsp");
 		dis.forward(req, resp);
 	}
@@ -103,5 +122,10 @@ public class AskService {
 		}
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);		
+	}
+
+	public int pcAsk() {
+		AskDAO dao = new AskDAO();
+		return dao.pcAsk();
 	}
 }

@@ -47,11 +47,23 @@ public class FreeBoardContoller extends HttpServlet {
 				if(pageParam != null) {
 					page = Integer.parseInt(pageParam);
 				}
+				
+				int totCount = service.pcfbList();
+				int listCount =10;
+				int totPage = totCount/listCount;
+				if(totCount % listCount > 0 ) {
+					totPage ++;
+				}
+				if(totPage ==0) {
+					totPage=1;
+				}
+				//System.out.println(totPage);
 				//System.out.println("fblist 요청");
 				ArrayList<FreeBoardDTO> list = null;
 				list = service.fbList(page);
 				req.setAttribute("list", list);
 				req.setAttribute("currPage", page);
+				req.setAttribute("endPage", totPage);
 				dis = req.getRequestDispatcher("freeBoard01_List.jsp");
 				dis.forward(req, resp);
 			break;

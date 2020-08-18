@@ -54,6 +54,9 @@ public class MessageController extends HttpServlet {
 				if(totCount % listCount > 0 ) {
 					totPage ++;
 				}
+				if(totPage == 0) {
+					totPage=1;
+				}
 				ArrayList<MessageDTO> list = null;
 				list = service.messageList(page);
 				req.setAttribute("m_list", list);

@@ -32,15 +32,19 @@ public class ReviewDAO {
 		}
 	}
 	
-	public ArrayList<ReviewDTO> list() {
+	public ArrayList<ReviewDTO> list(int page) {
 		String sql;
+		int pagePerCnt = 10; // 페이지 당 보여줄 게시물의 수
+		int end = page * pagePerCnt;
+		int start = (end-pagePerCnt)+1;
 		ArrayList<ReviewDTO> list = new ArrayList<ReviewDTO>();
 		try {
-			sql = "Select b_idx, id, content FROM bbs WHERE category = 2 ORDER BY b_idx DESC";
-			
+			sql = "SELECT rnum, b_idx, id, content FROM (SELECT ROW_NUMBER() OVER(ORDER BY b_idx DESC) AS rnum, "
+					+ "b_idx, id, content FROM bbs WHERE category=2) WHERE rnum BETWEEN ? AND ?";
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
 			rs = ps.executeQuery();
-			
 			while(rs.next()) {
 				ReviewDTO dto = new ReviewDTO();
 				dto.setB_idx(rs.getString("b_idx"));
@@ -152,6 +156,23 @@ public class ReviewDAO {
 		return result;
 		
 			
+	}
+
+	public int pcrvlist() {
+		String sql ="select count(*) as totalCount from bbs where category=2";
+		int count = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("totalCount");
+			}
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}	
+		return count;
 	}
 
 
