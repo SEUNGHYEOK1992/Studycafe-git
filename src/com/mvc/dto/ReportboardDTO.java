@@ -10,6 +10,7 @@ public class ReportboardDTO {
 	private String content;
 	private Date reg_date;
 	private int bHit;
+	private int category;
 	
 	public int getB_idx() {
 		return b_idx;
@@ -46,5 +47,11 @@ public class ReportboardDTO {
 	}
 	public void setbHit(int bHit) {
 		this.bHit = bHit;
+	}
+	public int getCategory() {
+		return category;
+	}
+	public void setCategory(int category) {
+		this.category = category;
 	}
 }

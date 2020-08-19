@@ -29,11 +29,17 @@ public class ReportboardDAO {
 		
 	}
 	
-	public ArrayList<ReportboardDTO> list() {
-		String sql = "SELECT b_idx, id, subject, reg_date, bHit FROM bbs WHERE id='admin' AND category IN(0 ,1) ORDER BY b_idx DESC";
+	public ArrayList<ReportboardDTO> list(int page) {
+		int pagePerCnt = 10; // 페이지 당 보여줄 게시물의 수
+		int end = page * pagePerCnt;
+		int start = (end-pagePerCnt)+1;
+		String sql = "SELECT rnum, b_idx, id, subject, reg_date, bHit FROM(SELECT ROW_NUMBER() OVER(ORDER BY b_idx DESC) AS rnum, " 
+				+"b_idx, id, subject, reg_date, bHit FROM bbs WHERE id='admin' AND category IN(0 ,1)) WHERE rnum BETWEEN ? AND ?";
 		ArrayList<ReportboardDTO> list = new ArrayList<ReportboardDTO>();
 		try {
 			ps = conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				ReportboardDTO dto = new ReportboardDTO();
@@ -66,8 +72,8 @@ public class ReportboardDAO {
 		
 	}
 
-	public Object reportdetail(int b_idx) {
-		String sql = "SELECT b_idx, id, subject, content, reg_date FROM bbs WHERE b_idx=?";
+	public ReportboardDTO reportdetail(int b_idx) {
+		String sql = "SELECT b_idx, id, subject, content, reg_date, category FROM bbs WHERE b_idx=?";
 		ReportboardDTO dto = null;
 		try {
 			ps = conn.prepareStatement(sql);
@@ -80,7 +86,9 @@ public class ReportboardDAO {
 				dto.setSubject(rs.getString("subject"));
 				dto.setContent(rs.getString("content"));
 				dto.setReg_date(rs.getDate("reg_date"));
-			}System.out.println("report dto 받아옴 2");
+				dto.setCategory(rs.getInt("category"));
+			}
+			//System.out.println("report dto 받아옴 2");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -89,5 +97,23 @@ public class ReportboardDAO {
 		}
 		return dto;
 	}
+
+	public int pcrepoList() {
+		String sql="select count(*) as totalCount from bbs where category IN(0,1) AND id='admin'";
+		int count = 0;
+		try {
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt("totalCount");
+			}
+		}catch(Exception e ) {
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}	
+		return count;
+	}
+
 
 }
