@@ -183,6 +183,31 @@
         #main {
             min-height: 100%;
         }
+        
+        #profileBox{
+        	position: relative;
+        	top: 100px;
+        	left: 800px;
+        	width: 1000px;
+        }
+        
+        table {
+        	position: absolute;
+        	top: 170px
+        }
+        
+        th, td{
+        	padding: 10px;
+        }
+        
+        #profileBox img{
+		    vertical-align: middle;
+		    width: 310px;
+		    height: 200px;
+		    left: 0px;
+		    position: absolute;
+		    top: -40px;
+        }
 
         /* ---------- main 끝 ---------- */
 
@@ -233,17 +258,17 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
         <div id="menu">
             <ul>
-	                <li><a href="#">스터디룸</a></li>
-	                <li><a href="#">예약</a></li>
+	                <li><a href="intro.jsp">스터디룸</a></li>
+	                <li><a href="resv01_reservation.jsp">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -260,7 +285,6 @@
 				<hr id="hrBar" >
 				<div id="buttonBox">
 	                <button id="profile" class="btn btn-default" type="submit" formmethod="post" onclick="location.href='profileDetail?id=${id}'"><i class="fas fa-user-cog fa-lg"></i></button>
-	                <!-- <a id="message" class="btn btn-default" href="messageList"><i class="far fa-envelope fa-2x"></i></i></i></a> -->
 	                <button id="message" class="btn btn-default" onclick="location.href='messageList'"><i class="far fa-envelope-open fa-lg"></i></button>
 	                <button id="logout" class="btn btn-default" onclick="location.href='logout'"><span>로그아웃</span></button>
 				</div>
@@ -278,59 +302,61 @@
  	
     <!-- 메인 시작 -->
     <div id="main">
-        <img src="${path }" width="200px" />       
-        <form action="profileUpdateForm" method="post">        
-	        <table>
-	      		<tr>
-	      			<th>${profileDetail.id}님의 프로필
-	        	        <input type="hidden" name="id" value="${profileDetail.id}" readonly />
-	            	</th>
-	            </tr>
-	            <tr>
-	                <th>이름</th>
-	                <td>
-	                	<input type="text" name="name" value="${profileDetail.name}" readonly />
-	                </td>        
-	            </tr>
-	            <tr>
-	                <th>생년월일</th>
-	                <td>
-	                    <input type="text" name="birth" value="${profileDetail.birth}" readonly />
-	                </td>
-	            </tr>
-	            <tr>
-	                <th>이메일</th>
-	                <td>
-	                    <input type="text" name="email" value="${profileDetail.email}" readonly />
-	                </td>
-	            </tr>
-	            <tr>
-	                <th>휴대폰</th>
-	                <td>
-	                    <input type="text" name="phone" value="${profileDetail.phone}" readonly />
-	                </td>
-	            </tr>
-	            <tr>
-	                <th>주소</th>
-	                <td>
-	                    <input type="text" name="addr" value="${profileDetail.addr}" readonly />
-	                </td>
-	            </tr>
-	            <%-- <img src="/photo/${detail.newFileName}" id="profilepic"/>         --%>
-	            <tr>
-	            	<th>프로필 사진</th>
-	            	<td>
-	            		<input type ="text" value="${profileDetail.oriFileName}" readonly />
-	            	</td>
-	            </tr>     
-	            <tr>
-	            	<td colspan="2">       
-	            		<input type="submit" id="modified" value="수정" >
-           				<input type="button" id="delete" value="탈퇴" onclick="location.href='delProfile?id=${profileDetail.id}'">
-           			</td>
-           		</tr>
-        	</table>
-        </form>
+    	<div id="profileBox">
+	        <img src="${path }"/>       
+	        <form action="profileUpdateForm" method="post">        
+		        <table>
+		      		<tr>
+		      			<th>${profileDetail.id}님의 프로필
+		        	        <input type="hidden" name="id" value="${profileDetail.id}" readonly />
+		            	</th>
+		            </tr>
+		            <tr>
+		                <th>이름</th>
+		                <td>
+		                	<input type="text" name="name" value="${profileDetail.name}" readonly />
+		                </td>        
+		            </tr>
+		            <tr>
+		                <th>생년월일</th>
+		                <td>
+		                    <input type="text" name="birth" value="${profileDetail.birth}" readonly />
+		                </td>
+		            </tr>
+		            <tr>
+		                <th>이메일</th>
+		                <td>
+		                    <input type="text" name="email" value="${profileDetail.email}" readonly />
+		                </td>
+		            </tr>
+		            <tr>
+		                <th>휴대폰</th>
+		                <td>
+		                    <input type="text" name="phone" value="${profileDetail.phone}" readonly />
+		                </td>
+		            </tr>
+		            <tr>
+		                <th>주소</th>
+		                <td>
+		                    <input type="text" name="addr" value="${profileDetail.addr}" readonly />
+		                </td>
+		            </tr>
+		            <%-- <img src="/photo/${detail.newFileName}" id="profilepic"/>         --%>
+		            <tr>
+		            	<th>프로필 사진</th>
+		            	<td>
+		            		<input type ="text" value="${profileDetail.oriFileName}" readonly />
+		            	</td>
+		            </tr>     
+		            <tr>
+		            	<td colspan="2" style="text-align: center;">       
+		            		<input type="submit" id="modified" value="수정"  class="btn btn-default" style="margin-right: 30px;">
+	           				<input type="button" id="delete" value="탈퇴" onclick="location.href='delProfile?id=${profileDetail.id}'" class="btn btn-default">
+	           			</td>
+	           		</tr>
+	        	</table>
+	        </form>
+        </div>
     </div>
     <!-- 메인 끝 -->
 

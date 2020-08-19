@@ -181,8 +181,70 @@
         /* ---------- main ---------- */
         
         #main {
-            min-height: 100%;
+            height: 750px;
         }
+        
+        #main::after {
+        	width: 100%;
+			height: 100%;
+			content: "";
+			background: url("./15.jpg");
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+			opacity: 0.4;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+        }
+        
+        #loginWrapper{
+       	    position: relative;
+		    top: 160px;
+		    left: 810px;
+		    background-color: #a3a1a1;
+		    width: 300px;
+		    height: 300px;
+		    vertical-align: middle;
+		    border-radius: 10px;
+        }
+        
+		#loginId {
+		    position: absolute;
+		    top: 50px;
+		    left: 60px;
+		    height: 50px;
+		    border-radius: 10px;
+   		    border: 0px;
+		}
+		
+		#loginPw{
+			position: absolute;
+			top: 110px;
+			left: 60px;
+			height: 50px;
+		    border-radius: 10px;
+		    border: 0px;
+		}
+		
+		#loginButton{
+			position: absolute;
+			top: 180px;
+			left: 100px;
+		}
+		
+		#joinButton{
+			position: absolute;
+		    top: 260px;
+		    left: 220px;
+		    font-size: 15px;
+		}
+		
+		input:focus {
+			outline: none;
+		}
 
         /* ---------- main 끝 ---------- */
 
@@ -233,17 +295,17 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
         <div id="menu">
             <ul>
-	                <li><a href="#">스터디룸</a></li>
-	                <li><a href="#">예약</a></li>
+	                <li><a href="intro.jsp">스터디룸</a></li>
+	                <li><a href="resv01_reservation.jsp">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -279,16 +341,16 @@
     <!-- 메인 시작 -->
     <div id="main">
         <form method="post" id="authForm" action="login">
-            <div>            
-                <input type="text" id="loginId" name="id" placeholder="ID" >          
-                <input type="password" id="loginPw" name="pw" placeholder="Password" >
+            <div id="loginWrapper">            
+                <input type="text" id="loginId" name="id" placeholder="   ID" ><br>      
+                <input type="password" id="loginPw" name="pw" placeholder="   Password" >
+	            <div id="loginButton">
+	                <input type="submit" value="로그인" class="btn btn-default" style="width: 90px; height: 40px;">
+	            </div>        
+	            <div id="joinButton">
+	                <a href="member02_join.jsp" style="color: white">회원가입</a>
+	            </div>
             </div>            
-            <div id="login">
-                <input type="submit" value="로그인">
-            </div>        
-            <div id="join">
-                <input type="button" onclick="location.href='member02_join.jsp'" value="회원가입">
-            </div>
         </form>
     </div>
     <!-- 메인 끝 -->

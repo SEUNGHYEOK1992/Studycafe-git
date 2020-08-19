@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +9,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <script src="https://kit.fontawesome.com/a814f74484.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/js/lightbox.min.js"></script>
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
         @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css);
@@ -182,24 +183,47 @@
         /* ---------- main ---------- */
         
         #main {
-            min-height: 100%;
+            height: 1150px;
         }
-
-        .messageTableBox{
-        	position: relative;
-		    width: 750px;
-		    top: 100px;
-		    left: 600px;
+        
+        #mainTitle{
+        	position: absolute;
+			top: 220px;
+			left: 250px;
         }
-      
-        .txt_line {
-            width:130px;
-            padding:0 5px;
-            overflow:hidden;
-            text-overflow:ellipsis;
-            white-space:nowrap;
+        
+        hr{
+            border: 1px solid rgb(148, 148, 148);
         }
-
+        
+        #img1, #img2, #img3, #img4{
+        	width: 500px;
+        }
+        
+        #box1{
+        	position: absolute;
+		    top: 350px;
+		    left: 400px;
+		}
+		
+		#box4{
+			position: absolute;
+		    top: 350px;
+ 	    	left: 1100px;
+		}
+		
+		#box2{
+			position: absolute;
+			top: 850px;
+			left: 400px;
+		}
+		
+		#box3{
+			position: absolute;
+			top: 850px;
+			left: 1100px;
+		}
+		
         /* ---------- main 끝 ---------- */
 
         /* ---------- footer ---------- */
@@ -291,59 +315,47 @@
     <!-- 헤더 끝 -->
 
 <!------------------------------------------------------------------------------------------------------->
- 	
     <!-- 메인 시작 -->
     <div id="main">
-        <div class="messageTableBox">
-            <img src=""/>
-            <button id="btn_del" onclick="del()">삭제</button>
-            <button id="btn_wri" onclick="location.href='message02_send.jsp'">쓰기</button>
-            <a href="messageList" style="margin-right: 20px; margin-left: 20px;">전체보기</a>
-            <a href="falseMsg" style="margin-right: 20px;">안읽은 메시지 보기</a>
-            <a href="sendList" style="margin-right: 20px;">보낸 메시지 보기</a>
-            <table class="table table-hover">
-            	<thead>
-	                <tr>
-	                    <th>체크</th>
-	                    <th>번호</th>
-	                    <th>받는 사람</th>
-	                    <th>내용</th>
-	                    <th>날짜</th>
-	                </tr>
-                </thead>
-                <c:forEach items="${send_List }" var="sendList">
-                <tr>
-                    <td><input type="checkbox" value="${sendList.m_idx }" /></td> <!-- 체크박스는 mvc 에서 코딩할 때 했던 방법 사용할지?-->
-                    <td>${sendList.m_idx }</td>
-                    <td>${sendList.recv_id }</td>
-                    <td><div class="txt_line"><a href="sendDetail?m_idx=${sendList.m_idx }">${sendList.mess_content }</a></div></td>
-                    <!--showpopup(); = 쪽지 상세보기 팝업 함수-->
-                    <td>${sendList.mess_reg_date }</td>
-                </tr>
-                </c:forEach>
-            </table>
-                <div class="text-center">
-		    		<ul class="pagination">
-		    			<li class="page-item">
-		    				<a class="page-link" href="./sendList?page=1"><span>처음</span></a>
-		    				<a id="prevPage" class="page-link" href="./sendList?page=${currPage-1}" aria-label="Previous">
-		    					<span aria-hidden="true">&laquo;</span>
-	                    		<span class="sr-only">Previous</span>
-		    				</a>
-		    			</li>
-		    			<li>
-		    				<a>${currPage}</a>
-		    			</li>
-		    			<li class="page-item">
-		    				<a id="nextPage" class="page-link" href="./sendList?page=${currPage+1}" aria-label="Next">
-		    					<span aria-hidden="true">&raquo;</span>
-	                    		<span class="sr-only">Next</span>
-		    				</a>
-		    				<a class="page-link" href="./sendList?page=${endPage }"><span>끝</span></a>
-		    			</li>
-		    		</ul>
-		    	</div>
-        </div>
+    	
+    	<div id="mainTitle">
+    		<span style="font-size: 35px;">스터디룸 소개</span><hr>
+    	</div>
+    	
+    	<div id="box1">
+    		<h3>개인형 자습실</h3>
+    		<a href="./15.jpg" data-lightbox="mvc-set">
+	    		<img src="./15.jpg" id="img1">
+    		</a>
+    	</div>
+    	
+    	<!--------------->
+    	
+    	<div id="box2">
+    		<h3>미팅룸</h3>
+    		<a href="./18.jpg" data-lightbox="mvc-set">
+	    		<img src="./18.jpg" id="img2">
+    		</a>
+    	</div>
+    	
+    	<!--------------->
+    	
+    	<div id="box3">
+    		<h3>단체 강의실</h3>
+    		<a href="./22.jpg" data-lightbox="mvc-set">
+	    		<img src="./22.jpg" id="img3">
+    		</a>
+    	</div>
+    	
+    	<!--------------->
+    	
+    	<div id="box4">
+    		<h3>카페형 자습실</h3>
+    		<a href="./3.jpg" data-lightbox="mvc-set">
+	    		<img src="./3.jpg" id="img4">
+    		</a>
+    	</div>
+    	
     </div>
     <!-- 메인 끝 -->
 
@@ -371,48 +383,9 @@
 
 </body>
 <script>
-	var currPage = ${currPage};
-	//console.log(currPage);
-	
-	var currPage = ${currPage};
-	var endPage = ${endPage};
-	
-	if(currPage==1){
-		document.getElementById("prevPage").style.display="none";
-	}
-	if(currPage >1 && currPage < endPage){
-		document.getElementById("prevPage").style.display="inline";
-		document.getElementById("nextPage").style.display="inline";
-	}
-	
-	if(currPage == endPage){
-		document.getElementById("nextPage").style.display="none";
-	}
-	
-	function del(){
-		var checkArr = [];
-		$("input[type='checkbox']:checked").each(function(idx,item){
-			console.log(idx,$(this).val());
-			checkArr.push($(this).val())
-		});
-		console.log(checkArr);
-		
-		$.ajax({
-			type:"get",
-			url:"msgDel",
-			data:{"delList":checkArr},
-			dataType:"JSON",
-			success:function(result){
-				console.log(result);
-				if(result.msgDelete){
-					alert("게시물 삭제에 성공 했습니다.");
-				}
-				location.href="sendList";
-			},
-			error:function(e){
-				console.log(e);
-			}
-		});
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg);
 	}
 </script>
 </html>

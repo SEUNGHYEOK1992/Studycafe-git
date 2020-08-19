@@ -181,7 +181,49 @@
         /* ---------- main ---------- */
         
         #main {
-            min-height: 100%;
+            height: 750px;
+        }
+        
+        #main::after {
+        	width: 100%;
+			height: 100%;
+			content: "";
+			background: url("./15.jpg");
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+			opacity: 0.4;
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+        }
+		
+		#joinform{
+			position: relative;
+		    top: 100px;
+		    left: 600px;
+		    background-color: #a3a1a1;
+		    width: 750px;
+		    height: 500px;
+		    border-radius: 10px;
+		}
+		
+		table{
+			position: absolute;
+			position: absolute;
+		    top: 40px;
+		    left: 90px;
+		    color: white;
+		}
+		        
+        td, th{
+        	padding: 10px;
+        }
+        
+        input, option{
+        	color: black;
         }
 
         /* ---------- main 끝 ---------- */
@@ -233,17 +275,17 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
         <div id="menu">
             <ul>
-	                <li><a href="#">스터디룸</a></li>
-	                <li><a href="#">예약</a></li>
+	                <li><a href="intro.jsp">스터디룸</a></li>
+	                <li><a href="resv01_reservation.jsp">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -294,8 +336,8 @@
                     </td>
                     <td>
                         <input type="text" name="id" id="id" size="20px">
-                        <input type="button" id="overlay" value="중복확인">
-                        <input type="button" id="kickChk" value="제명확인">
+                        <input type="button" id="overlay" value="중복확인" style="margin-left: 10px;" class="btn btn-default">
+                        <input type="button" id="kickChk" value="제명확인" style="margin-left: 10px;" class="btn btn-default">
                     </td>
                 </tr>
                 <tr>
@@ -318,7 +360,7 @@
                 -->
                 <tr>
                       <td>생년월일</td>
-                      <td>
+                      <td style="color: black;">
                                <script type="text/javascript">
                              var today = new Date();
                              var toyear = parseInt(today.getFullYear ());
@@ -350,7 +392,7 @@
                 </tr>
                 <tr>
                     <td>이메일</td>
-                    <td>
+                    <td style="color: black;">
                         <input type="text" name="email" id="email" size="10">@
                         <select name ="email2" id="email2">
                             <option value="google.com">google.com</option>
@@ -365,7 +407,7 @@
                     <td>
                         전화번호
                     </td>
-                    <td>
+                    <td style="color: black;">
                         <select id="phone" name="phone">
                             <option value="010">010</option>
                             <option value="011">011</option>                  
@@ -375,7 +417,7 @@
                     </td>
                 </tr>
             </table>
-            <input type="button" id="join" value="회원가입">
+            <input type="button" id="join" value="회원가입" style="left: 310px; position: absolute; top: 400px; width: 100px; height: 40px; font-size: 17px;" class="btn btn-default">
         </div>
     </div>
     <!-- 메인 끝 -->

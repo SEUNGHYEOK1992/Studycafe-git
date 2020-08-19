@@ -187,6 +187,41 @@
         #main {
             min-height: 100%;
         }
+        
+       .board_zone {
+		    position: relative;
+		    top: 160px;
+		    left: 600px;
+		    width: 1300px;
+	    }
+		
+		.boardTitle{
+			position: absolute;
+			top: 220px;
+			left: 250px;
+		}
+		
+		hr{
+            border: 1px solid rgb(148, 148, 148);
+        }
+        
+        #comment {
+		    position: relative;
+		    top: 230px;
+		    left: 596px;
+		    width: 720px;
+		}
+		
+		#likeCount, #dislikeCount{
+			width: 70px;
+			border: 0px;
+		}
+		
+		#deleteButton{
+		    position: relative;
+		    top: -67px;
+		    left: 300px;
+		}
 
         /* ---------- main 끝 ---------- */
 
@@ -237,17 +272,17 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
         <div id="menu">
             <ul>
-	                <li><a href="#">스터디룸</a></li>
-	                <li><a href="#">예약</a></li>
+	                <li><a href="intro.jsp">스터디룸</a></li>
+	                <li><a href="resv01_reservation.jsp">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -300,7 +335,7 @@
                                     <input type="hidden" name ="b_idx" value="${bbs.b_idx }"/>
                                     <span style="margin-right: 10px; font-weight: 800;" name="id">${bbs.id}</span>
                                     <span style="font-size: 13px;" name="reg_date">${bbs.reg_date}</span>
-                                    <span style="float: right; font-weight: 700;" name="bHit">${bbs.bHit}</span>
+                                    <span style="float: right; font-weight: 700;" name="bHit">조회수 : ${bbs.bHit}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -321,12 +356,12 @@
                     <br>
                     <a class="btn btn-default pull-right" onclick="location.href='fbList'">목록</a>
                     <input type="submit" class="btn btn-default" style="margin-right: 10px;" value="수정"/>
-                    <a class="btn btn-default" onclick="location.href='fbDelete?b_idx=${bbs.b_idx}'" style="margin-right: 10px;">삭제</a>
                     <a class="btn btn-default" onclick="like()" style="margin-right: 10px;">추천</a>
-                    <input type ="text" id="likeCount" name="like" value="" />
+                    <input type ="text" id="likeCount" name="like" value="" readonly/>
                     <a class="btn btn-default" onclick="disLike()" style="margin-right: 10px;">싫어요</a>
-                    <input type ="text" id="dislikeCount" name="dislike" value="" />
+                    <input type ="text" id="dislikeCount" name="dislike" value="" readonly/>
                     <a class="btn btn-default pull-right" onclick="singo()" style="margin-right: 10px;">신고</a>
+                    <a class="btn btn-default" onclick="location.href='fbDelete?b_idx=${bbs.b_idx}'" id="deleteButton">삭제</a>
                     </form>
                 </div>
             </div>
@@ -348,7 +383,7 @@
                                     <input type="hidden" name ="b_idx" value="${bbs.b_idx }"/>
                                     <span style="margin-right: 10px; font-weight: 800;" name="id">${bbs.id}</span>
                                     <span style="font-size: 13px;" name="reg_date">${bbs.reg_date}</span>
-                                    <span style="float: right; font-weight: 700;" name="bHit">${bbs.bHit}</span>
+                                    <span style="float: right; font-weight: 700;" name="bHit">조회수 : ${bbs.bHit}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -361,7 +396,7 @@
                             </tr>
                              <tr>
                                 <td>
-                                    첨부파일 : <input type ="text" placeholder="없음" value="${bbs.oriFileName}" readonly />
+                                    첨부파일 : <input type ="text" placeholder="없음" value="${bbs.oriFileName}" style="border: 0px;" readonly />
                                 </td>
                             </tr>
                         </tbody>
@@ -369,9 +404,9 @@
                     <br>
                     <a class="btn btn-default pull-right" onclick="location.href='fbList'">목록</a>
                     <a class="btn btn-default" onclick="like()" style="margin-right: 10px;">추천</a>
-                    <input type ="text" id="likeCount" name="like" value="" />
+                    <input type ="text" id="likeCount" name="like" value="" style="width: 70px; border: 0px;" readonly/>
                     <a class="btn btn-default" onclick="disLike()" style="margin-right: 10px;">싫어요</a>
-                    <input type ="text" id="dislikeCount" name="dislike" value="" />
+                    <input type ="text" id="dislikeCount" name="dislike" value="" style="width: 70px; border: 0px;" readonly/>
                     <a class="btn btn-default pull-right" onclick="singo()" style="margin-right: 10px;">신고</a>
                     </form>
                 </div>
@@ -380,27 +415,27 @@
             </c:choose>
 
             <!-- 댓글 시작 -->
-            <div id="comment" style="margin-left:300px; margin-top:400px; margin-bottom:200px;">
-                <table border="1" bordercolor="lightgray">
+            <div id="comment">
+                <table border="1" class="table table-bordered" id="commentTable">
                     <tr>
                         <form action="rpwrite?b_idx=${bbs.b_idx }" method="post">
                             <input type="hidden" value="${bbs.id }"/>
                             <!-- 아이디-->
-                            <td width="150">
+                            <td style="width: 150px; text-align: center; vertical-align: middle;">
                                 <div>
                                     ${id}
                                 </div>
                             </td>
                             <!-- 본문 작성-->
-                            <td width="550">
+                            <td style="width: 550px;">
                                 <div>
-                                    <textarea name="comment" rows="4" cols="70" ></textarea>
+                                    <textarea name="comment" style="resize: none; width: 530px; vertical-align: middle;" ></textarea>
                                 </div>
                             </td>
                             <!-- 댓글 등록 버튼 -->
-                            <td width="100">
+                            <td style="width: 300px; text-align: center; vertical-align: middle;">
                                 <div id="btn" style="text-align:center;">
-                                    <input type="submit" value="저장"/>    
+                                    <input type="submit" value="저장" class="btn btn-default" style="padding: 2px 7px;"/>    
                                 </div>
                             </td>
                         </form>
@@ -410,7 +445,7 @@
                    <form method="post" action="rpupdateForm?b_idx=${bbs.b_idx }">
                     <tr>
                         <!-- 아이디 -->
-                        <td width="150">
+                        <td style="width: 150px; text-align: center;">
                             <div>              
                                ${Reply.id}<br>
                                <input type="hidden" name="repl_idx" value="${Reply.repl_idx }" />
@@ -419,15 +454,15 @@
                         <!-- 본문내용 -->
                        <c:choose>
                             <c:when test="${id== Reply.id}">
-                                <td width="550">
+                                <td style="width: 550px;">
                                     <div class="text_wrapper" id="repl_comment">
-                                        <input type="text" name="repl_comment" value="${Reply.repl_comment}" />
+                                        <input type="text" name="repl_comment" value="${Reply.repl_comment}" style="border: 0px;" />
                                     </div>
                                     </td>
                         <!-- 버튼 -->
-                                <td width="100">   
-                                    <input type="submit" value="수정"/>   
-                                    <input type="button" onclick= "location.href='rpdel?repl_idx=${Reply.repl_idx}&&b_idx=${bbs.b_idx }'" value="삭제"/>                
+                                <td style="width: 300px; text-align: center;">   
+                                    <input type="submit" value="수정" class="btn btn-default" style="padding: 2px 7px;"/>   
+                                    <input type="button" onclick= "location.href='rpdel?repl_idx=${Reply.repl_idx}&&b_idx=${bbs.b_idx }'" value="삭제" class="btn btn-default" style="padding: 2px 7px;"/>                
                                 </td>
                               </c:when>
                             <c:otherwise>

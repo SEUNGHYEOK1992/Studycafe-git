@@ -42,8 +42,8 @@ public class MessageService {
 		String send_id = (String) req.getSession().getAttribute("id");
 		String recv_id = req.getParameter("recv_id");
 		String formtext = req.getParameter("formtext");
-		System.out.println(send_id);
-		System.out.println(recv_id +" / "+formtext );
+		//System.out.println(send_id);
+		//System.out.println(recv_id +" / "+formtext );
 		MessageDAO dao = new MessageDAO();
 		return dao.messageSend(send_id,recv_id,formtext);
 	}

@@ -184,14 +184,38 @@
         /* ---------- main ---------- */
         
         #main {
-            min-height: 100%;
+            height: 800px;
         }
+        
         .txt_line {
-            width:130px;
-            padding:0 5px;
-            overflow:hidden;
-            text-overflow:ellipsis;
-            white-space:nowrap;
+		    width: 130px;
+		    padding: 0 5px;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    white-space: nowrap;
+		    left: 160px;
+		    position: relative;
+		}
+        
+        .board_zone {
+		    position: relative;
+		    top: 160px;
+		    left: 350px;
+		    width: 1200px;
+		}
+	
+		.boardTitle{
+			position: absolute;
+			top: 220px;
+			left: 250px;
+		}
+		
+		#freeBoard th, td{
+			text-align: center;
+		}
+		
+		hr{
+            border: 1px solid rgb(148, 148, 148);
         }
 
         /* ---------- main 끝 ---------- */
@@ -243,17 +267,17 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
         <div id="menu">
             <ul>
-	                <li><a href="#">스터디룸</a></li>
-	                <li><a href="#">예약</a></li>
+	                <li><a href="intro.jsp">스터디룸</a></li>
+	                <li><a href="resv01_reservation.jsp">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -270,7 +294,6 @@
 				<hr id="hrBar" >
 				<div id="buttonBox">
 	                <button id="profile" class="btn btn-default" type="submit" formmethod="post" onclick="location.href='profileDetail?id=${id}'"><i class="fas fa-user-cog fa-lg"></i></button>
-	                <!-- <a id="message" class="btn btn-default" href="messageList"><i class="far fa-envelope fa-2x"></i></i></i></a> -->
 	                <button id="message" class="btn btn-default" onclick="location.href='messageList'"><i class="far fa-envelope-open fa-lg"></i></button>
 	                <button id="logout" class="btn btn-default" onclick="location.href='logout'"><span>로그아웃</span></button>
 				</div>
@@ -290,8 +313,8 @@
     <div id="main">
         <div class="boardTitle"><h1>자유게시판</h1><hr></div>
 		<div class="board_zone">
-			<div class="board_list_table" style="width: 70%;">
-				<table class="table table-hover">
+			<div class="board_list_table">
+				<table class="table table-hover" id="freeBoard">
 					<thead>
 						<tr>
 							<th>번호</th>
@@ -305,7 +328,7 @@
 						<c:forEach items="${list }" var="bbs">
 							<tr>
 								<td style="text-align: center;">${bbs.b_idx }</td>
-								<td style="text-align: center;"><div class="txt_line"><a href="fbdetail?b_idx=${bbs.b_idx }">${bbs.subject }</a></div></td>
+								<td><div class="txt_line"><a href="fbdetail?b_idx=${bbs.b_idx }">${bbs.subject }</a></div></td>
 								<td style="text-align: center;">${bbs.id }</td>
 								<td style="text-align: center;">${bbs.reg_date }</td>
 								<td style="text-align: center;">${bbs.bHit }</td>

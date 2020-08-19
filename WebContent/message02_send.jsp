@@ -192,11 +192,6 @@
             min-height: 100%;
         }
 
-        .send{
-            position: absolute;
-            left: 18%;
-            top: 16%;
-        }
         #formtext{
             resize: none;
             width: 313px;
@@ -205,10 +200,36 @@
             left: 18%;
             top: 22%;           
         }
+        
         #btn_send{
             position: absolute;
             left: 43%;
             top: 70%;
+        }
+        
+        #cancel{
+        	position: relative;
+            left: 480px;
+            top: 340px;
+        }
+        
+        .send{
+        	position: absolute;
+   			top: -60px;
+   			left: 340px;
+        }
+        
+        #sendBox{
+        	position: relative;
+		    top: 200px;
+		    left: 460px;
+		    width: 1000px;
+        }
+        
+        #btn_send{
+        	position: relative;
+		    left: 470px;
+		    top: 340px;
         }
 
         /* ---------- main 끝 ---------- */
@@ -260,17 +281,17 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
         <div id="menu">
             <ul>
-	                <li><a href="#">스터디룸</a></li>
-	                <li><a href="#">예약</a></li>
+	                <li><a href="intro.jsp">스터디룸</a></li>
+	                <li><a href="resv01_reservation.jsp">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -305,22 +326,23 @@
  	
     <!-- 메인 시작 -->
     <div id="main">
-        
-        <!--받는 사람 및 상단-->
-        <div class="send">
-            <b>받는사람 :</b> <input type="text" id="recv_id" name="recv_id" value="<%=recv_id %>" maxlength="8"/>
-            <!--<button id="idchk" onclick="location.href='msgIdChk?idChk=<%=recv_id%>'">ID 체크</button> -->
-            <input type="button" id="idchk" value="ID체크"/>
-        </div>
-        <!--내용-->
-        <div>
-            <textarea id="formtext"></textarea>
-        </div>
-        <!--보내기 버튼-->
-        <div>
-            <input type="button" id="btn_send" value="보내기"/>
-        </div>
-
+        <div id="sendBox">
+	        <!--받는 사람 및 상단-->
+	        <div class="send">
+	            <b>받는사람 :</b> <input type="text" id="recv_id" name="recv_id" value="<%=recv_id %>" maxlength="8"/>
+	            <!--<button id="idchk" onclick="location.href='msgIdChk?idChk=<%=recv_id%>'">ID 체크</button> -->
+	            <input type="button" id="idchk" value="ID체크"/>
+	        </div>
+	        <!--내용-->
+	        <div style="position: relative; left: 155px;">
+	            <textarea id="formtext"></textarea>
+	        </div>
+	        <!--보내기 버튼-->
+	        <div>
+	            <input type="button" id="btn_send" value="보내기"/>
+	            <input type="button" id="cancel" onclick="location.href='messageList'" value="돌아가기"/>
+	        </div>
+		</div>
     </div>
     <!-- 메인 끝 -->
 

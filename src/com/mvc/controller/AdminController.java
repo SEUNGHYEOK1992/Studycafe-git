@@ -62,7 +62,19 @@ public class AdminController extends HttpServlet {
 				req.setAttribute("list", list);
 				req.setAttribute("currPage", page);
 				req.setAttribute("endPage", totPage);
-				dis = req.getRequestDispatcher("admin01_Manage.jsp");
+				String admin = (String)req.getSession().getAttribute("id");
+				String pageMove ="admin01_Manage.jsp";
+				String msg="";
+				if(admin == null) {
+					pageMove = "member01_login.jsp";
+				}else {
+					if(!admin.equals("admin")) {
+						msg = "접근할 수 없습니다.";
+						req.setAttribute("msg", msg);
+						pageMove = "index.jsp";
+					}
+				}
+				dis = req.getRequestDispatcher(pageMove);
 				dis.forward(req, resp);
 			break;
 			
@@ -70,7 +82,18 @@ public class AdminController extends HttpServlet {
 				//System.out.println("디테일 요청");
 				AdminDTO dto = service.detail();
 				req.setAttribute("info", dto);
-				dis=req.getRequestDispatcher("admin02_View.jsp");
+				pageMove ="admin02_View.jsp";
+				admin = (String)req.getSession().getAttribute("id");
+				if(admin == null) {
+					pageMove = "member01_login.jsp";
+				}else {
+					if(!admin.equals("admin")) {
+						msg = "접근할 수 없습니다.";
+						req.setAttribute("msg", msg);
+						pageMove = "index.jsp";
+					}
+				}
+				dis=req.getRequestDispatcher(pageMove);
 				dis.forward(req, resp);
 			break;
 			
@@ -78,7 +101,7 @@ public class AdminController extends HttpServlet {
 				//System.out.println("수정 요청");
 				boolean success = false;
 				success = service.update();
-				String msg = "수정 실패";
+				msg = "수정 실패";
 				if(success) {
 					msg = "수정 성공";
 				}
@@ -105,7 +128,18 @@ public class AdminController extends HttpServlet {
 				req.setAttribute("r_list", r_list);
 				req.setAttribute("currPage", page);
 				req.setAttribute("endPage", totPage);
-				dis = req.getRequestDispatcher("admin03_Report.jsp");
+				pageMove ="admin03_Report.jsp";
+				admin = (String)req.getSession().getAttribute("id");
+				if(admin == null) {
+					pageMove = "member01_login.jsp";
+				}else {
+					if(!admin.equals("admin")) {
+						msg = "접근할 수 없습니다.";
+						req.setAttribute("msg", msg);
+						pageMove = "index.jsp";
+					}
+				}
+				dis = req.getRequestDispatcher(pageMove);
 				dis.forward(req, resp);
 			break;
 		
@@ -127,7 +161,18 @@ public class AdminController extends HttpServlet {
 				req.setAttribute("b_list", b_list);
 				req.setAttribute("currPage", page);
 				req.setAttribute("endPage", totPage);
-				dis=req.getRequestDispatcher("admin04_Black.jsp");
+				pageMove ="admin04_Black.jsp";
+				admin = (String)req.getSession().getAttribute("id");
+				if(admin == null) {
+					pageMove = "member01_login.jsp";
+				}else {
+					if(!admin.equals("admin")) {
+						msg = "접근할 수 없습니다.";
+						req.setAttribute("msg", msg);
+						pageMove = "index.jsp";
+					}
+				}
+				dis=req.getRequestDispatcher(pageMove);
 				dis.forward(req, resp);
 			break;
 			
@@ -149,7 +194,18 @@ public class AdminController extends HttpServlet {
 				req.setAttribute("k_list", k_list);
 				req.setAttribute("currPage", page);
 				req.setAttribute("endPage", totPage);
-				dis=req.getRequestDispatcher("admin05_Kick.jsp");
+				pageMove ="admin05_Kick.jsp";
+				admin = (String)req.getSession().getAttribute("id");
+				if(admin == null) {
+					pageMove = "member01_login.jsp";
+				}else {
+					if(!admin.equals("admin")) {
+						msg = "접근할 수 없습니다.";
+						req.setAttribute("msg", msg);
+						pageMove = "index.jsp";
+					}
+				}
+				dis=req.getRequestDispatcher(pageMove);
 				dis.forward(req, resp);
 			break;
 			

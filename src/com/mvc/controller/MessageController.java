@@ -87,6 +87,9 @@ public class MessageController extends HttpServlet {
 				if(totCount % listCount > 0 ) {
 					totPage ++;
 				}
+				if(totPage == 0) {
+					totPage=1;
+				}
 				list = service.falseMsg(page);
 				req.setAttribute("mchk_list", list);
 				req.setAttribute("currPage", page);
@@ -96,14 +99,14 @@ public class MessageController extends HttpServlet {
 			break;
 			
 			case "/messageSend":
-				System.out.println("메시지 작성 요청");
+				//System.out.println("메시지 작성 요청");
 				boolean success =false;
 				success = service.messageSend();
 				HashMap<String, Object> map = new HashMap<String,Object>();
 				map.put("send",success);
 				Gson gson = new Gson();
 				String obj =gson.toJson(map);
-				System.out.println("result : " + obj);
+				//System.out.println("result : " + obj);
 				resp.getWriter().println(obj);
 			break;
 			
@@ -131,6 +134,9 @@ public class MessageController extends HttpServlet {
 				totPage = totCount/listCount;
 				if(totCount % listCount > 0 ) {
 					totPage ++;
+				}
+				if(totPage == 0) {
+					totPage=1;
 				}
 				list = service.sendList(page);
 				req.setAttribute("send_List", list);

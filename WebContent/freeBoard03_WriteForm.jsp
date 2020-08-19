@@ -183,6 +183,35 @@
         #main {
             min-height: 100%;
         }
+        
+        .board_zone {
+		    position: relative;
+		    top: 160px;
+		    left: 400px;
+		    width: 1300px;
+	    }
+		
+		.boardTitle{
+			position: absolute;
+			top: 220px;
+			left: 250px;
+		}
+		
+		hr{
+            border: 1px solid rgb(148, 148, 148);
+        }
+        
+        #cancleButton{
+        	position: relative;
+        	left: 300px;
+        	top: -40px;
+        }
+        
+        #writeButton{
+        	position: relative;
+        	left: 280px;
+        	top: -40px;
+        }
 
         /* ---------- main 끝 ---------- */
 
@@ -233,17 +262,17 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
         <div id="menu">
             <ul>
-	                <li><a href="#">스터디룸</a></li>
-	                <li><a href="#">예약</a></li>
+	                <li><a href="intro.jsp">스터디룸</a></li>
+	                <li><a href="resv01_reservation.jsp">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -303,8 +332,8 @@
 						</tr>
 					</tbody>
 				</table>
-				<input type="submit" value="작성"/>
-				<a class="btn btn-default pull-right" onclick="location.href='fbList'" style="margin-right: 30px;">취소</a>
+				<a class="btn btn-default pull-right" onclick="location.href='fbList'" id="cancleButton">취소</a>
+				<input type="submit" value="작성"/ class="btn btn-default pull-right" id="writeButton">
 				</form>
 			</div>
 		</div>

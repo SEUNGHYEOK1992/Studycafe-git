@@ -183,6 +183,22 @@
         #main {
             min-height: 100%;
         }
+        
+        #profileBox{
+        	position: relative;
+        	top: 100px;
+        	left: 800px;
+        	width: 1000px;
+        }
+        
+        table {
+        	position: absolute;
+        	top: 170px
+        }
+        
+        th, td{
+        	padding: 10px;
+        }
 
         /* ---------- main 끝 ---------- */
 
@@ -233,17 +249,17 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
         <div id="menu">
             <ul>
-	                <li><a href="#">스터디룸</a></li>
-	                <li><a href="#">예약</a></li>
+	                <li><a href="intro.jsp">스터디룸</a></li>
+	                <li><a href="resv01_reservation.jsp">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -278,55 +294,55 @@
  	
     <!-- 메인 시작 -->
     <div id="main">
-        <div>
+        <div id="profileBox">
             <form action="profileUpdate" method="post" enctype="multipart/form-data">       
                 <table>  
                     <tr>
-                        <td colspan="2">        
+                        <th colspan="2">        
                             ${profileUpdateForm.id}님의 프로필
                             <input type="hidden" name="id" value="${profileUpdateForm.id}"/>
-                        </td>
+                        </th>
                     </tr>	
                     <tr>
-                        <td>이름</td>
+                        <th>이름</th>
                         <td>
                             <input type="text" id="sname" name="name" value="${profileUpdateForm.name}" />
                         </td>        
                     </tr>
                     <tr>
-                        <td>생년월일</td>
+                        <th>생년월일</th>
                         <td>
                             <input type="text" name="birth" value="${profileUpdateForm.birth}" />
                         </td>
                     </tr>
                     <tr>
-                        <td>이메일</td>
+                        <th>이메일</th>
                         <td>
                             <input type="text" name="email" value="${profileUpdateForm.email}" />
                         </td>
                     </tr>
                     <tr>
-                        <td>휴대폰</td>
+                        <th>휴대폰</th>
                         <td>
                             <input type="text" name="phone" value="${profileUpdateForm.phone}" />
                         </td>
                     </tr>
                     <tr>
-                        <td>주소</td>
+                        <th>주소</th>
                         <td>
                             <input type="text" name="addr" value="${profileUpdateForm.addr}" />
                         </td>
                     </tr>
                     <tr>
-                       <td>프로필사진</td>
+                       <th>프로필사진</th>
                        <td>
                             <a href="/photo/${profileUpdateForm.newFileName }" target="_blank">${profileUpdateForm.oriFileName }</a>
-                            <input type="file" id="upload" name="photo" />
+                            <input type="file" id="upload" name="photo" style="background-color: white;"/>
                        </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
-                            <input type="submit" id="save" value="저장" />
+                        <td colspan="2" style="text-align: center;">
+                            <input type="submit" id="save" value="저장" class="btn btn-default"/ style="position: relative; left: -40px;">
                         </td>
                     </tr>
                 </table>

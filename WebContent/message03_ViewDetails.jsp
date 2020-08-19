@@ -189,33 +189,37 @@
            border: 1px solid black;
            width: 400px;
            height: 100px;
-           position: absolute;
-           left: 50%;
-           top: 15%;
-           transform: translate(-50%, -50%);         
+           position: relative;
+           top: 80px;
+           left: 750px;
         }
         /*받은 내용*/
         #downtext{
             border: 1px solid black;
             width: 400px;
             height: 300px;
-            position: absolute;
-            left: 50%;
-            top: 48%;
-            transform: translate(-50%, -50%);  
+            position: relative;
+            top: 140px;
+            left: 750px;
         }
         /*답장 버튼*/
         #btn_reply{
-            position: absolute;
-            left: 50%;
-            top: 75%;
-            transform: translate(-50%, -50%); 
+            position: relative;
+            top: 170px;
+            left: 940px;
+            width: 100px;
         }
        /*버튼 폰트 크기*/
         #btn_size{
            font-size: 18px;
         }
-
+        #cancel{
+       	 	position: relative;
+            top: -31px;
+            left: 70px;
+       		font-size: 18px;
+        }
+        
         /* ---------- main 끝 ---------- */
 
         /* ---------- footer ---------- */
@@ -265,17 +269,17 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
         <div id="menu">
             <ul>
-	                <li><a href="#">스터디룸</a></li>
-	                <li><a href="#">예약</a></li>
+	                <li><a href="intro.jsp">스터디룸</a></li>
+	                <li><a href="resv01_reservation.jsp">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -323,6 +327,7 @@
         <!--답장버튼-->
         <div id = "btn_reply">
             <input type="button" id="btn_size" onclick="location.href='message02_send.jsp?recv_id=${m_info.send_id}'" value="답장"/>
+            <input type="button" id="cancel" onclick="location.href='messageList'" value="취소"/>
         </div>
 
     </div>

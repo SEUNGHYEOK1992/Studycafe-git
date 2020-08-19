@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%
+	String id = (String)request.getSession().getAttribute("id");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -180,36 +183,18 @@
 
         /* ---------- main ---------- */
         
-        #popularchart{
-	        position: fixed;
-		    width: 250px;
-		    height: 200px;
-		    color: black;
-		    border: 1px solid black;
-		    left: 1630px;
-		    top: 400px;
-		    border-radius: 10px;
-		    padding: 15px;
-		    text-align: center;
-      	}
-      	
-      	#popularchar table, th, td{
-      		text-align: center;
-      		vertical-align: middle;
-      	}
-
         #main {
             min-height: 100%;
         }
-        /* ---------인기 차트 ... 으로 만들기 */
-        .txt_line {
-            width:130px;
-            padding:0 5px;
-            overflow:hidden;
-            text-overflow:ellipsis;
-            white-space:nowrap;
+        
+        #btn{
+        	position: relative;
+        	top: 200px;
+        	left: 800px;
+        	width: 300px;
+        	height: 100px;
+        	font-size: 30px;
         }
-		/* ---------인기 차트 ... 으로 만들기 끝*/
 		
         /* ---------- main 끝 ---------- */
 
@@ -260,17 +245,17 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
         <div id="menu">
             <ul>
-	                <li><a href="#">스터디룸</a></li>
-	                <li><a href="#">예약</a></li>
+	                <li><a href="intro.jsp">스터디룸</a></li>
+	                <li><a href="resv01_reservation.jsp">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -302,18 +287,9 @@
     <!-- 헤더 끝 -->
 
 <!------------------------------------------------------------------------------------------------------->
- 	<div id="popularchart">         
-      	<table>          
-            <tr>
-           		<th>아이디</th>
-           		<th>제목</th>
-           		<th>조회수</th>
-            </tr>
-      	</table>
-	</div>
     <!-- 메인 시작 -->
     <div id="main">
-        
+        <button onclick="location.href='memberList'" id="btn" class="btn btn-default">관리자 메뉴</button>
     </div>
     <!-- 메인 끝 -->
 
@@ -345,37 +321,11 @@
 	if(msg != ""){
 		alert(msg);
 	}
-	
-	function popList(){
-		$.ajax({
-			type:"post",
-			url:"popList",
-			data:{},
-			dataType:"JSON",
-			success:function(data){
-				//console.log(data.popList);
-				drawTable(data.popList);
-			},
-			error:function(e){
-				console.log(e);
-			}
-		});
-	}
-	popList();
-	
-	function drawTable(list){
-		//for(var i=0; i<list.length;i++){}
-		var content="";
-		//$("tbody").empty();	
-		list.forEach(function(item,num){
-			//console.log(num,item);
-			content = "<tr>"
-			+"<td>"+item.id+"</td>"
-			+"<td><div class=txt_line><a href='fbdetail?b_idx="+item.b_idx+"'>"+item.subject+"</div></a></td>"
-			+"<td>"+item.bHit+"</td>"
-			+"</tr>";
-			$("tbody").append(content);
-		});	
+	var id = "${id}";
+	if(id != 'admin'){
+		msg = "접근할 수 없습니다. 관리자 계정으로 로그인 해 주세요.";
+		alert(msg);
+		location.href="member01_login.jsp";
 	}
 </script>
 </html>

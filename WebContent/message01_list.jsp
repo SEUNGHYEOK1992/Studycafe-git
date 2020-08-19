@@ -191,6 +191,13 @@
             text-overflow:ellipsis;
             white-space:nowrap;
         }
+        
+        .messageTableBox{
+        	position: relative;
+		    width: 750px;
+		    top: 100px;
+		    left: 600px;
+        }
 
         /* ---------- main 끝 ---------- */
 
@@ -241,17 +248,17 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
         <div id="menu">
             <ul>
-	                <li><a href="#">스터디룸</a></li>
-	                <li><a href="#">예약</a></li>
+	                <li><a href="intro.jsp">스터디룸</a></li>
+	                <li><a href="resv01_reservation.jsp">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -286,21 +293,23 @@
  	
     <!-- 메인 시작 -->
     <div id="main">
-        <div class="main_img">
+        <div class="messageTableBox">
             <img src=""/>
             <button id="btn_del" onclick="del()">삭제</button>
             <button id="btn_wri" onclick="location.href='message02_send.jsp'">쓰기</button>
-            <a href="messageList">전체보기</a>
-            <a href="falseMsg">안읽은 메시지 보기</a>
-            <a href="sendList">보낸 메시지 보기</a>
-            <table>
-                <tr>
-                    <th>체크</th>
-                    <th>번호</th>
-                    <th>보낸 사람</th>
-                    <th>내용</th>
-                    <th>날짜</th>
-                </tr>
+            <a href="messageList" style="margin-right: 20px; margin-left: 20px;">전체보기</a>
+            <a href="falseMsg" style="margin-right: 20px;">안읽은 메시지 보기</a>
+            <a href="sendList" style="margin-right: 20px;">보낸 메시지 보기</a>
+            <table class="table table-hover" id="messageTable">
+                <thead>
+	                <tr>
+	                    <th>체크</th>
+	                    <th>번호</th>
+	                    <th>보낸 사람</th>
+	                    <th>내용</th>
+	                    <th>날짜</th>
+	                </tr>
+                </thead>
                 <c:forEach items="${m_list }" var="message">
                 <tr>
                     <td><input type="checkbox" value="${message.m_idx }" /></td> <!-- 체크박스는 mvc 에서 코딩할 때 했던 방법 사용할지?-->

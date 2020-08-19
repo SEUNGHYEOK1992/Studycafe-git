@@ -187,24 +187,35 @@
             height: 1900px;
         }
 
-        #chartBox{
-	        position: absolute;
-		    width: 250px;
-		    height: 200px;
+        #chartBox {
+		    position: absolute;
+		    width: 266px;
+		    height: 234px;
 		    left: 1600px;
 		    top: 400px;
-      	}
+		    padding: 0px 30px;
+		    border-radius: 15px;
+		}
       	
       	#chart{
-      		border: 1px solid black;
+      		border: 2px solid black;
       		padding: 20px;
+      		padding-right: 0px;
       		border-radius: 10px;
       	}
-      	
       	
       	#chart table, th, td{
       		vertical-align: middle;
       		padding-right: 20px;
+      	}
+      	
+      	#chartNum{
+      		font-weight: bold;
+      		padding-right: 10px;
+      	}
+      	
+      	#titleBox{
+      		padding-bottom: 10px;
       	}
       	
       	.txt_line {
@@ -308,17 +319,17 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
         <div id="menu">
             <ul>
-	                <li><a href="#">스터디룸</a></li>
-	                <li><a href="#">예약</a></li>
+	                <li><a href="intro.jsp">스터디룸</a></li>
+	                <li><a href="resv01_reservation.jsp">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -353,7 +364,9 @@
     <!-- 메인 시작 -->
     <div id="main">
     	<div id="chartBox">
-    		<span><h3>게시물 베스트</h3></span>    
+    		<div id="titleBox">
+    			<span style="font-size: 20px; margin-bottom: 10px; font-weight: bold;">게시물 베스트</span>
+    		</div>    
 	    	<div id="chart">
 	        	<table>
 	            	<tr>
@@ -443,17 +456,18 @@
 		list.forEach(function(item,num){
 			console.log(num,item);
 			content = "<tr>"
-			+"<td>"+i+++"</td>"
+			+"<td id='chartNum'>"+i+++"</td>"
 			+"<td><div class=txt_line><a href='fbdetail?b_idx="+item.b_idx+"'>"+item.subject+"</div></a></td>"
 			+"</tr>";
 			$("tbody").append(content);
 		});	
 	};
+	
 	$(document).ready(function(){
-	      $('.slider').bxSlider();
-	      auto: true
-	      slideWidth: 60
-	      slideMargin: 10
+	      $('.slider').bxSlider({
+	      auto: true,
+	      pause: 3000
 	    });
+	});
 </script>
 </html>

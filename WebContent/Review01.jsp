@@ -181,7 +181,7 @@
         /* ---------- main ---------- */
         
         #main {
-            min-height: 100%;
+            min-height: 155%;
         }
 
         /* ---------- main 끝 ---------- */
@@ -233,17 +233,17 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
         <div id="menu">
             <ul>
-	                <li><a href="#">스터디룸</a></li>
-	                <li><a href="#">예약</a></li>
+	                <li><a href="intro.jsp">스터디룸</a></li>
+	                <li><a href="resv01_reservation.jsp">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -283,7 +283,7 @@
             <div class="reviewBox" style="top: 30%; left: 50%; position: absolute; transform: translate(-50%,-50%);">
                 <h2>후기게시판</h2>
                 <div>
-                    <textarea id="content" name = "content" placeholder="내용을 입력해주세요." style="width: 800px; height: 100px; outline: 1px solid #666; resize: none;" ></textarea>
+                    <textarea id="content" name = "content" placeholder="내용을 입력해주세요." style="width: 800px; height: 100px; outline: 1px solid #666; resize: none; padding: 20px;" ></textarea>
                 </div>
                 <div id="sendBox" style="width: 800px; height: 20;">
                     <input type="submit" id="sendbtn" value="저장" style="float: right; margin-top: 5px;">

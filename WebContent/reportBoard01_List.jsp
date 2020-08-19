@@ -183,6 +183,49 @@
         #main {
             min-height: 100%;
         }
+        
+        .board_zone {
+		    position: relative;
+		    top: 160px;
+		    left: 350px;
+		    width: 1200px;
+		}
+	
+		.boardTitle{
+			position: absolute;
+			top: 220px;
+			left: 250px;
+			height: 81px;
+		}
+		
+		.boardTitle2{
+			position: absolute;
+			top: 220px;
+			left: 420px;
+			height: 81px;
+		}
+		
+		h1{
+			margin-bottom: 20px;
+		}
+		
+		.boardTitle hr{
+            border: 1px solid #ff7473;
+        }
+        
+        .boardTitle2 hr{
+            border: 1px solid rgb(148, 148, 148);
+        }
+		
+		#freeBoard th, td{
+			text-align: center;
+		}
+		
+		.boardTitle h1 a, .boardTitle2 h1 a{
+			text-decoration: none;
+			color: black;
+		}
+		
 
         /* ---------- main 끝 ---------- */
 
@@ -233,17 +276,17 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
         <div id="menu">
             <ul>
-	                <li><a href="#">스터디룸</a></li>
-	                <li><a href="#">예약</a></li>
+	                <li><a href="intro.jsp">스터디룸</a></li>
+	                <li><a href="resv01_reservation.jsp">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -278,10 +321,11 @@
  	
     <!-- 메인 시작 -->
     <div id="main">
-        <div class="boardTitle"><h1>공지사항</h1><hr></div>
+        <div class="boardTitle"><h1><a href="./reportlist">공지사항</a></h1><hr></div>
+        <div class="boardTitle2"><h1><a href="./ask">문의하기</a></h1><hr></div>
 		<div class="board_zone">
-			<div class="board_list_table" style="width: 70%;">
-				<table class="table table-hover">
+			<div class="board_list_table">
+				<table class="table table-hover" id="freeBoard">
 					<thead>
 						<tr>
 							<th>번호</th>
@@ -301,7 +345,6 @@
 						</c:forEach>
 					</tbody>
 				</table>
-				<!--  <a class="btn btn-default pull-right" onclick="location.href='reportBoardWriteForm.jsp'">글쓰기</a> -->
 				<br><br>
 				<div class="text-center">
 		    		<ul class="pagination">

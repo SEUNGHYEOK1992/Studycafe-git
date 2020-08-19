@@ -188,6 +188,16 @@
         #main {
             min-height: 100%;
         }
+        
+        #complainBox{
+       	    position: relative;
+		    top: 100px;
+			left: 890px;
+        }
+        
+        #complainBox table th, td{
+        	padding: 10px;
+        }
 
         /* ---------- main 끝 ---------- */
 
@@ -238,7 +248,7 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
@@ -248,7 +258,7 @@
 	                <li><a href="#">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -286,7 +296,7 @@
         <div id="complainBox">
             <br/>
             <h3>신고하기</h3>
-            <hr/>
+            <br>
             <form method="post" action="complain?repo_id=<%=repo_id%>">
 	            <table>
 	            	<tr><td><input type="radio" name="report" value="욕설/비난"/> 욕설/비난</td></tr>
@@ -301,7 +311,7 @@
 	            	</tr>
 		            <tr>
 		            	<td>
-		            		<input type="submit" value="보내기"/>
+		            		<input type="submit" value="보내기"/ style="margin-left: -20px; margin-right: 20px;">
 		            		<input type="button" onclick="location.href='fbdetail?b_idx=<%=b_idx %>'" value="취소"/>
 		            	</td>
 		            </tr>

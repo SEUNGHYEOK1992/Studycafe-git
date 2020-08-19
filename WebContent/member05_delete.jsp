@@ -183,6 +183,23 @@
         #main {
             min-height: 100%;
         }
+        
+        #messageBox{
+			position: relative;
+			width: 1000px;
+			left: 770px;
+			top: 200px;
+        }
+        
+        #messageBox span{
+        	font-size: 40px;
+        }
+        
+        #mainpage{
+        	position: relative;
+		    top: 30px;
+		    left: 120px;
+        }
 
         /* ---------- main 끝 ---------- */
 
@@ -233,17 +250,17 @@
     <!-- 헤더 -->
     <div id="header">
         <div id="logo">
-            <a href="#">
+            <a href="./index.jsp">
                 <img src="./logo.png">
             </a>
         </div>
         <div id="menu">
             <ul>
-	                <li><a href="#">스터디룸</a></li>
-	                <li><a href="#">예약</a></li>
+	                <li><a href="intro.jsp">스터디룸</a></li>
+	                <li><a href="resv01_reservation.jsp">예약</a></li>
 	                <li><a href="./fbList">자유게시판</a></li>
 	                <li><a href="./rvlist">후기</a></li>
-	                <li><a href="./ask">고객센터</a></li>
+	                <li><a href="./reportlist">고객센터</a></li>
             </ul>
         </div>
         <div id="loginBox">
@@ -278,9 +295,9 @@
  	
     <!-- 메인 시작 -->
     <div id="main">
-        <div id="message">
-            <h1>탈퇴가 완료 되었습니다.</h1>
-            <button type="button" onclick="location.href='00_index.html'" id="mainpage">메인페이지로 이동</button>
+        <div id="messageBox">
+            <span>탈퇴가 완료 되었습니다.</span><br>
+            <button type="button" onclick="location.href='00_index.html'" id="mainpage" class="btn btn-default">메인페이지로 이동</button>
         </div>
     </div>
     <!-- 메인 끝 -->
