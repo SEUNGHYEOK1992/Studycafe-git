@@ -17,17 +17,21 @@
   + 관리자(메인,회원관리 목록,회원관리 상세보기,신고내역,블랙리스트,제명목록,공지사항)
 
 # 핵심 기능
-(https://user-images.githubusercontent.com/62984559/101437464-9af8d680-3953-11eb-8a66-971bf9c88377.PNG)
-(https://user-images.githubusercontent.com/62984559/101437467-9c2a0380-3953-11eb-815a-ba08d2fb302a.PNG)
-(https://user-images.githubusercontent.com/62984559/101437468-9cc29a00-3953-11eb-96ac-a0fdf881f502.PNG)
 
+![예약](https://user-images.githubusercontent.com/62984559/101439041-042e1900-3957-11eb-8389-fea0095818b9.PNG)
+![예약목록](https://user-images.githubusercontent.com/62984559/101439043-055f4600-3957-11eb-8bc1-8819aeb997c3.PNG)
+![예약취소](https://user-images.githubusercontent.com/62984559/101439045-05f7dc80-3957-11eb-9ba1-7091ed9c2466.PNG)
 
 # 구현내용
-(https://user-images.githubusercontent.com/62984559/101437407-7c92db00-3953-11eb-9b0a-8b6e29a8a715.jpg)
-(https://user-images.githubusercontent.com/62984559/101437410-7d2b7180-3953-11eb-9ace-5839778ac322.jpg)
-(https://user-images.githubusercontent.com/62984559/101437413-7dc40800-3953-11eb-87e8-74268a5a756e.jpg)
 
-#맡은 기능(자유게시판)
- 제가 맡은 기능은 자유게시판 페이지 입니다. 
- 글 작성 기능을 구현할 때 파일업로드 구현이 어려웠다. Java에서 파일 객체와 바이트 타입을 다루는게 익숙하지 않았고, Oracle 데이터베이스에서 어떻게 저장해야 효율적인지 알지 못했기 때문이다.
-전에 배웠던 수업내용을 참고하여서 JAVA에서 다루는 방법에 대해 공부했고, 제가 빠트린 부분은 새파일과 이전파일을 객체화를 시킬 때 경로지정을 제대로 해주지 않아서 오류가 났었습니다. 그 부분을 수정한 뒤에 실행시켰을 때 정상적으로 파일업로드 기능이 화면에 출력이 되었습니다.
+![자유게시판리스트](https://user-images.githubusercontent.com/62984559/101438989-e660b400-3956-11eb-8f49-2e342a32d0de.jpg)
+![자유게시판](https://user-images.githubusercontent.com/62984559/101438992-e6f94a80-3956-11eb-8ec8-339eaa47dc2b.jpg)
+![자유게시판수정](https://user-images.githubusercontent.com/62984559/101438994-e791e100-3956-11eb-9119-b07e0121cc81.jpg)
+
+
+# 맡은 기능(자유게시판)
+제가 맡은 기능은 자유게시판 페이지입니다.
+글 작성 기능을 구현할 때 파일 업로드 구현이 어려웠습니다다. 
+Java에서 파일 객체와 바이트 타입을 다루는 게 익숙하지 않았고, Oracle 데이터베이스에서 어떻게 저장해야 효율적인지 알지 못했기 때문입니다.
+전에 배웠던 수업내용을 참고하여서 JAVA에서 다루는 방법에 관해 공부했고, 제가 빠트린 부분은 새 파일과 이전 파일을 객체화를 시킬 때 경로지정을 제대로 해주지 않아서 오류가 났었습니다. 
+그 부분을 수정한 뒤에 실행시켰을 때 정상적으로 파일 업로드 기능이 화면에 출력되었습니다.
